@@ -21,41 +21,18 @@ var scenes;
         }
         // Private Mathods
         // Public Methods
-        // Initialize Game Variables and objects
+        // TODO: Initialize Game Variables and objects
         PlayScene.prototype.Start = function () {
-            this._ocean = new objects.Ocean(this.assetManager);
-            this._plane = new objects.Plane(this.assetManager);
-            this._island = new objects.Island(this.assetManager);
-            // instantiate the cloud array
-            this._clouds = new Array();
-            this._cloudNum = 3;
-            // loop and add each cloud to the array
-            for (var count = 0; count < this._cloudNum; count++) {
-                this._clouds[count] = new objects.Cloud(this.assetManager);
-            }
+            this._sonic = new objects.Hero(this.assetManager, 1 * 10);
             this.Main();
         };
+        //TODO: Call update of game objects
         PlayScene.prototype.Update = function () {
-            this._ocean.Update();
-            this._plane.Update();
-            this._island.Update();
-            this._clouds.forEach(function (cloud) {
-                cloud.Update();
-            });
+            this._sonic.Update();
         };
-        // This is where the fun happens
+        //TODO: Add Game objects to the scene
         PlayScene.prototype.Main = function () {
-            var _this = this;
-            // add the ocean to the scene
-            this.addChild(this._ocean);
-            // add the island to the scene
-            this.addChild(this._island);
-            // add the plane to the scene
-            this.addChild(this._plane);
-            // add clouds to the scene
-            this._clouds.forEach(function (cloud) {
-                _this.addChild(cloud);
-            });
+            this.addChild(this._sonic);
         };
         return PlayScene;
     }(objects.Scene));

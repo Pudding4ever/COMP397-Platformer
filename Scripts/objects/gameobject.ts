@@ -1,4 +1,7 @@
 module objects {
+
+
+
   export class GameObject extends createjs.Bitmap {
     // private instance variables
     protected _dx: number;
