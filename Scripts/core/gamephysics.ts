@@ -4,15 +4,14 @@ module core {
         static readonly g = 9.81;
         private timeIterator: core.RealtimeIterator;
         private isJumpng: boolean = false;
+        private _onX;
+        private _onY;
 
         public constructor() {
             this.timeIterator = new core.RealtimeIterator();
         }
 
-
-
-        jump(hero: objects.Hero, alfa: number) :void {
-
+        jump(hero: objects.Hero, alfa: number, Pt: number = 14) :void {
             let i = 0;
             let gf = this;
             let h = hero;
@@ -20,18 +19,18 @@ module core {
             let startY = h.y;
             if (!this.isJumpng) {
                 this.isJumpng = true;
-                let onX = createjs.Ticker.on("tick", function () {
-                    h.x = startX + gf.calculateX(14, alfa, ++i / 10);
+                this._onX = createjs.Ticker.on("tick", function () {
+                    h.x = startX + gf.calculateX(Pt, alfa, ++i / 10);
                     if (!gf.checkX(h)) {
-                        createjs.Ticker.off("tick", onX);
+                        createjs.Ticker.off("tick", this._onX);
                     }
                 }, this);
 
-                let onY = createjs.Ticker.on("tick", function () {
-                    h.y = startY - gf.calculateY(14, alfa, ++i / 10);
+                this._onY = createjs.Ticker.on("tick", function () {
+                    h.y = startY - gf.calculateY(Pt, alfa, ++i / 10);
                     if (!gf.checkY(h)) {
-                        createjs.Ticker.off("tick", onY);
-                        createjs.Ticker.off("tick", onX);
+                        createjs.Ticker.off("tick", this._onY);
+                        createjs.Ticker.off("tick", this._onX);
                         gf.isJumpng = false;
                     }
 
@@ -40,7 +39,11 @@ module core {
 
         }
 
-
+        public stopJumping() {
+            createjs.Ticker.off("tick", this._onY);
+            createjs.Ticker.off("tick", this._onX);
+            this.isJumpng = false;
+        }
 
         private calculateX(Pt: number, alfa: core.MovingDirections, ti: number) :number {
             return this.V0(Pt, GamePhysics.g) * ti * Math.cos(alfa * 180 / Math.PI);
@@ -55,7 +58,7 @@ module core {
         }
 
 
-        private checkX(hero: objects.Hero): boolean {
+        public checkX(hero: objects.Hero): boolean {
             if (hero.x >= 640 - hero.halfWidth) {
                 hero.x = 640 - hero.halfWidth;
                 return false;
@@ -70,7 +73,7 @@ module core {
             return true;
         }
 
-        private checkY(hero: objects.Hero) :boolean {
+        public checkY(hero: objects.Hero) :boolean {
 
             if(hero.y >= 480 - hero.halfHeight) {
                 hero.y = 480 - hero.halfHeight;

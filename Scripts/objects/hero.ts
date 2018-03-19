@@ -5,27 +5,32 @@ module objects {
         private _physics :core.GamePhysics;
         private _forceN: number = 1;
         private _weightN: number;
+        private _previousX: number;
+        private _previousY: number;
 
         constructor(assetManager: createjs.LoadQueue, weightN: number) {
             super(assetManager, "sonicHero");
             this._physics = new core.GamePhysics();
             this._weightN = weightN;
+            this._previousX = this.x;
+            this._previousY = this.y;
             this.Start();
-
         }
 
         public Start(): void {
-            this.y = 430;
+            this.y = 480 - this.halfHeight;
             let deltaMeasurer = new core.TimeDeltaMeasurer();
             deltaMeasurer.maxDelta = 40;
             deltaMeasurer.start();
-
-
         }
 
         public Update():void {
             this.Move();
             this.CheckBounds();
+            this._dx = this.x - this._previousX;
+            this._dy = this.y - this._previousY;
+            this._previousX = this.x;
+            this._previousY = this.y;
         }
 
         public Move():void {
@@ -44,8 +49,26 @@ module objects {
             if (objects.Game.keyboardManager.jumpBack) {
                 this._physics.jump(this, 270 - 0.005 - 90);
             }
+        }
 
+        public jumpDown():void {
+            if(this._dx > 0) {
+                this._physics.jump(this, 270 - 19, 5);
+            } else {
+                this._physics.jump(this, 270 + 30, 5);
+            }
+        }
 
+        public isOnGround():boolean {
+            return !(this._physics.checkX(this) && this._physics.checkY(this));
+        }
+
+        public stopHero():void {
+            this._physics.stopJumping();
+        }
+
+        public isFalling():boolean {
+            return this._dy > 0;
         }
 
         public CheckBounds():void {
@@ -75,5 +98,7 @@ module objects {
         public set forceN(value: number) {
             this._forceN = value;
         }
+
+
     }
 }

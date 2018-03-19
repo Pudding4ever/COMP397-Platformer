@@ -23,7 +23,8 @@ module core {
             {id: "nextButton", src: "./Assets/images/nextButton.png"},
             {id: "backButton", src: "./Assets/images/backButton.png"},
             {id: "sonicHero", src: "./Assets/images/sonic.png"},
-            {id: "sonicHero", src: "./Assets/images/platform.png"}
+            {id: "platform", src: "./Assets/images/platform.png"},
+
         ];
 
         // preloads assets
