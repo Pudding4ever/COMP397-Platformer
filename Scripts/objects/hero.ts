@@ -1,12 +1,17 @@
 module objects {
     export class Hero extends objects.GameObject {
 
+//BUG: Player teleports to top of platform if player moves under platform before touching the ground.
+
         private _movingDirection :core.MovingDirections;
         private _physics :core.GamePhysics;
         private _forceN: number = 1;
         private _weightN: number;
         private _previousX: number;
         private _previousY: number;
+
+        public myScene: objects.Scene;
+
 
         constructor(assetManager: createjs.LoadQueue, weightN: number) {
             super(assetManager, "sonicHero");
@@ -47,8 +52,14 @@ module objects {
             }
 
             if (objects.Game.keyboardManager.jumpBack) {
-                this._physics.jump(this, 270 - 0.005 - 90);
+                this.fireBullet();
             }
+        }
+
+        public fireBullet():void{
+    var b = new objects.Bullet(this.myScene.assetManager);
+    b.x = this.x;
+    b.y = this.y;
         }
 
         public jumpDown():void {
@@ -101,4 +112,9 @@ module objects {
 
 
     }
+
+
+
+
+    
 }

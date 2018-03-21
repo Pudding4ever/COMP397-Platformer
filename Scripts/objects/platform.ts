@@ -3,7 +3,7 @@ module objects {
 
         constructor(assetManager: createjs.LoadQueue) {
             super(assetManager, "platform");
-            this.x = 330;
+            this.x = 230;
             this.y = 360;
         }
 

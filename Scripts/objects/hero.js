@@ -17,11 +17,13 @@ var objects;
             _this._forceN = 1;
             _this._physics = new core.GamePhysics();
             _this._weightN = weightN;
+            _this._previousX = _this.x;
+            _this._previousY = _this.y;
             _this.Start();
             return _this;
         }
         Hero.prototype.Start = function () {
-            this.y = 430;
+            this.y = 480 - this.halfHeight;
             var deltaMeasurer = new core.TimeDeltaMeasurer();
             deltaMeasurer.maxDelta = 40;
             deltaMeasurer.start();
@@ -29,6 +31,10 @@ var objects;
         Hero.prototype.Update = function () {
             this.Move();
             this.CheckBounds();
+            this._dx = this.x - this._previousX;
+            this._dy = this.y - this._previousY;
+            this._previousX = this.x;
+            this._previousY = this.y;
         };
         Hero.prototype.Move = function () {
             if (objects.Game.keyboardManager.moveLeft) {
@@ -41,8 +47,30 @@ var objects;
                 this._physics.jump(this, 270 + 0.005);
             }
             if (objects.Game.keyboardManager.jumpBack) {
-                this._physics.jump(this, 270 - 0.005 - 90);
+                this.fireBullet();
             }
+        };
+        Hero.prototype.fireBullet = function () {
+            var b = new objects.Bullet(this.myScene.assetManager);
+            b.x = this.x;
+            b.y = this.y;
+        };
+        Hero.prototype.jumpDown = function () {
+            if (this._dx > 0) {
+                this._physics.jump(this, 270 - 19, 5);
+            }
+            else {
+                this._physics.jump(this, 270 + 30, 5);
+            }
+        };
+        Hero.prototype.isOnGround = function () {
+            return !(this._physics.checkX(this) && this._physics.checkY(this));
+        };
+        Hero.prototype.stopHero = function () {
+            this._physics.stopJumping();
+        };
+        Hero.prototype.isFalling = function () {
+            return this._dy > 0;
         };
         Hero.prototype.CheckBounds = function () {
             // right boundary

@@ -23,6 +23,7 @@ module scenes {
     // TODO: Initialize Game Variables and objects
     public Start(): void {
         this._sonic = new objects.Hero(this.assetManager, 1 * 10);
+        this._sonic.myScene = this;
         this._platform = new objects.Platform(this.assetManager)
         this.Main();
     }

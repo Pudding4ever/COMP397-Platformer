@@ -1,7 +1,7 @@
 module core {
 
     export class GamePhysics {
-        static readonly g = 9.81;
+        static g: number = 9.81;
         private timeIterator: core.RealtimeIterator;
         private isJumpng: boolean = false;
         private _onX;
@@ -19,13 +19,7 @@ module core {
             let startY = h.y;
             if (!this.isJumpng) {
                 this.isJumpng = true;
-                this._onX = createjs.Ticker.on("tick", function () {
-                    h.x = startX + gf.calculateX(Pt, alfa, ++i / 10);
-                    if (!gf.checkX(h)) {
-                        createjs.Ticker.off("tick", this._onX);
-                    }
-                }, this);
-
+//Horizontal jump movement is cool and realistic but not good for platformer so I removed. Cool idea for a more realistic game though.
                 this._onY = createjs.Ticker.on("tick", function () {
                     h.y = startY - gf.calculateY(Pt, alfa, ++i / 10);
                     if (!gf.checkY(h)) {

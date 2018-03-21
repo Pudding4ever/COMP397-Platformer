@@ -12,8 +12,11 @@ var objects;
 (function (objects) {
     var Platform = /** @class */ (function (_super) {
         __extends(Platform, _super);
-        function Platform() {
-            return _super !== null && _super.apply(this, arguments) || this;
+        function Platform(assetManager) {
+            var _this = _super.call(this, assetManager, "platform") || this;
+            _this.x = 230;
+            _this.y = 360;
+            return _this;
         }
         return Platform;
     }(objects.GameObject));
