@@ -23,14 +23,26 @@ var scenes;
         // Public Methods
         // TODO: Initialize Game Variables and objects
         PlayScene.prototype.Start = function () {
+            this.collisionmanager = new managers.Collision();
             this._sonic = new objects.Hero(this.assetManager, 1 * 10);
             this._sonic.myScene = this;
             this._platform = new objects.Platform(this.assetManager);
+            this._badguy = new objects.Enemy(this.assetManager);
+            this.bulletobjectpool = new Array();
+            for (var i = 0; i < 12; i++) {
+                var b;
+                b = new objects.Bullet(this.assetManager);
+                this.bulletobjectpool.push(b);
+                this.addChild(b);
+                console.log("created bullet");
+            }
             this.Main();
         };
         //TODO: Call update of game objects
         PlayScene.prototype.Update = function () {
             this._sonic.Update();
+            this.checkBullets();
+            this._badguy.Update();
             if (this.isOn(this._platform) && this._sonic.isFalling()) {
                 this._sonic.stopHero();
                 this.placeOn(this._platform, this._sonic);
@@ -39,10 +51,18 @@ var scenes;
                 this._sonic.jumpDown();
             }
         };
+        PlayScene.prototype.checkBullets = function () {
+            var b;
+            for (b in this.bulletobjectpool) {
+                this.bulletobjectpool[b].Update();
+                this.collisionmanager.Check(this.bulletobjectpool[b], this._badguy);
+            }
+        };
         //TODO: Add Game objects to the scene
         PlayScene.prototype.Main = function () {
             this.addChild(this._sonic);
             this.addChild(this._platform);
+            this.addChild(this._badguy);
         };
         PlayScene.prototype.isOn = function (platform) {
             var x = this._sonic.x;

@@ -27,6 +27,7 @@ var objects;
             this.halfHeight = this.height * 0.5;
             this.regX = this.halfWidth;
             this.regY = this.halfHeight;
+            this.isColliding = false;
         };
         // public methods
         GameObject.prototype.Start = function () {

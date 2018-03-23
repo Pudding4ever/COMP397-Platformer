@@ -10,38 +10,38 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var objects;
 (function (objects) {
-    var Bullet = /** @class */ (function (_super) {
-        __extends(Bullet, _super);
-        function Bullet(assetManager) {
-            var _this = _super.call(this, assetManager, "bullet") || this;
-            _this.active = false;
+    var Enemy = /** @class */ (function (_super) {
+        __extends(Enemy, _super);
+        function Enemy(assetManager) {
+            var _this = _super.call(this, assetManager, "badguy") || this;
+            _this.active = true;
             _this.timer = 0;
             _this.Start();
             return _this;
         }
-        Bullet.prototype.Start = function () {
+        Enemy.prototype.Start = function () {
             var deltaMeasurer = new core.TimeDeltaMeasurer();
             deltaMeasurer.maxDelta = 40;
             deltaMeasurer.start();
-            this.active == false;
+            this.active == true;
+            this.x = 530;
+            this.y = 460;
             console.log(this.active);
         };
-        Bullet.prototype.Update = function () {
+        Enemy.prototype.Update = function () {
             if (this.active == true) {
-                console.log("bullet active and travelling");
                 this.alpha = 1;
-                this.x = this.x + 3;
-                this.timer++;
-                if (this.timer > 240) {
-                    console.log("bullet deactivated!");
-                    this.active = false;
-                    this.timer = 0;
-                    this.alpha = 0;
-                }
+                //run any AI here
+            }
+            if (this.isColliding == true) {
+                console.log("enemy deactivated!");
+                this.active = false;
+                this.isColliding = false;
+                this.alpha = 0;
             }
         };
-        return Bullet;
+        return Enemy;
     }(objects.GameObject));
-    objects.Bullet = Bullet;
+    objects.Enemy = Enemy;
 })(objects || (objects = {}));
-//# sourceMappingURL=bullet.js.map
+//# sourceMappingURL=enemy.js.map

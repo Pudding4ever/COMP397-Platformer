@@ -57,9 +57,24 @@ module objects {
         }
 
         public fireBullet():void{
-    var b = new objects.Bullet(this.myScene.assetManager);
-    b.x = this.x;
-    b.y = this.y;
+            console.log ("fire key pressed!");
+            console.log (this.myScene.bulletobjectpool);
+            var b: any;
+    for (b in this.myScene.bulletobjectpool)
+    {
+        console.log ("checking bullet object pool ", + b);
+        console.log (this.myScene.bulletobjectpool[b].active);
+        if (this.myScene.bulletobjectpool[b].active == false)
+        {
+            console.log ("activating bullet!");
+            this.myScene.bulletobjectpool[b].x = this.x;
+            this.myScene.bulletobjectpool[b].y = this.y;
+            this.myScene.bulletobjectpool[b].active = true;
+        console.log (this.myScene.bulletobjectpool[b].active);
+        break;
+        }
+    } 
+
         }
 
         public jumpDown():void {

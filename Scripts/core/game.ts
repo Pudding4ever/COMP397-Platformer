@@ -24,6 +24,8 @@ module core {
             {id: "backButton", src: "./Assets/images/backButton.png"},
             {id: "sonicHero", src: "./Assets/images/sonic.png"},
             {id: "platform", src: "./Assets/images/platform.png"},
+            {id: "bullet", src: "./Assets/images/bullet.png"},
+            {id: "badguy", src: "./Assets/images/badguy.png"},
 
         ];
 

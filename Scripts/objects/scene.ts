@@ -4,11 +4,12 @@ module objects {
 
     // Public Properties
     public assetManager;
+    public bulletobjectpool: objects.Bullet[];
+    public collisionmanager: managers.Collision;
 
     // Constructor
     constructor(assetManager: createjs.LoadQueue) {
       super();
-
       this.assetManager = assetManager;
     }
     // Private Methods
