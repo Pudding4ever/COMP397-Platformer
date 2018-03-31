@@ -15,11 +15,11 @@ var core;
             if (!this.isJumpng) {
                 this.isJumpng = true;
                 //Horizontal jump movement is cool and realistic but not good for platformer so I removed. Cool idea for a more realistic game though.
+                //Ok, boss.
                 this._onY = createjs.Ticker.on("tick", function () {
                     h.y = startY - gf.calculateY(Pt, alfa, ++i / 10);
                     if (!gf.checkY(h)) {
                         createjs.Ticker.off("tick", this._onY);
-                        createjs.Ticker.off("tick", this._onX);
                         gf.isJumpng = false;
                     }
                 }, this);
@@ -29,9 +29,6 @@ var core;
             createjs.Ticker.off("tick", this._onY);
             createjs.Ticker.off("tick", this._onX);
             this.isJumpng = false;
-        };
-        GamePhysics.prototype.calculateX = function (Pt, alfa, ti) {
-            return this.V0(Pt, GamePhysics.g) * ti * Math.cos(alfa * 180 / Math.PI);
         };
         GamePhysics.prototype.calculateY = function (Pt, alfa, ti) {
             return this.V0(Pt, GamePhysics.g) * ti * Math.sin(alfa * 180 / Math.PI) - GamePhysics.g * ti * ti * 0.5;

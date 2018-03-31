@@ -50,6 +50,10 @@ var scenes;
             if (!this.isOn(this._platform) && !this._sonic.isOnGround()) {
                 this._sonic.jumpDown();
             }
+            if (this._sonic.isOnMiddle() || this._sonic.isOnLeftBorder()) {
+                this._platform.Move();
+                this._badguy.Move();
+            }
         };
         PlayScene.prototype.checkBullets = function () {
             var b;

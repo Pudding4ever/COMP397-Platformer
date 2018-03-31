@@ -40,6 +40,14 @@ var objects;
                 this.alpha = 0;
             }
         };
+        Enemy.prototype.Move = function () {
+            if (objects.Game.keyboardManager.moveLeft) {
+                this.x += 5;
+            }
+            if (objects.Game.keyboardManager.moveRight) {
+                this.x -= 5;
+            }
+        };
         return Enemy;
     }(objects.GameObject));
     objects.Enemy = Enemy;

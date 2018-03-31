@@ -18,6 +18,14 @@ var objects;
             _this.y = 360;
             return _this;
         }
+        Platform.prototype.Move = function () {
+            if (objects.Game.keyboardManager.moveLeft) {
+                this.x += 5;
+            }
+            if (objects.Game.keyboardManager.moveRight) {
+                this.x -= 5;
+            }
+        };
         return Platform;
     }(objects.GameObject));
     objects.Platform = Platform;
