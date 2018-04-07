@@ -34,7 +34,7 @@ this.plan = `
       console.log(this.plan);
 
       this.rows = new Array<Array<String>>();
-      this.rows = this.plan.trim().split("\n").map(l => [...l]);
+      this.rows = this.plan.trim().split("\n").map(l => [...l]); //Splits up the "plan" string into an array of single rows, broken at each new line.
       console.log(this.rows);
       this.height = this.rows.length;
       this.width = this.rows[0].length;
@@ -46,11 +46,12 @@ this.plan = `
       const levelChars = {
         ".": "empty", "#": objects.Platform,
         "@": objects.Hero, "e": objects.Enemy//, "E": objects.BigEnemy, "W": objects.Weapon, "P": objects.Powerup
-      };
+      }; //Didn't actually end up using this as originally planned.
        
       this.y = 0;
       this.x = 0;
 
+      //The below loop breaks up the array of rows into an array of individual characters, then checks the individual characters to create and place objects in the world.
       for (let str of this.rows)
       {
         this.x = 0;
@@ -62,11 +63,13 @@ this.plan = `
           {
             case chr = '.':
             {
+                //empty space
             break;
             }
 
             case chr = '#':
             {
+            //place a platform
             console.log(chr);
             let newplat = new objects.Platform(this.assetManager, this.x*scale, this.y*scale);
           this.levelPlatforms.push(newplat);
@@ -145,6 +148,8 @@ this.plan = `
 
 public CheckPlatformCollisions()
 {
+//Checks all platforms in levelPlatforms array for collisions with hero.
+//Probably a slow way to do this but I had to find a way to support multiple platforms in the world at once.
     for (var i = 0; i < this.levelPlatforms.length; i++)
     {
 
