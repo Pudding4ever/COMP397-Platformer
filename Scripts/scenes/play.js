@@ -15,9 +15,9 @@ var scenes;
 ......................
 ......................
 ..#................#..
-..#..............=.#..
-..#.........o.o....#..
-..#.@......#####...#..
+..#................#..
+..#................#..
+..#........#####...#..
 ..#####............#..
 ......#++++++++++++#..
 ......##############..
@@ -30,7 +30,7 @@ var scenes;
             this.width = this.rows[0].length;
             this.startActors = [];
             this.levelPlatforms = new Array();
-            const scale = 25;
+            const scale = 25; //size of basic platform block (must be square)
             const levelChars = {
                 ".": "empty", "#": objects.Platform,
                 "@": objects.Hero, "e": objects.Enemy //, "E": objects.BigEnemy, "W": objects.Weapon, "P": objects.Powerup
@@ -131,4 +131,18 @@ var scenes;
     }
     scenes.PlayScene = PlayScene;
 })(scenes || (scenes = {}));
+/*
+If I am correct this is intended to function as a side scrolling camera by
+moving the world under the player when the player is at the left hand border?
+
+Novel idea, don't move the player/camera, move the world... but it should be possible to define and move a viewport instead.
+Keeping this commented out for now while I figure out how that's going to work.
+
+
+
+        if (this._sonic.isOnMiddle() || this._sonic.isOnLeftBorder()) {
+            this._platform.Move();
+            this._badguy.Move();
+        }
+*/ 
 //# sourceMappingURL=play.js.map

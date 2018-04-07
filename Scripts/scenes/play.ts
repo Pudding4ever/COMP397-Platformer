@@ -23,9 +23,9 @@ this.plan = `
 ......................
 ......................
 ..#................#..
-..#..............=.#..
-..#.........o.o....#..
-..#.@......#####...#..
+..#................#..
+..#................#..
+..#........#####...#..
 ..#####............#..
 ......#++++++++++++#..
 ......##############..
@@ -41,7 +41,7 @@ this.plan = `
       this.startActors = [];
       this.levelPlatforms = new Array<objects.Platform>();
 
-      const scale = 25;
+      const scale = 25; //size of basic platform block (must be square)
 
       const levelChars = {
         ".": "empty", "#": objects.Platform,
@@ -125,20 +125,6 @@ this.plan = `
         this.CheckPlatformCollisions();
         }
 
-<<<<<<< HEAD
-=======
-        if (!this.isOn(this._platform) && !this._sonic.isOnGround()) {
-            this._sonic.jumpDown();
-        }
-
-        if (this._sonic.isOnMiddle() || this._sonic.isOnLeftBorder()) {
-            this._platform.Move();
-            this._badguy.Move();
-        }
-
-    }
-
->>>>>>> origin/master
     public checkBullets()
     {
         var b: any;
@@ -186,3 +172,18 @@ public CheckPlatformCollisions()
 
   }
 }
+
+/*
+If I am correct this is intended to function as a side scrolling camera by 
+moving the world under the player when the player is at the left hand border?
+
+Novel idea, don't move the player/camera, move the world... but it should be possible to define and move a viewport instead.
+Keeping this commented out for now while I figure out how that's going to work.
+
+
+
+        if (this._sonic.isOnMiddle() || this._sonic.isOnLeftBorder()) {
+            this._platform.Move();
+            this._badguy.Move();
+        }
+*/
