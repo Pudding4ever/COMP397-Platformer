@@ -1,6 +1,6 @@
 var core;
 (function (core) {
-    var MovingDirections;
+    let MovingDirections;
     (function (MovingDirections) {
         MovingDirections[MovingDirections["FORWARD"] = 0] = "FORWARD";
         MovingDirections[MovingDirections["UP"] = 90] = "UP";

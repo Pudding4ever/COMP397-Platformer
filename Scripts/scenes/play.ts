@@ -1,5 +1,5 @@
 module scenes {
-  export class PlayScene extends objects.Scene {
+    export class PlayScene extends objects.Scene {
     // Private Instance Variables
     //TODO: Game object private variables
       private _sonic: objects.Hero;
@@ -10,7 +10,84 @@ module scenes {
 
     // Constructor
     constructor(assetManager: createjs.LoadQueue) {
+
       super(assetManager);
+
+this.plan = `
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+......................
+..#................#..
+..#..............=.#..
+..#.........o.o....#..
+..#.@......#####...#..
+..#####............#..
+......#++++++++++++#..
+......##############..
+......................`;
+
+      console.log(this.plan);
+
+      this.rows = new Array<Array<String>>();
+      this.rows = this.plan.trim().split("\n").map(l => [...l]);
+      console.log(this.rows);
+      this.height = this.rows.length;
+      this.width = this.rows[0].length;
+      this.startActors = [];
+      this.levelPlatforms = new Array<objects.Platform>();
+
+      const scale = 25;
+
+      const levelChars = {
+        ".": "empty", "#": objects.Platform,
+        "@": objects.Hero, "e": objects.Enemy//, "E": objects.BigEnemy, "W": objects.Weapon, "P": objects.Powerup
+      };
+       
+      this.y = 0;
+      this.x = 0;
+
+      for (let str of this.rows)
+      {
+        this.x = 0;
+        this.row = new Array<String>();
+        this.row = [...str];
+        for (let chr of this.row)
+        {
+          switch (chr)
+          {
+            case chr = '.':
+            {
+            break;
+            }
+
+            case chr = '#':
+            {
+            console.log(chr);
+            let newplat = new objects.Platform(this.assetManager, this.x*scale, this.y*scale);
+          this.levelPlatforms.push(newplat);
+          this.addChild(newplat);
+          console.log("Platform placed!");
+          break;
+            }
+
+            default:
+            {
+              //empty space
+              break;
+            }
+
+          }
+          this.x++;
+        }
+        this.y++;
+      }
+
+      console.log(this.levelPlatforms);
 
       this.Start();
     }
@@ -26,7 +103,7 @@ module scenes {
         this.collisionmanager = new managers.Collision();
         this._sonic = new objects.Hero(this.assetManager, 1 * 10);
         this._sonic.myScene = this;
-        this._platform = new objects.Platform(this.assetManager);
+        //this._platform = new objects.Platform(this.assetManager);
         this._badguy = new objects.Enemy(this.assetManager);
         this.bulletobjectpool = new Array<objects.Bullet>();
         for (var i = 0; i < 12; i++)
@@ -45,17 +122,8 @@ module scenes {
         this._sonic.Update();
         this.checkBullets();
         this._badguy.Update();
-
-        if (this.isOn(this._platform) && this._sonic.isFalling()) {
-            this._sonic.stopHero();
-            this.placeOn(this._platform, this._sonic);
+        this.CheckPlatformCollisions();
         }
-
-        if (!this.isOn(this._platform) && !this._sonic.isOnGround()) {
-            this._sonic.jumpDown();
-        }
-
-    }
 
     public checkBullets()
     {
@@ -74,6 +142,22 @@ module scenes {
       this.addChild(this._platform);
       this.addChild(this._badguy);
     }
+
+public CheckPlatformCollisions()
+{
+    for (var i = 0; i < this.levelPlatforms.length; i++)
+    {
+
+        if (this.isOn(this.levelPlatforms[i]) && this._sonic.isFalling()) {
+            this._sonic.stopHero();
+            this.placeOn(this.levelPlatforms[i], this._sonic);
+        }
+
+        if (!this.isOn(this.levelPlatforms[i]) && !this._sonic.isOnGround()) {
+            this._sonic.jumpDown();
+        }
+        }
+}
 
     private isOn(platform: objects.Platform):boolean {
         let x = this._sonic.x;

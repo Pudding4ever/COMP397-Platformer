@@ -1,32 +1,25 @@
 var core;
 (function (core) {
-    var TimeDeltaMeasurer = /** @class */ (function () {
-        function TimeDeltaMeasurer() {
-        }
-        TimeDeltaMeasurer.prototype.start = function () {
+    class TimeDeltaMeasurer {
+        start() {
             this._next = new Date().getMilliseconds();
-        };
-        TimeDeltaMeasurer.prototype.calculateDelta = function () {
+        }
+        calculateDelta() {
             this._prev = this._next;
             this._next = new Date().getMilliseconds();
             return this._next - this._prev;
-        };
-        TimeDeltaMeasurer.prototype.stop = function () {
+        }
+        stop() {
             this._prev = 0;
             this._next = 0;
-        };
-        Object.defineProperty(TimeDeltaMeasurer.prototype, "maxDelta", {
-            get: function () {
-                return this._maxDelta;
-            },
-            set: function (value) {
-                this._maxDelta = value;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        return TimeDeltaMeasurer;
-    }());
+        }
+        set maxDelta(value) {
+            this._maxDelta = value;
+        }
+        get maxDelta() {
+            return this._maxDelta;
+        }
+    }
     core.TimeDeltaMeasurer = TimeDeltaMeasurer;
 })(core || (core = {}));
 //# sourceMappingURL=timedeltameasurer.js.map

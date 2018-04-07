@@ -1,10 +1,10 @@
 module objects {
     export class Platform extends objects.GameObject {
 
-        constructor(assetManager: createjs.LoadQueue) {
+        constructor(assetManager: createjs.LoadQueue, x:number, y:number) {
             super(assetManager, "platform");
-            this.x = 230;
-            this.y = 360;
+            this.x = x;
+            this.y = y;
         }
 
     }

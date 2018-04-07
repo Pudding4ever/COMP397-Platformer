@@ -1,12 +1,10 @@
 var managers;
 (function (managers) {
-    var Collision = /** @class */ (function () {
-        function Collision() {
-        }
-        Collision.prototype.Check = function (object1, object2) {
+    class Collision {
+        Check(object1, object2) {
             // create two vec2 objects
-            var P1 = new math.Vec2(object1.x, object1.y);
-            var P2 = new math.Vec2(object2.x, object2.y);
+            let P1 = new math.Vec2(object1.x, object1.y);
+            let P2 = new math.Vec2(object2.x, object2.y);
             if (math.Vec2.Distance(P1, P2) < (object1.halfHeight + object2.halfHeight)) {
                 if (!object2.isColliding) {
                     console.log("COLLISION");
@@ -16,9 +14,8 @@ var managers;
                     object2.isColliding = false;
                 }
             }
-        };
-        return Collision;
-    }());
+        }
+    }
     managers.Collision = Collision;
 })(managers || (managers = {}));
 //# sourceMappingURL=collision.js.map

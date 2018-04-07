@@ -1,15 +1,15 @@
 var managers;
 (function (managers) {
-    var Keyboard = /** @class */ (function () {
+    class Keyboard {
         // constructors
-        function Keyboard() {
+        constructor() {
             this.enabled = true;
             document.addEventListener('keydown', this.onKeyDown.bind(this), false);
             document.addEventListener('keyup', this.onKeyUp.bind(this), false);
         }
         // private methods
         // public methods
-        Keyboard.prototype.onKeyDown = function (event) {
+        onKeyDown(event) {
             switch (event.keyCode) {
                 case config.Keys.W:
                 case config.Keys.UP_ARROW:
@@ -34,8 +34,8 @@ var managers;
                     this.jumpBack = true;
                     break;
             }
-        };
-        Keyboard.prototype.onKeyUp = function (event) {
+        }
+        onKeyUp(event) {
             switch (event.keyCode) {
                 case config.Keys.W:
                 case config.Keys.UP_ARROW:
@@ -60,9 +60,8 @@ var managers;
                     this.jumpBack = false;
                     break;
             }
-        };
-        return Keyboard;
-    }());
+        }
+    }
     managers.Keyboard = Keyboard;
 })(managers || (managers = {}));
 //# sourceMappingURL=keyboard.js.map

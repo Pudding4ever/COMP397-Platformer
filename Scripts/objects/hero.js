@@ -1,42 +1,31 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var objects;
 (function (objects) {
-    var Hero = /** @class */ (function (_super) {
-        __extends(Hero, _super);
-        function Hero(assetManager, weightN) {
-            var _this = _super.call(this, assetManager, "sonicHero") || this;
-            _this._forceN = 1;
-            _this._physics = new core.GamePhysics();
-            _this._weightN = weightN;
-            _this._previousX = _this.x;
-            _this._previousY = _this.y;
-            _this.Start();
-            return _this;
+    class Hero extends objects.GameObject {
+        constructor(assetManager, weightN) {
+            super(assetManager, "sonicHero");
+            this._forceN = 1;
+            this._physics = new core.GamePhysics();
+            this._weightN = weightN;
+            this._previousX = this.x;
+            this._previousY = this.y;
+            this.Start();
         }
-        Hero.prototype.Start = function () {
+        Start() {
             this.y = 480 - this.halfHeight;
-            var deltaMeasurer = new core.TimeDeltaMeasurer();
+            let deltaMeasurer = new core.TimeDeltaMeasurer();
             deltaMeasurer.maxDelta = 40;
             deltaMeasurer.start();
-        };
-        Hero.prototype.Update = function () {
+        }
+        Update() {
             this.Move();
             this.CheckBounds();
             this._dx = this.x - this._previousX;
             this._dy = this.y - this._previousY;
             this._previousX = this.x;
             this._previousY = this.y;
-        };
-        Hero.prototype.Move = function () {
+            //console.log (this.x, this.y);
+        }
+        Move() {
             if (objects.Game.keyboardManager.moveLeft) {
                 this.x -= 5;
             }
@@ -49,8 +38,8 @@ var objects;
             if (objects.Game.keyboardManager.jumpBack) {
                 this.fireBullet();
             }
-        };
-        Hero.prototype.fireBullet = function () {
+        }
+        fireBullet() {
             console.log("fire key pressed!");
             console.log(this.myScene.bulletobjectpool);
             var b;
@@ -66,25 +55,25 @@ var objects;
                     break;
                 }
             }
-        };
-        Hero.prototype.jumpDown = function () {
+        }
+        jumpDown() {
             if (this._dx > 0) {
                 this._physics.jump(this, 270 - 19, 5);
             }
             else {
                 this._physics.jump(this, 270 + 30, 5);
             }
-        };
-        Hero.prototype.isOnGround = function () {
+        }
+        isOnGround() {
             return !(this._physics.checkX(this) && this._physics.checkY(this));
-        };
-        Hero.prototype.stopHero = function () {
+        }
+        stopHero() {
             this._physics.stopJumping();
-        };
-        Hero.prototype.isFalling = function () {
+        }
+        isFalling() {
             return this._dy > 0;
-        };
-        Hero.prototype.CheckBounds = function () {
+        }
+        CheckBounds() {
             // right boundary
             if (this.x >= 640 - this.halfWidth) {
                 this.x = 640 - this.halfWidth;
@@ -93,29 +82,20 @@ var objects;
             if (this.x <= this.halfWidth) {
                 this.x = this.halfWidth;
             }
-        };
-        Object.defineProperty(Hero.prototype, "movingDirection", {
-            get: function () {
-                return this._movingDirection;
-            },
-            set: function (value) {
-                this._movingDirection = value;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Hero.prototype, "forceN", {
-            get: function () {
-                return this._forceN;
-            },
-            set: function (value) {
-                this._forceN = value;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        return Hero;
-    }(objects.GameObject));
+        }
+        get movingDirection() {
+            return this._movingDirection;
+        }
+        set movingDirection(value) {
+            this._movingDirection = value;
+        }
+        get forceN() {
+            return this._forceN;
+        }
+        set forceN(value) {
+            this._forceN = value;
+        }
+    }
     objects.Hero = Hero;
 })(objects || (objects = {}));
 //# sourceMappingURL=hero.js.map

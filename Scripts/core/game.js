@@ -4,15 +4,15 @@ var core;
 (function (core) {
     (function () {
         // Game Variables
-        var canvas = document.getElementById("canvas");
-        var stage;
-        var helloLabel;
-        var clickMeButton;
-        var assetManager;
-        var assetManifest;
-        var currentScene;
-        var currentState;
-        var keyboardManager;
+        let canvas = document.getElementById("canvas");
+        let stage;
+        let helloLabel;
+        let clickMeButton;
+        let assetManager;
+        let assetManifest;
+        let currentScene;
+        let currentState;
+        let keyboardManager;
         //TODO: add pictures
         assetManifest = [
             { id: "clickMeButton", src: "./Assets/images/clickMeButton.png" },

@@ -36,6 +36,7 @@ module objects {
             this._dy = this.y - this._previousY;
             this._previousX = this.x;
             this._previousY = this.y;
+            //console.log (this.x, this.y);
         }
 
         public Move():void {
