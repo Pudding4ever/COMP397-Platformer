@@ -65,8 +65,8 @@ module core {
 
         public checkY(hero: objects.Hero) :boolean {
 
-            if(hero.y >= 480 - hero.halfHeight) {
-                hero.y = 480 - hero.halfHeight;
+            if(hero.y >= 460 - hero.halfHeight) {
+                hero.y = 460 - hero.halfHeight;
                 return false;
             }
 

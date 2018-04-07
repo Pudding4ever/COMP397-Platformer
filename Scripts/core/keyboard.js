@@ -30,8 +30,11 @@ var managers;
                 case config.Keys.SPACE:
                     this.jumpForward = true;
                     break;
-                case config.Keys.CTRL:
-                    this.jumpBack = true;
+                case config.Keys.Z:
+                    this.Fire = true;
+                    break;
+                case config.Keys.X:
+                    this.SwitchWeapon = true;
                     break;
             }
         }
@@ -56,8 +59,11 @@ var managers;
                 case config.Keys.SPACE:
                     this.jumpForward = false;
                     break;
-                case config.Keys.CTRL:
-                    this.jumpBack = false;
+                case config.Keys.Z:
+                    this.Fire = false;
+                    break;
+                case config.Keys.X:
+                    this.SwitchWeapon = false;
                     break;
             }
         }

@@ -14,7 +14,9 @@ var config;
     Keys.D = 68;
     // space bar
     Keys.SPACE = 32;
-    Keys.CTRL = 17;
+    Keys.Z = 90;
+    Keys.X = 88;
+    Keys.C = 67;
     config.Keys = Keys;
 })(config || (config = {}));
 //# sourceMappingURL=keys.js.map

@@ -6,23 +6,29 @@ var scenes;
         constructor(assetManager) {
             super(assetManager);
             this.plan = `
-......................
-......................
-......................
-......................
-......................
-......................
-......................
-......................
-..#................#..
-..#................#..
-..#................#..
-..#........#####...#..
-..#####............#..
-......#++++++++++++#..
-......##############..
-......................`;
+.........................................................
+.........................................................
+.........................................................
+.........................................................
+.........................................................
+.........................................................
+.........................................................
+.........................................................
+.........................................................
+.........................................................
+..#................#.....................................
+..#................#.....................................
+..#................#.....................................
+..#........#####...#.....................................
+..#####............#.....................................
+......#++++++++++++#.....................................
+......#######################..####..#####..###..##......
+.........................................................`;
             console.log(this.plan);
+            this._healthLabel = new objects.Label("Health: - - -", "12px", "Consolas", "#000000", 20, 20, true);
+            this._weaponLabel = new objects.Label("Weapon: Pistol", "12px", "Consolas", "#000000", 20, 40, true);
+            this.addChild(this._healthLabel);
+            this.addChild(this._weaponLabel);
             this.rows = new Array();
             this.rows = this.plan.trim().split("\n").map(l => [...l]); //Splits up the "plan" string into an array of single rows, broken at each new line.
             console.log(this.rows);
@@ -74,6 +80,30 @@ var scenes;
         }
         // Private Mathods
         // Public Methods
+        UpdateLabels() {
+            this._healthLabel.text = "Health: " + this._sonic.lives;
+            switch (this._sonic.weapontype) {
+                case this._sonic.weapontype = 0:
+                    {
+                        this._weaponLabel.text = "Weapon: Pistol";
+                        break;
+                    }
+                case this._sonic.weapontype = 1:
+                    {
+                        this._weaponLabel.text = "Weapon: Shotgun";
+                        break;
+                    }
+                case this._sonic.weapontype = 2:
+                    {
+                        this._weaponLabel.text = "Weapon: Machine Gun";
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+        }
         // TODO: Initialize Game Variables and objects
         Start() {
             this.collisionmanager = new managers.Collision();
@@ -82,7 +112,7 @@ var scenes;
             //this._platform = new objects.Platform(this.assetManager);
             this._badguy = new objects.Enemy(this.assetManager);
             this.bulletobjectpool = new Array();
-            for (var i = 0; i < 12; i++) {
+            for (var i = 0; i < 50; i++) {
                 var b;
                 b = new objects.Bullet(this.assetManager);
                 this.bulletobjectpool.push(b);
@@ -97,6 +127,7 @@ var scenes;
             this.checkBullets();
             this._badguy.Update();
             this.CheckPlatformCollisions();
+            this.UpdateLabels();
         }
         checkBullets() {
             var b;

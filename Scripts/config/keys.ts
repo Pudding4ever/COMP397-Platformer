@@ -14,6 +14,8 @@ module config {
 
     // space bar
     public static SPACE: number = 32;
-    public static CTRL: number = 17;
+    public static Z: number = 90;
+    public static X: number = 88;
+    public static C: number = 67;
   }
 }

@@ -48,8 +48,8 @@ var core;
             return true;
         }
         checkY(hero) {
-            if (hero.y >= 480 - hero.halfHeight) {
-                hero.y = 480 - hero.halfHeight;
+            if (hero.y >= 460 - hero.halfHeight) {
+                hero.y = 460 - hero.halfHeight;
                 return false;
             }
             // left boundary

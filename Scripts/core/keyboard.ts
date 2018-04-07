@@ -8,7 +8,8 @@ module managers {
     public moveLeft: boolean;
     public moveRight: boolean;
     public jumpForward: boolean;
-    public jumpBack: boolean;
+    public Fire: boolean;
+    public SwitchWeapon: boolean;
     public enabled: boolean;
     public paused: boolean;
 
@@ -48,8 +49,12 @@ module managers {
           this.jumpForward = true;
         break;
 
-        case config.Keys.CTRL:
-          this.jumpBack = true;
+        case config.Keys.Z:
+          this.Fire = true;
+          break;
+
+          case config.Keys.X:
+          this.SwitchWeapon = true;
           break;
 
       }
@@ -81,10 +86,12 @@ module managers {
           this.jumpForward = false;
         break;
 
-        case config.Keys.CTRL:
-          this.jumpBack = false;
+        case config.Keys.Z:
+          this.Fire = false;
           break;
-
+          case config.Keys.X:
+          this.SwitchWeapon = false;
+          break;
       }
     }
   }

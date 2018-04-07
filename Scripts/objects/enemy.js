@@ -13,7 +13,7 @@ var objects;
             deltaMeasurer.start();
             this.active == true;
             this.x = 530;
-            this.y = 460;
+            this.y = 460 - this.halfHeight;
             console.log(this.active);
         }
         Update() {
