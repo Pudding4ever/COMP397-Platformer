@@ -6,6 +6,14 @@ var objects;
             this.x = x;
             this.y = y;
         }
+        Move() {
+            if (objects.Game.keyboardManager.moveLeft) {
+                this.x += 5;
+            }
+            if (objects.Game.keyboardManager.moveRight) {
+                this.x -= 5;
+            }
+        }
     }
     objects.Platform = Platform;
 })(objects || (objects = {}));

@@ -30,7 +30,9 @@ var objects;
                 this.x -= 5;
             }
             if (objects.Game.keyboardManager.moveRight) {
-                this.x += 5;
+                if (!this.isOnMiddle()) {
+                    this.x += 5;
+                }
             }
             if (objects.Game.keyboardManager.jumpForward) {
                 this._physics.jump(this, 270 + 0.005);
@@ -73,6 +75,9 @@ var objects;
         isFalling() {
             return this._dy > 0;
         }
+        isMovingForward() {
+            return this._dx > 0;
+        }
         CheckBounds() {
             // right boundary
             if (this.x >= 640 - this.halfWidth) {
@@ -94,6 +99,15 @@ var objects;
         }
         set forceN(value) {
             this._forceN = value;
+        }
+        get dx() {
+            return this._dx;
+        }
+        isOnMiddle() {
+            return this.x > 640 / 2;
+        }
+        isOnLeftBorder() {
+            return this.x <= this.halfWidth;
         }
     }
     objects.Hero = Hero;

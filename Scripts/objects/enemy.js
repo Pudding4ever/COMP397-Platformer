@@ -28,6 +28,14 @@ var objects;
                 this.alpha = 0;
             }
         }
+        Move() {
+            if (objects.Game.keyboardManager.moveLeft) {
+                this.x += 5;
+            }
+            if (objects.Game.keyboardManager.moveRight) {
+                this.x -= 5;
+            }
+        }
     }
     objects.Enemy = Enemy;
 })(objects || (objects = {}));

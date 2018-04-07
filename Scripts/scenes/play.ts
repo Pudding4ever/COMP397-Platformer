@@ -125,6 +125,20 @@ this.plan = `
         this.CheckPlatformCollisions();
         }
 
+<<<<<<< HEAD
+=======
+        if (!this.isOn(this._platform) && !this._sonic.isOnGround()) {
+            this._sonic.jumpDown();
+        }
+
+        if (this._sonic.isOnMiddle() || this._sonic.isOnLeftBorder()) {
+            this._platform.Move();
+            this._badguy.Move();
+        }
+
+    }
+
+>>>>>>> origin/master
     public checkBullets()
     {
         var b: any;

@@ -32,7 +32,15 @@ public timer: number = 0;
                this.isColliding = false;
                this.alpha = 0;
             }
-            }
         }
 
+        public Move():void {
+            if(objects.Game.keyboardManager.moveLeft) {
+                this.x += 5;
+            }
+            if(objects.Game.keyboardManager.moveRight) {
+                this.x -= 5;
+            }
+        }
     }
+}

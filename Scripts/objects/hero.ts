@@ -45,7 +45,9 @@ module objects {
             }
 
             if(objects.Game.keyboardManager.moveRight) {
-                this.x += 5;
+                if (!this.isOnMiddle()) {
+                    this.x += 5;
+                }
             }
 
             if (objects.Game.keyboardManager.jumpForward) {
@@ -57,25 +59,24 @@ module objects {
             }
         }
 
-        public fireBullet():void{
+        public fireBullet(): void {
             console.log ("fire key pressed!");
             console.log (this.myScene.bulletobjectpool);
             var b: any;
-    for (b in this.myScene.bulletobjectpool)
-    {
-        console.log ("checking bullet object pool ", + b);
-        console.log (this.myScene.bulletobjectpool[b].active);
-        if (this.myScene.bulletobjectpool[b].active == false)
-        {
-            console.log ("activating bullet!");
-            this.myScene.bulletobjectpool[b].x = this.x;
-            this.myScene.bulletobjectpool[b].y = this.y;
-            this.myScene.bulletobjectpool[b].active = true;
-        console.log (this.myScene.bulletobjectpool[b].active);
-        break;
-        }
-    } 
-
+            for (b in this.myScene.bulletobjectpool)
+            {
+                console.log ("checking bullet object pool ", + b);
+                console.log (this.myScene.bulletobjectpool[b].active);
+                if (this.myScene.bulletobjectpool[b].active == false)
+                {
+                    console.log ("activating bullet!");
+                    this.myScene.bulletobjectpool[b].x = this.x;
+                    this.myScene.bulletobjectpool[b].y = this.y;
+                    this.myScene.bulletobjectpool[b].active = true;
+                console.log (this.myScene.bulletobjectpool[b].active);
+                break;
+                }
+            }
         }
 
         public jumpDown():void {
@@ -97,6 +98,10 @@ module objects {
         public isFalling():boolean {
             return this._dy > 0;
         }
+
+        public isMovingForward(): boolean {
+            return this._dx > 0;
+    }
 
         public CheckBounds():void {
             // right boundary
@@ -126,7 +131,17 @@ module objects {
             this._forceN = value;
         }
 
+        public get dx(): number {
+            return this._dx;
+        }
 
+        public isOnMiddle(): boolean {
+            return this.x > 640 / 2;
+        }
+
+        public isOnLeftBorder(): boolean {
+            return this.x <= this.halfWidth;
+        }
     }
 
 
