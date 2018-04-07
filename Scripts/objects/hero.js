@@ -30,9 +30,9 @@ var objects;
                 this.x -= 5;
             }
             if (objects.Game.keyboardManager.moveRight) {
-                if (!this.isOnMiddle()) {
-                    this.x += 5;
-                }
+                //if (!this.isOnMiddle()) {
+                this.x += 5;
+                // }
             }
             if (objects.Game.keyboardManager.jumpForward) {
                 this._physics.jump(this, 270 + 0.005);

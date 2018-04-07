@@ -45,9 +45,9 @@ module objects {
             }
 
             if(objects.Game.keyboardManager.moveRight) {
-                if (!this.isOnMiddle()) {
+                //if (!this.isOnMiddle()) {
                     this.x += 5;
-                }
+               // }
             }
 
             if (objects.Game.keyboardManager.jumpForward) {
