@@ -207,7 +207,7 @@ module objects {
             return this._dx > 0;
     }
 
-        public CheckBounds():void {
+       /* public CheckBounds():void {
             // right boundary
             if(this.x >= 640 - this.halfWidth) {
                 this.x = 640 - this.halfWidth;
@@ -218,7 +218,7 @@ module objects {
                 this.x = this.halfWidth;
             }
         }
-
+*/
         public get movingDirection(): core.MovingDirections {
             return this._movingDirection;
         }

@@ -45,7 +45,7 @@ module core {
             stage.enableMouseOver(20); // turn this on for buttons
             createjs.Ticker.framerate = 60; // 60 FPS
             createjs.Ticker.on("tick", Update);
-
+            var context = canvas.msGetInputContext
             objects.Game.stage = stage;
             objects.Game.currentScene = config.Scene.START;
             currentState = config.Scene.START;

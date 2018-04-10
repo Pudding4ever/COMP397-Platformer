@@ -36,7 +36,7 @@ var core;
             return 0.5 * Pt * g;
         }
         checkX(hero) {
-            if (hero.x >= 640 - hero.halfWidth) {
+            if (hero.x >= 8640 - hero.halfWidth) {
                 hero.x = 640 - hero.halfWidth;
                 return false;
             }

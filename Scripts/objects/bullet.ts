@@ -34,7 +34,7 @@ public bullettype: number = 0;
                     {
                         this.alpha = 1;
                         this.x = this.x + 8;
-                        this.y = this.y + 1;
+                        this.y = this.y + 0.5;
                         this.timer++;
                         break;
                     }
@@ -42,7 +42,7 @@ public bullettype: number = 0;
                     {
                         this.alpha = 1;
                         this.x = this.x + 8;
-                        this.y = this.y + 2;
+                        this.y = this.y + 1;
                         this.timer++;
                         break;
                     }
@@ -50,7 +50,7 @@ public bullettype: number = 0;
                     {
                         this.alpha = 1;
                         this.x = this.x + 8;
-                        this.y = this.y - 1;
+                        this.y = this.y - 0.5;
                         this.timer++;
                         break;
                     }
@@ -58,7 +58,7 @@ public bullettype: number = 0;
                     {
                         this.alpha = 1;
                         this.x = this.x + 8;
-                        this.y = this.y - 2;
+                        this.y = this.y - 1;
                         this.timer++;
                         break;
                     }

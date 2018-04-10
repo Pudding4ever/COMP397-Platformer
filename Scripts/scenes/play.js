@@ -81,6 +81,10 @@ var scenes;
         // Private Mathods
         // Public Methods
         UpdateLabels() {
+            this._healthLabel.x = this.stage.regX + 20;
+            this._healthLabel.y = this.stage.regY + 20;
+            this._weaponLabel.x = this.stage.regX + 20;
+            this._weaponLabel.y = this.stage.regY + 40;
             this._healthLabel.text = "Health: " + this._sonic.lives;
             switch (this._sonic.weapontype) {
                 case this._sonic.weapontype = 0:
@@ -103,6 +107,10 @@ var scenes;
                         break;
                     }
             }
+        }
+        UpdateCamera() {
+            this.stage.regX = this._sonic.x - 50;
+            this.stage.regY = this._sonic.y - 410;
         }
         // TODO: Initialize Game Variables and objects
         Start() {
@@ -128,6 +136,7 @@ var scenes;
             this._badguy.Update();
             this.CheckPlatformCollisions();
             this.UpdateLabels();
+            this.UpdateCamera();
         }
         checkBullets() {
             var b;

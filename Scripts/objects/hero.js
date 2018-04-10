@@ -163,16 +163,18 @@ var objects;
         isMovingForward() {
             return this._dx > 0;
         }
-        CheckBounds() {
-            // right boundary
-            if (this.x >= 640 - this.halfWidth) {
-                this.x = 640 - this.halfWidth;
-            }
-            // left boundary
-            if (this.x <= this.halfWidth) {
-                this.x = this.halfWidth;
-            }
-        }
+        /* public CheckBounds():void {
+             // right boundary
+             if(this.x >= 640 - this.halfWidth) {
+                 this.x = 640 - this.halfWidth;
+             }
+ 
+             // left boundary
+             if(this.x <= this.halfWidth) {
+                 this.x = this.halfWidth;
+             }
+         }
+ */
         get movingDirection() {
             return this._movingDirection;
         }

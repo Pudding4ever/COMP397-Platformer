@@ -110,6 +110,11 @@ this.plan = `
     // Public Methods
     public UpdateLabels()
     {
+        this._healthLabel.x = this.stage.regX + 20;
+        this._healthLabel.y = this.stage.regY + 20;
+        this._weaponLabel.x = this.stage.regX + 20;
+        this._weaponLabel.y = this.stage.regY + 40;
+
         this._healthLabel.text = "Health: " + this._sonic.lives;
         switch(this._sonic.weapontype)
         {
@@ -134,6 +139,12 @@ this.plan = `
             }
         }
 
+    }
+
+    public UpdateCamera()
+    {
+        this.stage.regX = this._sonic.x - 50;
+        this.stage.regY = this._sonic.y - 410;
     }
 
 
@@ -163,6 +174,7 @@ this.plan = `
         this._badguy.Update();
         this.CheckPlatformCollisions();
         this.UpdateLabels();
+        this.UpdateCamera();
         }
 
     public checkBullets()
