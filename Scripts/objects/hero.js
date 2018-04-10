@@ -17,12 +17,16 @@ var objects;
             this.Start();
         }
         Start() {
-            this.y = 480 - this.halfHeight;
+            //this.y = 480 - this.halfHeight;
             let deltaMeasurer = new core.TimeDeltaMeasurer();
             deltaMeasurer.maxDelta = 40;
             deltaMeasurer.start();
         }
         Update() {
+            if (this.lives <= 0) {
+                //eventually play some kind of death animation here
+                objects.Game.currentScene = config.Scene.OVER;
+            }
             this.setWeaponROF();
             this.Move();
             this.CheckBounds();
@@ -32,7 +36,7 @@ var objects;
             this._previousY = this.y;
             this.timer++;
             this.switchtimer++;
-            //console.log (this.x, this.y);
+            console.log(this.x, this.y);
         }
         Move() {
             if (objects.Game.keyboardManager.moveLeft) {
@@ -42,6 +46,12 @@ var objects;
                 //if (!this.isOnMiddle()) {
                 this.x += 5;
                 // }
+            }
+            if (objects.Game.keyboardManager.moveForward) {
+                this.y += 5;
+            }
+            if (objects.Game.keyboardManager.moveBackward) {
+                this.y -= 5;
             }
             if (objects.Game.keyboardManager.jumpForward) {
                 this._physics.jump(this, 270 + 0.005);

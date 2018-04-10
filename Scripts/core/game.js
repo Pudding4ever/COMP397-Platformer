@@ -23,6 +23,8 @@ var core;
             { id: "platform", src: "./Assets/images/platform.png" },
             { id: "bullet", src: "./Assets/images/bullet.png" },
             { id: "badguy", src: "./Assets/images/badguy.png" },
+            { id: "backgroundlv1", src: "./Assets/images/bg1.png" },
+            { id: "backgroundlv2", src: "./Assets/images/bg2.png" },
         ];
         // preloads assets
         function Init() {
@@ -63,6 +65,9 @@ var core;
                     break;
                 case config.Scene.PLAY:
                     currentScene = new scenes.PlayScene(assetManager);
+                    break;
+                case config.Scene.PLAY2:
+                    currentScene = new scenes.Play2Scene(assetManager);
                     break;
                 case config.Scene.OVER:
                     currentScene = new scenes.OverScene(assetManager);

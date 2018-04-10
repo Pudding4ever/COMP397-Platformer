@@ -23,7 +23,7 @@ module scenes {
 
     // Initialize Game Variables and objects
     public Start(): void {
-      this._welcomeLabel = new objects.Label("Welcome", "60px", "Consolas", "#000000", 320, 240, true);
+      this._welcomeLabel = new objects.Label("KILL ALL ALIENS", "72px", "Impact", "#FF0000", 320, 140, true);
       this._startButton = new objects.Button(this.assetManager, "startButton", 320, 340);
       this.Main();
     }

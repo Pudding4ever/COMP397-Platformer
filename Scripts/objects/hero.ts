@@ -29,13 +29,19 @@ module objects {
         }
 
         public Start(): void {
-            this.y = 480 - this.halfHeight;
+            //this.y = 480 - this.halfHeight;
             let deltaMeasurer = new core.TimeDeltaMeasurer();
             deltaMeasurer.maxDelta = 40;
             deltaMeasurer.start();
         }
 
         public Update():void {
+            if (this.lives <= 0)
+            {
+                //eventually play some kind of death animation here
+                Game.currentScene = config.Scene.OVER;
+            }
+
             this.setWeaponROF();
             this.Move();
             this.CheckBounds();
@@ -45,7 +51,7 @@ module objects {
             this._previousY = this.y;
             this.timer ++;
             this.switchtimer ++;
-            //console.log (this.x, this.y);
+            console.log (this.x, this.y);
         }
 
         public Move():void {
@@ -57,6 +63,16 @@ module objects {
                 //if (!this.isOnMiddle()) {
                     this.x += 5;
                // }
+            }
+
+            if(objects.Game.keyboardManager.moveForward)
+            {
+                this.y += 5;
+            }
+
+            if(objects.Game.keyboardManager.moveBackward)
+            {
+                this.y -= 5;
             }
 
             if (objects.Game.keyboardManager.jumpForward) {

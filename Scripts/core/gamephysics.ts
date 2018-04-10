@@ -49,8 +49,8 @@ module core {
 
 
         public checkX(hero: objects.Hero): boolean {
-            if (hero.x >= 640 - hero.halfWidth) {
-                hero.x = 640 - hero.halfWidth;
+            if (hero.x >= 6400 - hero.halfWidth) {
+                hero.x = 400 - hero.halfWidth;
                 return false;
             }
 

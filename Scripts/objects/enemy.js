@@ -5,6 +5,7 @@ var objects;
             super(assetManager, "badguy");
             this.active = true;
             this.timer = 0;
+            this.etype = 0;
             this.Start();
         }
         Start() {
@@ -28,12 +29,16 @@ var objects;
                 this.alpha = 0;
             }
         }
-        Move() {
-            if (objects.Game.keyboardManager.moveLeft) {
-                this.x += 5;
-            }
-            if (objects.Game.keyboardManager.moveRight) {
-                this.x -= 5;
+        AIRoutine() {
+            switch (this.etype) {
+                case 0:
+                    {
+                        //jumping parasite AI
+                    }
+                case 1:
+                    {
+                        //enemy soldier AI
+                    }
             }
         }
     }

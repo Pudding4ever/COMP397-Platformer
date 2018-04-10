@@ -3,6 +3,7 @@ module objects {
 
 public active: boolean = true;
 public timer: number = 0;
+public etype: number = 0;
     
         constructor(assetManager: createjs.LoadQueue) {
             super(assetManager, "badguy");
@@ -34,13 +35,21 @@ public timer: number = 0;
             }
         }
 
-        public Move():void {
-            if(objects.Game.keyboardManager.moveLeft) {
-                this.x += 5;
-            }
-            if(objects.Game.keyboardManager.moveRight) {
-                this.x -= 5;
-            }
+public AIRoutine()
+{
+    switch(this.etype)
+    {
+        case 0:
+        {
+            //jumping parasite AI
+        }
+
+        case 1:
+        {
+            //enemy soldier AI
         }
     }
 }
+
+        }
+    }
