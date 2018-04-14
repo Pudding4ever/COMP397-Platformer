@@ -14,8 +14,8 @@ module objects {
         public ROF: number;
         public timer: number = 0;
         public weapontype: number = 0;
-        public switchdelay: number = 15
-        public switchtimer: number = 0
+        public switchdelay: number = 15;
+        public switchtimer: number = 0;
         public lives: number = 3;
 
         constructor(assetManager: createjs.LoadQueue, weightN: number) {
@@ -44,7 +44,6 @@ module objects {
 
             this.setWeaponROF();
             this.Move();
-            this.CheckBounds();
             this._dx = this.x - this._previousX;
             this._dy = this.y - this._previousY;
             this._previousX = this.x;
