@@ -31,7 +31,6 @@ var objects;
             }
             this.setWeaponROF();
             this.Move();
-            this.CheckBounds();
             this._dx = this.x - this._previousX;
             this._dy = this.y - this._previousY;
             this._previousX = this.x;
