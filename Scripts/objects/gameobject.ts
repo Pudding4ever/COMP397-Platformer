@@ -13,6 +13,7 @@ module objects {
     public halfWidth: number;
     public halfHeight: number;
     public isColliding: boolean;
+    public isCollidingBullet: boolean;
 
     // constructors
     constructor(assetManager: createjs.LoadQueue, imageString:string) {

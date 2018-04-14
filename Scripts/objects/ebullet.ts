@@ -1,12 +1,12 @@
 module objects {
-    export class Bullet extends objects.GameObject {
+    export class eBullet extends objects.GameObject {
 
 public active: boolean = false;
 public timer: number = 0;
 public bullettype: number = 0;
     
         constructor(assetManager: createjs.LoadQueue) {
-            super(assetManager, "bullet");
+            super(assetManager, "ebullet");
             this.Start();
         }
 
@@ -27,7 +27,7 @@ public bullettype: number = 0;
                 this.timer = 0;
                 this.alpha = 0;
             }
-
+            
             if(this.active == true)
             {
                 switch(this.bullettype)
@@ -35,14 +35,14 @@ public bullettype: number = 0;
                     case this.bullettype = 0:
                     {
                         this.alpha = 1;
-                        this.x = this.x + 8;
+                        this.x = this.x - 5;
                         this.timer++;
                         break;
                     }
                     case this.bullettype = 1:
                     {
                         this.alpha = 1;
-                        this.x = this.x + 8;
+                        this.x = this.x - 5;
                         this.y = this.y + 0.5;
                         this.timer++;
                         break;
@@ -50,7 +50,7 @@ public bullettype: number = 0;
                     case this.bullettype = 2:
                     {
                         this.alpha = 1;
-                        this.x = this.x + 8;
+                        this.x = this.x - 5;
                         this.y = this.y + 1;
                         this.timer++;
                         break;
@@ -58,7 +58,7 @@ public bullettype: number = 0;
                     case this.bullettype = 3:
                     {
                         this.alpha = 1;
-                        this.x = this.x + 8;
+                        this.x = this.x - 5;
                         this.y = this.y - 0.5;
                         this.timer++;
                         break;
@@ -66,7 +66,7 @@ public bullettype: number = 0;
                     case this.bullettype = 4:
                     {
                         this.alpha = 1;
-                        this.x = this.x + 8;
+                        this.x = this.x - 5;
                         this.y = this.y - 1;
                         this.timer++;
                         break;
@@ -75,14 +75,14 @@ public bullettype: number = 0;
                     default:
                     {
                         this.alpha = 1;
-                        this.x = this.x + 8;
+                        this.x = this.x - 5;
                         this.timer++;
                         break;
                     }
 
 
                 }
-                if (this.timer > 240)
+                if (this.timer > 150)
                 {
                     //console.log ("bullet deactivated!");
                    this.active = false;

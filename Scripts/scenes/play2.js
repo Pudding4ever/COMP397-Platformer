@@ -37,13 +37,14 @@ var scenes;
             console.log(this.rows);
             this.height = this.rows.length;
             this.width = this.rows[0].length;
-            this.startActors = [];
+            this.stageActors = [];
             this.levelPlatforms = new Array();
             const scale = 25; //size of basic platform block (must be square)
-            const levelChars = {
-                ".": "empty", "#": objects.Platform,
-                "@": objects.Hero, "e": objects.Enemy //, "E": objects.BigEnemy, "W": objects.Weapon, "P": objects.Powerup
-            }; //Didn't actually end up using this as originally planned.
+            /* const levelChars = {
+               ".": "empty", "#": objects.Platform,
+               "@": objects.Hero, "e": objects.Enemy//, "E": objects.BigEnemy, "W": objects.Weapon, "P": objects.Powerup
+             }; //Didn't actually end up using this as originally planned.
+              */
             this.y = 0;
             this.x = 0;
             //The below loop breaks up the array of rows into an array of individual characters, then checks the individual characters to create and place objects in the world.
@@ -150,7 +151,7 @@ var scenes;
             this._sonic.y = this._ry;
             this.collisionmanager = new managers.Collision();
             //this._platform = new objects.Platform(this.assetManager);
-            this._badguy = new objects.Enemy(this.assetManager);
+            //this._badguy = new objects.Enemy(this.assetManager);
             this.bulletobjectpool = new Array();
             for (var i = 0; i < 50; i++) {
                 var b;
@@ -172,9 +173,14 @@ var scenes;
         }
         checkBullets() {
             var b;
+            var i;
+            i = 0;
             for (b in this.bulletobjectpool) {
                 this.bulletobjectpool[b].Update();
-                this.collisionmanager.Check(this.bulletobjectpool[b], this._badguy);
+                for (var a in this.stageActors) {
+                    i++;
+                    this.collisionmanager.Check(this.bulletobjectpool[b], this.stageActors[i]); //checks bullet collision with all stage actors. collision script will handle determining if a bullet will actually DO anything to the thing it hit
+                }
             }
         }
         //TODO: Add Game objects to the scene

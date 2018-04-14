@@ -18,8 +18,11 @@ module objects {
         public switchtimer: number = 0
         public lives: number = 3;
 
+        public invframes: boolean = false;
+        public invtimer: number = 0;
+
         constructor(assetManager: createjs.LoadQueue, weightN: number) {
-            super(assetManager, "sonicHero");
+            super(assetManager, "player");
             this._physics = new core.GamePhysics();
             this._weightN = weightN;
             this._previousX = this.x;
@@ -39,7 +42,7 @@ module objects {
             if (this.lives <= 0)
             {
                 //eventually play some kind of death animation here
-                Game.currentScene = config.Scene.OVER;
+                objects.Game.currentScene = config.Scene.OVER;
             }
 
             this.setWeaponROF();
@@ -51,7 +54,24 @@ module objects {
             this._previousY = this.y;
             this.timer ++;
             this.switchtimer ++;
-            console.log (this.x, this.y);
+            //console.log (this.x, this.y);
+            this.invtimer ++;
+            if (this.isColliding == true)
+            {
+                if (this.invtimer <= 20)
+                {
+                    //don't get hit, you're still in invincible frames
+                    this.isColliding = false;
+                }
+               else
+               {
+                   //do get hit, lose life, flash the player (TODO add flash effect);
+                   this.lives --;
+                   this.isColliding = false;
+                   this.invtimer = 0;
+               } 
+            }
+
         }
 
         public Move():void {

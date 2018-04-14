@@ -8,11 +8,12 @@ module objects {
     // Public Properties
     public assetManager;
     public bulletobjectpool: objects.Bullet[];
+    public enemybulletobjectpool: objects.eBullet[];
     public collisionmanager: managers.Collision;
 
     public height: number;
     public width: number;
-    public startActors: Array<objects.GameObject>;
+    public stageActors: Array<objects.GameObject>;
     public levelPlatforms: Array<objects.Platform>;
     public plan: string;
     public rows: Array<Array<String>>;

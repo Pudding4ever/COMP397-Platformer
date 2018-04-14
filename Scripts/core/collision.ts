@@ -8,9 +8,80 @@ module managers {
 
       if (math.Vec2.Distance(P1, P2) < (object1.halfHeight + object2.halfHeight)) {
         if (!object2.isColliding) {
-            console.log ("COLLISION");
-          object2.isColliding = true;
+          object2.isColliding = true; 
         }
+        else {
+          object2.isColliding = false;
+        }
+      }
+    }
+
+      public CheckBullet(object1: objects.GameObject, object2: objects.GameObject) {
+        // create two vec2 objects
+        let P1: math.Vec2 = new math.Vec2(object1.x, object1.y);
+        let P2: math.Vec2 = new math.Vec2(object2.x, object2.y);
+  
+        if (math.Vec2.Distance(P1, P2) < (object1.halfHeight + object2.halfHeight)) {
+          if (!object2.isColliding) {
+            if (object1.name == "ebullet") //if it's an enemy bullet
+            {
+              switch (object2.name)
+            {
+              case "platform":
+              {
+                object1.isColliding = true;
+                break;
+              }
+
+              case "player":
+              {
+                object1.isColliding = true;
+                object2.isColliding = true;
+              }
+
+              default:
+              break;
+            }
+          }
+            if (object1.name != "ebullet") //if it's not an enemy bullet and therefore your bullet
+            {
+            switch (object2.name)
+            {
+              case "platform":
+              {
+                object1.isColliding = true;
+                break;
+              }
+              case "jumpingenemy":
+              {
+                object1.isColliding = true;
+                object2.isColliding = true;
+                break;
+              }
+              case "shootingenemy":
+              {
+                object1.isColliding = true;
+                object2.isColliding = true;
+                break;
+              }
+              case "flyingenemy":
+              {
+                object1.isColliding = true;
+                object2.isColliding = true;
+                break;
+              }
+
+          }
+        }
+      }
+      }
+    }
+  }
+}
+
+
+
+
 /*           switch (object2.name) {
             case "coin":
               if ((object2.alpha != 0) && (object1.alpha != 0)) {
@@ -49,6 +120,3 @@ module managers {
           }
         }
       } */
-      else {
-        object2.isColliding = false;
-      }}}}}

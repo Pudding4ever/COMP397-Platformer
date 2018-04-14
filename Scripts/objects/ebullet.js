@@ -1,8 +1,8 @@
 var objects;
 (function (objects) {
-    class Bullet extends objects.GameObject {
+    class eBullet extends objects.GameObject {
         constructor(assetManager) {
-            super(assetManager, "bullet");
+            super(assetManager, "ebullet");
             this.active = false;
             this.timer = 0;
             this.bullettype = 0;
@@ -27,14 +27,14 @@ var objects;
                     case this.bullettype = 0:
                         {
                             this.alpha = 1;
-                            this.x = this.x + 8;
+                            this.x = this.x - 5;
                             this.timer++;
                             break;
                         }
                     case this.bullettype = 1:
                         {
                             this.alpha = 1;
-                            this.x = this.x + 8;
+                            this.x = this.x - 5;
                             this.y = this.y + 0.5;
                             this.timer++;
                             break;
@@ -42,7 +42,7 @@ var objects;
                     case this.bullettype = 2:
                         {
                             this.alpha = 1;
-                            this.x = this.x + 8;
+                            this.x = this.x - 5;
                             this.y = this.y + 1;
                             this.timer++;
                             break;
@@ -50,7 +50,7 @@ var objects;
                     case this.bullettype = 3:
                         {
                             this.alpha = 1;
-                            this.x = this.x + 8;
+                            this.x = this.x - 5;
                             this.y = this.y - 0.5;
                             this.timer++;
                             break;
@@ -58,7 +58,7 @@ var objects;
                     case this.bullettype = 4:
                         {
                             this.alpha = 1;
-                            this.x = this.x + 8;
+                            this.x = this.x - 5;
                             this.y = this.y - 1;
                             this.timer++;
                             break;
@@ -66,12 +66,12 @@ var objects;
                     default:
                         {
                             this.alpha = 1;
-                            this.x = this.x + 8;
+                            this.x = this.x - 5;
                             this.timer++;
                             break;
                         }
                 }
-                if (this.timer > 240) {
+                if (this.timer > 150) {
                     //console.log ("bullet deactivated!");
                     this.active = false;
                     this.timer = 0;
@@ -81,6 +81,6 @@ var objects;
             }
         }
     }
-    objects.Bullet = Bullet;
+    objects.eBullet = eBullet;
 })(objects || (objects = {}));
-//# sourceMappingURL=bullet.js.map
+//# sourceMappingURL=ebullet.js.map

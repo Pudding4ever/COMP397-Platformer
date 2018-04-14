@@ -2,13 +2,15 @@ var objects;
 (function (objects) {
     class Hero extends objects.GameObject {
         constructor(assetManager, weightN) {
-            super(assetManager, "sonicHero");
+            super(assetManager, "player");
             this._forceN = 1;
             this.timer = 0;
             this.weapontype = 0;
             this.switchdelay = 15;
             this.switchtimer = 0;
             this.lives = 3;
+            this.invframes = false;
+            this.invtimer = 0;
             this._physics = new core.GamePhysics();
             this._weightN = weightN;
             this._previousX = this.x;
@@ -36,7 +38,20 @@ var objects;
             this._previousY = this.y;
             this.timer++;
             this.switchtimer++;
-            console.log(this.x, this.y);
+            //console.log (this.x, this.y);
+            this.invtimer++;
+            if (this.isColliding == true) {
+                if (this.invtimer <= 20) {
+                    //don't get hit, you're still in invincible frames
+                    this.isColliding = false;
+                }
+                else {
+                    //do get hit, lose life, flash the player (TODO add flash effect);
+                    this.lives--;
+                    this.isColliding = false;
+                    this.invtimer = 0;
+                }
+            }
         }
         Move() {
             if (objects.Game.keyboardManager.moveLeft) {
