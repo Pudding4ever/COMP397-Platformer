@@ -18,6 +18,7 @@ module objects {
     public plan: string;
     public rows: Array<Array<String>>;
     public row: Array<String>;
+    public prevrow: Array<String>;
     public x: number;
     public y: number;
 
