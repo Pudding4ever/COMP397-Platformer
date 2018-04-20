@@ -1,6 +1,10 @@
 module objects {
     export class Platform extends objects.GameObject {
 
+        public blockAbove: boolean;
+        public blockLeft: boolean;
+        public blockRight: boolean;
+
         constructor(assetManager: createjs.LoadQueue, x:number, y:number) {
             super(assetManager, "platform");
             this.x = x;
