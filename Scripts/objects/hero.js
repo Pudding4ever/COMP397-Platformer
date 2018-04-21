@@ -9,15 +9,16 @@ var objects;
             this.weapontype = 0;
             this.switchdelay = 15;
             this.switchtimer = 0;
-            this.lives = 5;
-            this.ammo1 = 10;
-            this.ammo2 = 50;
+            this.lives = 3;
+            this.ammo1 = 0;
+            this.ammo2 = 0;
             this.ammo3 = 0;
-            this.grenades = 3;
+            this.grenades = 1;
             this.invframes = false;
             this.invtimer = 0;
             this.shield = false;
             this.rapidfire = false;
+            this.speed = false;
             this._physics = new core.GamePhysics();
             this._weightN = weightN;
             this._previousX = this.x;
@@ -33,6 +34,22 @@ var objects;
             deltaMeasurer.start();
         }
         Update() {
+            if (this.shield == true) {
+                if (this.shieldflicker == true) {
+                    this.alpha = this.alpha - 0.01;
+                }
+                else
+                    this.alpha = this.alpha + 0.01;
+                if (this.alpha < 0.5) {
+                    this.shieldflicker = false;
+                }
+                if (this.alpha >= 1) {
+                    this.shieldflicker = true;
+                }
+            }
+            if (this.rapidtimer >= 900) {
+                this.rapidfire = false;
+            }
             if (this.lives <= 0) {
                 //eventually play some kind of death animation here
                 objects.Game.currentScene = config.Scene.OVER;
@@ -45,14 +62,20 @@ var objects;
             this._previousY = this.y;
             this.timer++;
             this.switchtimer++;
+            this.rapidtimer++;
             //console.log (this.x, this.y);
             this.invtimer++;
             if (this.isColliding == true) {
-                if (this.invtimer <= 20) {
+                if (this.invtimer <= 40) {
                     //don't get hit, you're still in invincible frames
                     this.isColliding = false;
                 }
                 else {
+                    if (this.shield == true) {
+                        this.shield = false;
+                        this.lives++;
+                        this.alpha = 1;
+                    }
                     //do get hit, lose life, flash the player (TODO add flash effect);
                     this.lives--;
                     this.isColliding = false;

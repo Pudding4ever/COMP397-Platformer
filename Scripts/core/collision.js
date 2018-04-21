@@ -14,6 +14,67 @@ var managers;
                 }
             }
         }
+        checkforPowerupCollision(object1, object2) {
+            let P1 = new math.Vec2(object1.x, object1.y);
+            let P2 = new math.Vec2(object2.x, object2.y);
+            if (math.Vec2.Distance(P1, P2) < (object1.halfHeight + object2.halfHeight)) {
+                if (!object2.isColliding) {
+                    switch (object2.name) {
+                        case "p_ammobox":
+                            {
+                                object2.isColliding = true;
+                                object1.ammo1 = object1.ammo1 + 5;
+                                object1.ammo2 = object1.ammo2 + 25;
+                                object1.ammo3 = object1.ammo3 + 1;
+                                break;
+                            }
+                        case "p_grenade":
+                            {
+                                object2.isColliding = true;
+                                object1.grenades = object1.grenades + 2;
+                                break;
+                            }
+                        case "p_health":
+                            {
+                                object2.isColliding = true;
+                                object1.lives = object1.lives + 2;
+                                break;
+                            }
+                        case "p_shield":
+                            {
+                                object2.isColliding = true;
+                                object1.shield = true;
+                                object1.shieldflicker = true;
+                                break;
+                            }
+                        case "p_ewpew":
+                            {
+                                object2.isColliding = true;
+                                object1.rapidtimer = 0;
+                                object1.rapidfire = true;
+                                break;
+                            }
+                        case "w_rifle":
+                            {
+                                object2.isColliding = true;
+                                object1.ammo2 = object1.ammo2 + 50;
+                                break;
+                            }
+                        case "w_shotgun":
+                            {
+                                object2.isColliding = true;
+                                object1.ammo1 = object1.ammo1 + 10;
+                                break;
+                            }
+                        case "levelexit":
+                            {
+                                object2.isColliding = true;
+                                break;
+                            }
+                    }
+                }
+            }
+        }
         checkJumpingEnemy(object1, object2) {
             let P1 = new math.Vec2(object1.x, object1.y);
             let P2 = new math.Vec2(object2.x, object2.y);

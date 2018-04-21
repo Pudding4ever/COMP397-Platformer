@@ -17,18 +17,22 @@ module objects {
         public weapontype: number = 0;
         public switchdelay: number = 15;
         public switchtimer: number = 0;
-        public lives: number = 5;
+        public lives: number = 3;
 
-        public ammo1: number = 10;
-        public ammo2: number = 50;
+        public ammo1: number = 0;
+        public ammo2: number = 0;
         public ammo3: number = 0;
-        public grenades: number = 3;
+        public grenades: number = 1;
 
         public invframes: boolean = false;
         public invtimer: number = 0;
 
         public shield: boolean = false;
         public rapidfire: boolean = false;
+        public speed: boolean = false
+        public speedtimer: number;
+        public rapidtimer: number;
+        public shieldflicker: boolean;
 
         constructor(assetManager: createjs.LoadQueue, weightN: number) {
             super(assetManager, "player");
@@ -49,6 +53,28 @@ module objects {
         }
 
         public Update():void {
+            if(this.shield == true)
+            {
+                if(this.shieldflicker == true)
+                {
+                    this.alpha = this.alpha - 0.01;
+                }
+                else this.alpha = this.alpha +0.01;
+                if (this.alpha < 0.5)
+                {
+                    this.shieldflicker = false;
+                }
+                if (this.alpha >= 1)
+                {
+                    this.shieldflicker = true;
+                }
+            }
+
+            if (this.rapidtimer >= 900)
+            {
+                this.rapidfire = false;
+            }
+
             if (this.lives <= 0)
             {
                 //eventually play some kind of death animation here
@@ -63,17 +89,24 @@ module objects {
             this._previousY = this.y;
             this.timer ++;
             this.switchtimer ++;
+            this.rapidtimer ++;
             //console.log (this.x, this.y);
             this.invtimer ++;
             if (this.isColliding == true)
             {
-                if (this.invtimer <= 20)
+                if (this.invtimer <= 40)
                 {
                     //don't get hit, you're still in invincible frames
                     this.isColliding = false;
                 }
                else
                {
+                   if(this.shield == true)
+                   {
+                       this.shield = false;
+                       this.lives++;
+                       this.alpha = 1;
+                   }
                    //do get hit, lose life, flash the player (TODO add flash effect);
                    this.lives --;
                    this.isColliding = false;

@@ -33,14 +33,17 @@ module core {
             {id: "grenade", src: "./Assets/images/smallgrenade.png"},
             {id: "p_health", src: "./Assets/images/lifeup.png"},
             {id: "p_shield", src: "./Assets/images/shield.png"},
+            {id: "p_ewpew", src: "./Assets/images/rapidshot.png"},
             {id: "w_rifle", src: "./Assets/images/rifle.png"},
-            {id: "w_shotgun", src: "./Assets/images/bg2.png"},
+            {id: "w_shotgun", src: "./Assets/images/shotgun.png"},
             {id: "rocket", src: "./Assets/images/rocket.png"},
             {id: "jumpingenemy", src: "./Assets/images/e1.png"},
             {id: "shootingenemy", src: "./Assets/images/e2.png"},
             {id: "flyingenemy", src: "./Assets/images/e3.png"},
             {id: "backgroundlv1", src: "./Assets/images/bg1.png"},
             {id: "backgroundlv2", src: "./Assets/images/bg2.png"},
+            {id: "backgroundlv3", src: "./Assets/images/bg3.png"},
+            {id: "levelexit", src: "./Assets/images/levelexit.png"},
 
         ];
 
@@ -62,7 +65,7 @@ module core {
             createjs.Ticker.on("tick", Update);
             var context = canvas.msGetInputContext
             objects.Game.stage = stage;
-            objects.Game.currentScene = config.Scene.START;
+            objects.Game.currentScene = config.Scene.PLAY2;
             currentState = config.Scene.START;
 
             keyboardManager = new managers.Keyboard();

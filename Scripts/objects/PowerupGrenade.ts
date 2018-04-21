@@ -12,7 +12,7 @@ export class PowerupGrenade extends objects.GameObject
         }
 
         public Update():void {
-            if(this.isColliding)
+            if(this.isColliding == true)
             {
                 this.Reset();
             }
@@ -20,6 +20,7 @@ export class PowerupGrenade extends objects.GameObject
 
         public Reset()
         {
+            console.log("powerup reset");
             this.alpha=0;
             this.x = -10000;
             this.y = -10000;
