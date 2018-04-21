@@ -108,7 +108,7 @@ var objects;
                 this.y = this.y - 0.2;
             }
             if (this.y < this.myScene.player.y - 150) {
-                this.y = this.y - 0.2;
+                this.y = this.y + 0.2;
             }
             if (this.scaleX < 0 && this.myScene.player.x != this.x) {
                 //console.log("move right");

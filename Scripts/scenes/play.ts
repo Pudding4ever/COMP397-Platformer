@@ -249,6 +249,7 @@ this.plan = `
         //this._badguy.Update();
         this.CheckPlatformCollisions();
         this.CheckEnemyPlatformCollisions();
+        this.checkEnemyImpact();
         this.UpdateLabels();
         this.UpdateCamera();
         this.UpdateActors();
@@ -305,6 +306,14 @@ public checkEnemyBullets()
     }
     }
 
+}
+
+public checkEnemyImpact()
+{
+    for (let a in this.stageActors)
+    {
+    this.collisionmanager.checkJumpingEnemy(this.stageActors[a], this._sonic); 
+    }
 }
 
     //TODO: Add Game objects to the scene

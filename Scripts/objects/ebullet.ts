@@ -98,7 +98,7 @@ public bulletDirection: number = 1;
                     case this.bullettype = 5:
                     {
                         this.alpha = 1;
-                        this.scaleX = 2;
+                        this.scaleX = 1;
                         this.scaleY = 4;
                         this.x = this.x;
                         this.y = this.y + 3;
