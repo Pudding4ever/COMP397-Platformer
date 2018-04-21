@@ -19,7 +19,7 @@ var managers;
             let P2 = new math.Vec2(object2.x, object2.y);
             if (math.Vec2.Distance(P1, P2) < (object1.halfHeight + object2.halfHeight)) {
                 if (!object2.isColliding) {
-                    if (object2.name == "player") {
+                    if (object2.name == "player" && object1.name == "jumpingenemy") {
                         object2.isColliding = true;
                     }
                 }

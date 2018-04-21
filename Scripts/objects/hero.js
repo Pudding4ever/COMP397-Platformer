@@ -9,7 +9,7 @@ var objects;
             this.weapontype = 0;
             this.switchdelay = 15;
             this.switchtimer = 0;
-            this.lives = 3;
+            this.lives = 5;
             this.invframes = false;
             this.invtimer = 0;
             this.shield = false;

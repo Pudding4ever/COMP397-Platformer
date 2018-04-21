@@ -36,6 +36,8 @@ var objects;
                 this.isColliding = false;
             }
             if (this.active == true) {
+                this.scaleX = 1;
+                this.scaleY = 1;
                 switch (this.bullettype) {
                     case this.bullettype = 0:
                         {
@@ -73,6 +75,16 @@ var objects;
                             this.alpha = 1;
                             this.x = this.x - 5 * this.bulletDirection;
                             this.y = this.y - 1;
+                            this.timer++;
+                            break;
+                        }
+                    case this.bullettype = 5:
+                        {
+                            this.alpha = 1;
+                            this.scaleX = 2;
+                            this.scaleY = 4;
+                            this.x = this.x;
+                            this.y = this.y + 3;
                             this.timer++;
                             break;
                         }
