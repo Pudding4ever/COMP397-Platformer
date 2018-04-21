@@ -101,6 +101,9 @@ var core;
                 case config.Scene.PLAY2:
                     currentScene = new scenes.Play2Scene(assetManager);
                     break;
+                case config.Scene.PLAY3:
+                    currentScene = new scenes.Play3Scene(assetManager);
+                    break;
                 case config.Scene.OVER:
                     currentScene = new scenes.OverScene(assetManager);
                     break;
