@@ -33,7 +33,7 @@ var scenes;
             this.addChild(this._background);
             this.addChild(this._healthLabel);
             this.addChild(this._weaponLabel);
-            this.addChild(this._grenadeLabel);
+            //this.addChild(this._grenadeLabel);
             this.rows = new Array();
             this.rows = this.plan.trim().split("\n").map(l => [...l]); //Splits up the "plan" string into an array of single rows, broken at each new line.
             console.log(this.rows);
