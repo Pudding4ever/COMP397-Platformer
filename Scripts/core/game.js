@@ -41,6 +41,7 @@ var core;
             { id: "backgroundlv2", src: "./Assets/images/bg2.png" },
             { id: "backgroundlv3", src: "./Assets/images/bg3.png" },
             { id: "levelexit", src: "./Assets/images/levelexit.png" },
+            { id: "pistol", src: "./Assets/sounds/pistol.wav" },
         ];
         // preloads assets
         function Init() {
