@@ -22,6 +22,7 @@ var managers;
                     switch (object2.name) {
                         case "p_ammobox":
                             {
+                                createjs.Sound.play("powerup");
                                 object2.isColliding = true;
                                 object1.ammo1 = object1.ammo1 + 5;
                                 object1.ammo2 = object1.ammo2 + 25;
@@ -30,18 +31,21 @@ var managers;
                             }
                         case "p_grenade":
                             {
+                                createjs.Sound.play("powerup");
                                 object2.isColliding = true;
                                 object1.grenades = object1.grenades + 2;
                                 break;
                             }
                         case "p_health":
                             {
+                                createjs.Sound.play("heal");
                                 object2.isColliding = true;
                                 object1.lives = object1.lives + 2;
                                 break;
                             }
                         case "p_shield":
                             {
+                             createjs.Sound.play("powerup");   
                                 object2.isColliding = true;
                                 object1.shield = true;
                                 object1.shieldflicker = true;
@@ -49,6 +53,7 @@ var managers;
                             }
                         case "p_ewpew":
                             {
+                                createjs.Sound.play("powerup");
                                 object2.isColliding = true;
                                 object1.rapidtimer = 0;
                                 object1.rapidfire = true;
@@ -56,18 +61,21 @@ var managers;
                             }
                         case "w_rifle":
                             {
+                                createjs.Sound.play("powerup");
                                 object2.isColliding = true;
                                 object1.ammo2 = object1.ammo2 + 50;
                                 break;
                             }
                         case "w_shotgun":
                             {
+                                createjs.Sound.play("powerup");
                                 object2.isColliding = true;
                                 object1.ammo1 = object1.ammo1 + 10;
                                 break;
                             }
                         case "levelexit":
                             {
+                                createjs.Sound.play("gameover");
                                 object2.isColliding = true;
                                 break;
                             }
