@@ -15,8 +15,9 @@ var scenes;
         // Initialize Game Variables and objects
         Start() {
             console.log("GAME OVER YEAH");
-            this._overLabel = new objects.Label("Game Over", "40px", "Consolas", "#FF0000", 320, 240, true);
+            this._overLabel = new objects.Label("GAME OVER YEAH", "40px", "IMPACT", "#FF0000", 320, 240, true);
             this._backButton = new objects.Button(this.assetManager, "backButton", 320, 340);
+            this._background = new objects.GameObject(this.assetManager, "backgroundlv3");
             this.Main();
         }
         Update() {
