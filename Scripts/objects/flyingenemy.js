@@ -73,6 +73,10 @@ var objects;
                 }
             }
             if (this.health <= 0) {
+                if(this.active == true)
+                {
+                 createjs.Sound.play("enemydead");
+                }
                 //console.log ("enemy deactivated!");
                 this.active = false;
                 this.isColliding = false;
@@ -121,6 +125,7 @@ var objects;
         }
         ShootBang() {
             console.log("shootbang");
+             createjs.Sound.play("flyingenemyshot");
             for (var b in this.myScene.enemybulletobjectpool) {
                 // console.log ("checking bullet object pool ", + b);
                 //console.log (this.myScene.bulletobjectpool[b].active);
