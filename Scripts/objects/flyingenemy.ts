@@ -1,5 +1,5 @@
 module objects {
-    export class JumpingEnemy extends objects.GameObject {
+    export class FlyingEnemy extends objects.GameObject {
 
 private _physics :core.GamePhysics;
 public active: boolean = true;
@@ -16,7 +16,7 @@ public myScene: objects.Scene;
 public bullet: objects.eBullet;
     
         constructor(assetManager: createjs.LoadQueue) {
-            super(assetManager, "jumpingenemy");
+            super(assetManager, "flyingenemy");
             this.Start();
         }
 
@@ -30,7 +30,7 @@ public bullet: objects.eBullet;
             this.x = 530;
             this.y = 460 - this.halfHeight;
             console.log (this.active);
-            this.health = 1;
+            this.health = 5;
         }
 
         public DirectionChecker()
@@ -51,7 +51,7 @@ public bullet: objects.eBullet;
             //only run AI routines when the player is close by
             if(this.myScene.player.x > this.x)
             {
-                if(this.myScene.player.x - this.x <= 500)
+                if(this.myScene.player.x - this.x <= 800)
                 {
                     return true;
                 }
@@ -59,7 +59,7 @@ public bullet: objects.eBullet;
             }
             else
             {
-                if(this.x - this.myScene.player.x <= 500)
+                if(this.x - this.myScene.player.x <= 800)
                 {
                     return true;  
                 }
@@ -110,48 +110,61 @@ public bullet: objects.eBullet;
             }
         }
 
-public AIRoutine()
-{
-    this.DirectionChecker();
-    switch(this.etype)
-    {
-        case 0:
+        public AIRoutine()
         {
-            //stand still and fire shots
-            if (this.firetimer >= this.fireRate)
+            this.DirectionChecker();
+            switch(this.etype)
             {
-                this.firetimer = 0;
-                this.JumpAttack();
+                case 0:
+                {
+                    //stand still and fire shots
+                    if (this.firetimer >= this.fireRate && this.x == this.myScene.player.x)
+                    {
+                        this.firetimer = 0;
+                        this.ShootBang();
+                        break;
+                    }
+                    else
+                    {
+                        if (this.firetimer >= 25) //stand still for a second after firing
+                        {
+                        this.MoveEnemy();
+                        }
+                    }
+                    break;
+                }
+        
+                default:
                 break;
             }
         }
-
-        case 1:
+        
+        public MoveEnemy()
         {
-            //rush toward player firing shots
-            break;
+
+        if (this.y > this.myScene.player.y - 150)
+        {
+            this.y = this.y - 0.2;
+        }
+        
+        if (this.y < this.myScene.player.y - 150)
+        {
+            this.y = this.y + 0.2;
         }
 
-        default:
-        break;
-    }
-}
+        if(this.scaleX < 0 && this.myScene.player.x != this.x)
+        {
+            //console.log("move right");
+            this.x = this.x + 1;
+        }
+        else if (this.scaleX > 0 &&  this.myScene.player.x != this.x)
+        {
+            //console.log("move left");
+            this.x = this.x - 1;
+        }
+        }
 
-public JumpAttack()
-{
-    if(this.scaleX < 0)
-    {
-    this._physics.enemyjump(this, 270 + 0.005);
-    }
-    else {this._physics.enemyjump(this, 270 - 0.005 - 90);}
-}
-
-
-}
-
-}
-
-/* public ShootBang()
+ public ShootBang()
 {
     console.log("shootbang");
     for (var b in this.myScene.enemybulletobjectpool)
@@ -161,7 +174,7 @@ public JumpAttack()
         if (this.myScene.enemybulletobjectpool[b].active == false)
         {
            console.log ("activating ebullet!");
-            this.myScene.enemybulletobjectpool[b].bullettype = 0;
+            this.myScene.enemybulletobjectpool[b].bullettype = 5;
             this.myScene.enemybulletobjectpool[b].bulletDirection = this.scaleX;
             this.myScene.enemybulletobjectpool[b].x = this.x;
             this.myScene.enemybulletobjectpool[b].y = this.y;
@@ -171,4 +184,6 @@ public JumpAttack()
         }
 }
 
-        } */
+        }
+    }
+}

@@ -102,7 +102,7 @@ public bullet: objects.eBullet;
             if (this.health <= 0)
 
             {
-                console.log ("enemy deactivated!");
+            //console.log ("enemy deactivated!");
                this.active = false;
                this.isColliding = false;
                this.alpha = 0;

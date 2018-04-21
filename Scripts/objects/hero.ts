@@ -17,7 +17,7 @@ module objects {
         public weapontype: number = 0;
         public switchdelay: number = 15;
         public switchtimer: number = 0;
-        public lives: number = 3;
+        public lives: number = 5;
 
         public invframes: boolean = false;
         public invtimer: number = 0;

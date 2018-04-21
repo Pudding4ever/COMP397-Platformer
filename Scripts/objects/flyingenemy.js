@@ -1,8 +1,8 @@
 var objects;
 (function (objects) {
-    class ShootingEnemy extends objects.GameObject {
+    class FlyingEnemy extends objects.GameObject {
         constructor(assetManager) {
-            super(assetManager, "shootingenemy");
+            super(assetManager, "flyingenemy");
             this.active = true;
             this.timer = 0;
             this.etype = 0;
@@ -10,7 +10,7 @@ var objects;
             this.invframes = false;
             this.invtimer = 0;
             this.firetimer = 0;
-            this.fireRate = 90;
+            this.fireRate = 50;
             this.Start();
         }
         Start() {
@@ -23,8 +23,7 @@ var objects;
             this.x = 530;
             this.y = 460 - this.halfHeight;
             console.log(this.active);
-            this.health = 3;
-            //this.Physics.blankjump(this, 270 + 0.005);
+            this.health = 5;
         }
         DirectionChecker() {
             //face and shoot in direction of the player
@@ -38,14 +37,14 @@ var objects;
         DistanceChecker() {
             //only run AI routines when the player is close by
             if (this.myScene.player.x > this.x) {
-                if (this.myScene.player.x - this.x <= 500) {
+                if (this.myScene.player.x - this.x <= 800) {
                     return true;
                 }
                 else
                     return false;
             }
             else {
-                if (this.x - this.myScene.player.x <= 500) {
+                if (this.x - this.myScene.player.x <= 800) {
                     return true;
                 }
                 else
@@ -88,7 +87,7 @@ var objects;
                 case 0:
                     {
                         //stand still and fire shots
-                        if (this.firetimer >= this.fireRate) {
+                        if (this.firetimer >= this.fireRate && this.x == this.myScene.player.x) {
                             this.firetimer = 0;
                             this.ShootBang();
                             break;
@@ -105,16 +104,17 @@ var objects;
             }
         }
         MoveEnemy() {
-            //this.Physics.stopJumping();
-            //console.log (this.currentplatform);
-            //console.log (this.currentplatform.blockAbove);
-            //console.log (this.currentplatform.blockLeft);
-            //console.log (this.currentplatform.blockRight);
-            if (this.scaleX < 0 && this.currentplatform.blockRight == true) {
+            if (this.y > this.myScene.player.y - 150) {
+                this.y = this.y - 0.2;
+            }
+            if (this.y < this.myScene.player.y - 150) {
+                this.y = this.y + 0.2;
+            }
+            if (this.scaleX < 0 && this.myScene.player.x != this.x) {
                 //console.log("move right");
                 this.x = this.x + 1;
             }
-            else if (this.scaleX > 0 && this.currentplatform.blockLeft == true) {
+            else if (this.scaleX > 0 && this.myScene.player.x != this.x) {
                 //console.log("move left");
                 this.x = this.x - 1;
             }
@@ -126,7 +126,7 @@ var objects;
                 //console.log (this.myScene.bulletobjectpool[b].active);
                 if (this.myScene.enemybulletobjectpool[b].active == false) {
                     console.log("activating ebullet!");
-                    this.myScene.enemybulletobjectpool[b].bullettype = 0;
+                    this.myScene.enemybulletobjectpool[b].bullettype = 5;
                     this.myScene.enemybulletobjectpool[b].bulletDirection = this.scaleX;
                     this.myScene.enemybulletobjectpool[b].x = this.x;
                     this.myScene.enemybulletobjectpool[b].y = this.y;
@@ -137,6 +137,6 @@ var objects;
             }
         }
     }
-    objects.ShootingEnemy = ShootingEnemy;
+    objects.FlyingEnemy = FlyingEnemy;
 })(objects || (objects = {}));
-//# sourceMappingURL=shootingenemy.js.map
+//# sourceMappingURL=flyingenemy.js.map
