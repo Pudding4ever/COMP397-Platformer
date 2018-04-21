@@ -244,34 +244,41 @@ this.plan = `
       this.addChild(this._badguy);
     }
 
-public CheckPlatformCollisions()
-{
-//Checks all platforms in levelPlatforms array for collisions with hero.
-//Probably a slow way to do this but I had to find a way to support multiple platforms in the world at once.
-    for (var i = 0; i < this.levelPlatforms.length; i++)
-    {
-
-        if (this.isOn(this.levelPlatforms[i]) && this._sonic.isFalling()) {
-            this._sonic.stopHero();
-            this.placeOn(this.levelPlatforms[i], this._sonic);
+        public CheckPlatformCollisions()
+        {
+            //Checks all platforms in levelPlatforms array for collisions with hero.
+            //Probably a slow way to do this but I had to find a way to support multiple platforms in the world at once.
+            for (var i = 0; i < this.levelPlatforms.length; i++)
+            {
+                if (this.isOn(this.levelPlatforms[i])) {
+                    //console.log("isOn:" + this.isOn(this.levelPlatforms[i]));
+                    //console.log("isFalling:" + this._sonic.isFalling());
+                    this._sonic.stopHero();
+                    this.placeOn(this.levelPlatforms[i], this._sonic);
+                    return;
+                }
+            }
+            if (!this._sonic.isOnGround()) {
+                this._sonic.jumpDown();
+            }
         }
 
-        if (!this.isOn(this.levelPlatforms[i]) && !this._sonic.isOnGround()) {
-            this._sonic.jumpDown();
+        private isOn(platform: objects.Platform):boolean {
+            if (!platform.blockAbove) {
+                let x = this._sonic.x;
+                let y = this._sonic.y;
+                let isIn: boolean = x + this._sonic.width / 2 >= platform.x - platform.width / 2 &&
+                    x - this._sonic.width / 2 <= platform.x + platform.width / 2 &&
+                    y + this._sonic.height / 2 >= platform.y - platform.height / 2 &&
+                    y - this._sonic.height / 2 <= platform.y + platform.height / 2;
+                return isIn && this._sonic.isFalling();
+            }
+            return false;
         }
+
+        private placeOn(platform: objects.Platform, hero: objects.Hero) {
+            hero.y = platform.y - platform.height/2 - hero.height/2;
         }
-}
-
-    private isOn(platform: objects.Platform):boolean {
-        let x = this._sonic.x;
-        let y = this._sonic.y;
-        return (x + this._sonic.width/2 >= platform.x - platform.width/2 && x - this._sonic.width/2 <= platform.x + platform.width/2) &&
-            (y >= platform.y - platform.height/2 - this._sonic.height/2);
-    }
-
-    private placeOn(platform: objects.Platform, hero: objects.Hero) {
-        hero.y = platform.y - platform.height/2 - hero.height/2;
-    }
 
   }
 }
