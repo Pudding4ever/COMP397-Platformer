@@ -156,7 +156,7 @@ var objects;
                 switch (this.weapontype) {
                     case this.weapontype = 0://pistol
                         {
-                            createjs.Sound.Play("pistol");
+                            //createjs.Sound.Play("pistol");
                             for (b in this.myScene.bulletobjectpool) {
                                 // console.log ("checking bullet object pool ", + b);
                                 //console.log (this.myScene.bulletobjectpool[b].active);
