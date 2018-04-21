@@ -28,6 +28,7 @@ var scenes;
             this.addChild(this._overLabel);
             // add the backButton to the scene
             this.addChild(this._backButton);
+            this.addChild(this._background);
             // event listeners
             this._backButton.on("click", this._backButtonClick);
         }
