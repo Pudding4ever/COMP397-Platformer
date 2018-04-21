@@ -81,7 +81,7 @@ var objects;
                     case this.bullettype = 5:
                         {
                             this.alpha = 1;
-                            this.scaleX = 1;
+                            this.scaleX = 0.5;
                             this.scaleY = 4;
                             this.x = this.x;
                             this.y = this.y + 3;

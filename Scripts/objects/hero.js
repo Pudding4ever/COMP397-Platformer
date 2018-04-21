@@ -10,6 +10,10 @@ var objects;
             this.switchdelay = 15;
             this.switchtimer = 0;
             this.lives = 5;
+            this.ammo1 = 10;
+            this.ammo2 = 50;
+            this.ammo3 = 0;
+            this.grenades = 3;
             this.invframes = false;
             this.invtimer = 0;
             this.shield = false;
@@ -147,31 +151,13 @@ var objects;
                         }
                     case this.weapontype = 2://machine gun
                         {
-                            for (b in this.myScene.bulletobjectpool) {
-                                // console.log ("checking bullet object pool ", + b);
-                                //console.log (this.myScene.bulletobjectpool[b].active);
-                                if (this.myScene.bulletobjectpool[b].active == false) {
-                                    // console.log ("activating bullet!");
-                                    this.myScene.bulletobjectpool[b].bullettype = 0;
-                                    this.myScene.bulletobjectpool[b].bulletDirection = this.scaleX;
-                                    this.myScene.bulletobjectpool[b].x = this.x;
-                                    this.myScene.bulletobjectpool[b].y = this.y;
-                                    this.myScene.bulletobjectpool[b].active = true;
-                                    //console.log (this.myScene.bulletobjectpool[b].active);
-                                    break;
-                                }
-                            }
-                            break;
-                        }
-                    case this.weapontype = 1://shotgun
-                        {
-                            for (let i = 0; i < 5; i++) {
+                            if (this.ammo2 > 0) {
                                 for (b in this.myScene.bulletobjectpool) {
                                     // console.log ("checking bullet object pool ", + b);
                                     //console.log (this.myScene.bulletobjectpool[b].active);
                                     if (this.myScene.bulletobjectpool[b].active == false) {
                                         // console.log ("activating bullet!");
-                                        this.myScene.bulletobjectpool[b].bullettype = i;
+                                        this.myScene.bulletobjectpool[b].bullettype = 0;
                                         this.myScene.bulletobjectpool[b].bulletDirection = this.scaleX;
                                         this.myScene.bulletobjectpool[b].x = this.x;
                                         this.myScene.bulletobjectpool[b].y = this.y;
@@ -180,7 +166,38 @@ var objects;
                                         break;
                                     }
                                 }
+                                this.ammo2--;
+                                break;
                             }
+                            else {
+                                this.weapontype = 0;
+                            }
+                            break;
+                        }
+                    case this.weapontype = 1://shotgun
+                        {
+                            if (this.ammo1 > 0) {
+                                for (let i = 0; i < 5; i++) {
+                                    for (b in this.myScene.bulletobjectpool) {
+                                        // console.log ("checking bullet object pool ", + b);
+                                        //console.log (this.myScene.bulletobjectpool[b].active);
+                                        if (this.myScene.bulletobjectpool[b].active == false) {
+                                            // console.log ("activating bullet!");
+                                            this.myScene.bulletobjectpool[b].bullettype = i;
+                                            this.myScene.bulletobjectpool[b].bulletDirection = this.scaleX;
+                                            this.myScene.bulletobjectpool[b].x = this.x;
+                                            this.myScene.bulletobjectpool[b].y = this.y;
+                                            this.myScene.bulletobjectpool[b].active = true;
+                                            //console.log (this.myScene.bulletobjectpool[b].active);
+                                            break;
+                                        }
+                                    }
+                                }
+                                this.ammo1--;
+                                break;
+                            }
+                            else
+                                (this.weapontype = 2);
                             break;
                         }
                 }

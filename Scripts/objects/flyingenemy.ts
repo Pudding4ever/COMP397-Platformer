@@ -46,12 +46,12 @@ public bullet: objects.eBullet;
             }
         }
 
-        public DistanceChecker(): boolean
+        public DistanceChecker(distance:number): boolean
         {
             //only run AI routines when the player is close by
             if(this.myScene.player.x > this.x)
             {
-                if(this.myScene.player.x - this.x <= 800)
+                if(this.myScene.player.x - this.x <= distance)
                 {
                     return true;
                 }
@@ -59,7 +59,7 @@ public bullet: objects.eBullet;
             }
             else
             {
-                if(this.x - this.myScene.player.x <= 800)
+                if(this.x - this.myScene.player.x <= distance)
                 {
                     return true;  
                 }
@@ -92,7 +92,7 @@ public bullet: objects.eBullet;
 
                 this.alpha = 1;
                 //run any AI here
-                if (this.DistanceChecker())
+                if (this.DistanceChecker(800))
                 {
                     this.AIRoutine();
                 }
@@ -118,7 +118,7 @@ public bullet: objects.eBullet;
                 case 0:
                 {
                     //stand still and fire shots
-                    if (this.firetimer >= this.fireRate && this.x == this.myScene.player.x)
+                    if (this.firetimer >= this.fireRate && this.DistanceChecker(20))
                     {
                         this.firetimer = 0;
                         this.ShootBang();
@@ -142,12 +142,12 @@ public bullet: objects.eBullet;
         public MoveEnemy()
         {
 
-        if (this.y > this.myScene.player.y - 150)
+        if (this.y > this.myScene.player.y - 120)
         {
             this.y = this.y - 0.2;
         }
         
-        if (this.y < this.myScene.player.y - 150)
+        if (this.y < this.myScene.player.y - 120)
         {
             this.y = this.y + 0.2;
         }
@@ -155,12 +155,12 @@ public bullet: objects.eBullet;
         if(this.scaleX < 0 && this.myScene.player.x != this.x)
         {
             //console.log("move right");
-            this.x = this.x + 1;
+            this.x = this.x + 1.5;
         }
         else if (this.scaleX > 0 &&  this.myScene.player.x != this.x)
         {
             //console.log("move left");
-            this.x = this.x - 1;
+            this.x = this.x - 1.5;
         }
         }
 

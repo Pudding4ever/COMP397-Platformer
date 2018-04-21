@@ -8,6 +8,7 @@ module scenes {
 
       private _healthLabel: objects.Label;
       private _weaponLabel: objects.Label;
+      private _grenadeLabel: objects.Label;
 
       private _background: objects.GameObject;
 
@@ -23,32 +24,34 @@ module scenes {
 
 this.plan = `
 ....................................................................................................................................................................................................................................................................................
-................................................................................................................###...................................................................................###............................LVLFIN............................#############
-................................................................................................................###...................................................................................###............................LVLFIN............................#############
+................................................................................................................###...................................................................................###..............................................................#############
+................................................................................................................###.j.................................................................................###...............................X..............................#############
 ############.....................................................f..............................................######................................................................................###.....................###......###.....#######...............###############
-############....................................................................................................######................................................................................###.....................###......###.....#######...............###############
+############....................................................................................................######................................................................................###.....................###......###.....#######...j...........###############
 ############..........................................................................#####........###..........#######...............................................................................###....................##.##....##.##....##..###...###.......#################
 ############....................e.....................................................#####........###..........#######....w.........e................................................................###....................##.##....##.##....##..###...###.......#################
 ############...................####...............................................#####............######.......##################################....................................................###...................##...##..##...##.......##...........####################
 ############...................####...............................................#####............######.......##################################....................................................###...................##...##..##...##.......##...........####################
 #..............................####...........................................#####................########.....................................####.....................................#######......###....................##.##....##.##.......##.........#######################
-#.......................j......####...........................................#####................########.....................................####.......................e.............#######......###....................##.##....##.##.......##.........#######################
-#.....................####.....####................................................................#########.......................................####.................######......#######...........###.....................###......###.......##.......##########################
-#.....................####.....####.....................w..........................................#########.......................................####.................######......#######...........###.....................###......###.......##.......##########################
+#..............................####...........................................#####................########.....................................####.j.....................e.............#######......###....................##.##....##.##.......##.........#######################
+#.....................####.....####................................................................#########.......................................####.................######......#######...........###.....................###......###.......##........#########################
+#.....................####.....####.....................w..............j...........................##########.......................................####................######......#######...........###.....................###......###.......##........#########################
 #.....................####.....####...................######........#######........................##########.......................................................#####..............................................................................#############################
-#.@...................####.....####............j.....######........#######..............e.........##########................e......................................#####................................................E.............................##############################
+#.@...................####..j..####............j......######........#######..............e.........##########................e......................................#####...j............................................E.............................#############################
 ####################################################################################################################################################################################################################################################################################
 ####################################################################################################################################################################################################################################################################################`;
 
       console.log(this.plan);
-      this._healthLabel = new objects.Label("Health: x", "12px", "Consolas", "#000000", 20, 20, true);
-      this._weaponLabel = new objects.Label("Weapon: Pistol", "12px", "Consolas", "#000000", 20, 40, true);
+      this._healthLabel = new objects.Label("Health: x", "18px", "Consolas", "#FF0000", 10, 10, true);
+      this._weaponLabel = new objects.Label("Pistol", "18px", "Consolas", "#FF0000", 10, 30, true);
+      this._grenadeLabel = new objects.Label("Grenades", "18px", "Consolas", "#FF0000", 10, 50, true);
       this._background = new objects.GameObject(this.assetManager, "backgroundlv1");
       this._background.x = 1000;
-      this._background.y = -20;
+      this._background.y = -10;
       this.addChild(this._background);
       this.addChild(this._healthLabel);
       this.addChild(this._weaponLabel);
+      this.addChild(this._grenadeLabel);
       this.rows = new Array<Array<String>>();
       this.rows = this.plan.trim().split("\n").map(l => [...l]); //Splits up the "plan" string into an array of single rows, broken at each new line.
       console.log(this.rows);
@@ -90,23 +93,23 @@ this.plan = `
             case chr = '#':
             {
             //place a platform
-            console.log(chr);
+            //console.log(chr);
             let newplat = new objects.Platform(this.assetManager, this.x*scale, this.y*scale);
                 //check adjacency to other platforms
                 if (this.prevrow != null && this.prevrow[this.x] == this.row[this.x])
                 {
                     newplat.blockAbove = true;
-                    console.log("blockabove");
+                    //console.log("blockabove");
                 }
                 if (this.x > 0 && this.row[this.x] == this.row[this.x-1])
                 {
                     newplat.blockLeft = true;
-                    console.log("blockleft");
+                    //console.log("blockleft");
                 }
                 if (this.x < this.row.length && this.row[this.x] == this.row[this.x+1])
                 {
                     newplat.blockRight = true;
-                    console.log("blockright");
+                    //console.log("blockright");
                 }
                 this.levelPlatforms.push(newplat);
                 this.addChild(newplat);
@@ -119,6 +122,12 @@ this.plan = `
                 //place the player LAST
                 this._rx = this.x*scale;
                 this._ry = this.y*scale;
+                break;
+            }
+
+            case chr = 'X':
+            {
+                //place the level EXIT
                 break;
             }
 
@@ -160,15 +169,104 @@ this.plan = `
                 break;
             }
 
-            case chr = 'P':
+            case chr = '>':
             {
-                //place random powerup
+                //place speed powerup
+                let newenemy = new objects.PowerupSpeed(this.assetManager)
+                newenemy.x = this.x*scale;
+                newenemy.y = this.y*scale;
+                this.addChild(newenemy);
+                this.stageActors.push(newenemy);
+                console.log("speed powerup placed!");
                 break;
             }
 
-            case chr = 'W':
+            case chr = '=':
             {
-                //place random weapon
+                //place ammobox powerup
+                                let newenemy = new objects.PowerupAmmo(this.assetManager)
+                                newenemy.x = this.x*scale;
+                                newenemy.y = this.y*scale;
+                                this.addChild(newenemy);
+                                this.stageActors.push(newenemy);
+                                console.log("ammo powerup placed!");
+                                break;
+            }
+
+            case chr = '+':
+            {
+                //place health powerup
+                let newenemy = new objects.PowerupHealth(this.assetManager)
+                newenemy.x = this.x*scale;
+                newenemy.y = this.y*scale;
+                this.addChild(newenemy);
+                this.stageActors.push(newenemy);
+                console.log("health powerup placed!");
+                break;
+            }
+
+            case chr = 'G':
+            {
+                let newenemy = new objects.PowerupGrenade(this.assetManager)
+                newenemy.x = this.x*scale;
+                newenemy.y = this.y*scale;
+                this.addChild(newenemy);
+                this.stageActors.push(newenemy);
+                console.log("grenade powerup placed!");
+                break;
+            }
+
+            case chr = 'R':
+            {
+                //place grenade powerup
+                let newenemy = new objects.PowerupRapidFire(this.assetManager)
+                newenemy.x = this.x*scale;
+                newenemy.y = this.y*scale;
+                this.addChild(newenemy);
+                this.stageActors.push(newenemy);
+                console.log("rapidfire powerup placed!");
+                break;
+            }
+            
+            case chr = 'S':
+            {
+                //place shield powerup
+                let newenemy = new objects.PowerupShield(this.assetManager)
+                newenemy.x = this.x*scale;
+                newenemy.y = this.y*scale;
+                this.addChild(newenemy);
+                this.stageActors.push(newenemy);
+                console.log("shield powerup placed!");
+                break;
+            }
+
+            case chr = '2':
+            {
+                //place rifle powerup
+                let newenemy = new objects.WeaponRifle(this.assetManager)
+                newenemy.x = this.x*scale;
+                newenemy.y = this.y*scale;
+                this.addChild(newenemy);
+                this.stageActors.push(newenemy);
+                console.log("rifle powerup placed!");
+                break;
+            }
+
+            case chr = '1':
+            {
+                //place shotgun powerup
+                let newenemy = new objects.WeaponShotgun(this.assetManager)
+                newenemy.x = this.x*scale;
+                newenemy.y = this.y*scale;
+                this.addChild(newenemy);
+                this.stageActors.push(newenemy);
+                console.log("shotgun powerup placed!");
+                break;
+            }
+
+            case chr = '3':
+            {
+                //place rocket launcher powerup
                 break;
             }
 
@@ -198,27 +296,30 @@ this.plan = `
     // Public Methods
     public UpdateLabels()
     {
-        this._healthLabel.x = this.stage.regX + 20;
-        this._healthLabel.y = this.stage.regY + 20;
-        this._weaponLabel.x = this.stage.regX + 20;
-        this._weaponLabel.y = this.stage.regY + 40;
+        this._healthLabel.x = this.stage.regX - 200;
+        this._healthLabel.y = this.stage.regY + 0;
+        this._weaponLabel.x = this.stage.regX - 200;
+        this._weaponLabel.y = this.stage.regY + 15;
+        this._grenadeLabel.x = this.stage.regX - 200;
+        this._grenadeLabel.y = this.stage.regY + 30;
 
         this._healthLabel.text = "Health: " + this._sonic.lives;
+        this._grenadeLabel.text = "Grenades: " + this._sonic.grenades;
         switch(this._sonic.weapontype)
         {
             case this._sonic.weapontype = 0:
             {
-                this._weaponLabel.text = "Weapon: Pistol";
+                this._weaponLabel.text = "Pistol: ∞";
                 break;
             }
             case this._sonic.weapontype = 1:
             {
-                this._weaponLabel.text = "Weapon: Shotgun";
+                this._weaponLabel.text = "Shotgun: " + this._sonic.ammo1;
                 break;
             }
             case this._sonic.weapontype = 2:
             {
-                this._weaponLabel.text = "Weapon: Machine Gun";
+                this._weaponLabel.text = "Machine Gun: " + this._sonic.ammo2;
                 break;
             }
             default:

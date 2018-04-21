@@ -19,6 +19,11 @@ module objects {
         public switchtimer: number = 0;
         public lives: number = 5;
 
+        public ammo1: number = 10;
+        public ammo2: number = 50;
+        public ammo3: number = 0;
+        public grenades: number = 3;
+
         public invframes: boolean = false;
         public invtimer: number = 0;
 
@@ -199,6 +204,8 @@ module objects {
 
                     case this.weapontype = 2: //machine gun
                     {
+                        if (this.ammo2 > 0)
+                        {
                         for (b in this.myScene.bulletobjectpool)
                         {
                            // console.log ("checking bullet object pool ", + b);
@@ -215,11 +222,17 @@ module objects {
                             break;
                             }
                          }
+                         this.ammo2--;
+                        break;
+                        }
+                        else{this.weapontype = 0;}
                         break;
                     }
 
                     case this.weapontype = 1: //shotgun
                     {
+                        if (this.ammo1 > 0)
+                        {
                         for (let i: number = 0; i < 5; i++)
                         {
                         for (b in this.myScene.bulletobjectpool)
@@ -239,7 +252,11 @@ module objects {
                             }
                          }
                         }
+                        this.ammo1--;
                         break;
+                    }
+                    else(this.weapontype = 2);
+                    break;
                     }
         }
         }

@@ -84,7 +84,8 @@ module core {
 
         function Main(): void {
             stage.removeAllChildren();
-
+            stage.regX = 0;
+            stage.regY = 0;
             switch (objects.Game.currentScene) {
                 case config.Scene.START:
                     currentScene = new scenes.StartScene(assetManager);
