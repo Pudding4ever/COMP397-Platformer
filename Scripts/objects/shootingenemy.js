@@ -121,6 +121,7 @@ var objects;
         }
         ShootBang() {
             console.log("shootbang");
+            createjs.Sound.play("enemyshot");
             for (var b in this.myScene.enemybulletobjectpool) {
                 // console.log ("checking bullet object pool ", + b);
                 //console.log (this.myScene.bulletobjectpool[b].active);
