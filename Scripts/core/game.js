@@ -42,6 +42,19 @@ var core;
             { id: "backgroundlv3", src: "./Assets/images/bg3.png" },
             { id: "levelexit", src: "./Assets/images/levelexit.png" },
             { id: "pistol", src: "./Assets/audio/pistol.wav" },
+            { id: "rifle", src: "./Assets/audio/rifle.wav" },
+            { id: "rifle2", src: "./Assets/audio/rifle2.wav" },
+            { id: "ouch", src: "./Assets/audio/ouch.wav" },
+            { id: "ouch2", src: "./Assets/audio/ouch2.wav" },
+            { id: "dead", src: "./Assets/audio/dead.wav" },
+            { id: "jumpingguysound", src: "./Assets/audio/jumping monster noise.wav" },
+            { id: "powerup", src: "./Assets/audio/powerup.wav" },
+            { id: "shotgun", src: "./Assets/audio/shotgun.wav" },
+            { id: "heal", src: "./Assets/audio/heal.wav" },
+            { id: "flyingenemyshot", src: "./Assets/audio/flyingenemyshot.wav" },
+            { id: "gameover", src: "./Assets/audio/gameover.wav" },
+            { id: "enemyshot", src: "./Assets/audio/enemyshot.wav" },
+            { id: "enemydead", src: "./Assets/audio/pistol.wav" },
         ];
         // preloads assets
         function Init() {
