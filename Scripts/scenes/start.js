@@ -23,11 +23,11 @@ var scenes;
         }
         // This is where the fun happens
         Main() {
+            this.addChild(this._background);
             // add the welcome label to the scene
             this.addChild(this._welcomeLabel);
             // add the startButton to the scene
             this.addChild(this._startButton);
-            this.addChild(this._background);
             this._startButton.on("click", this._startButtonClick);
         }
     }
