@@ -16,6 +16,7 @@ var scenes;
         Start() {
             this._welcomeLabel = new objects.Label("KILL ALL ALIENS", "72px", "Impact", "#FF0000", 320, 140, true);
             this._startButton = new objects.Button(this.assetManager, "startButton", 320, 340);
+            this._background = new objects.GameObject(this.assetManager, "backgroundlv3");
             this.Main();
         }
         Update() {
@@ -26,6 +27,7 @@ var scenes;
             this.addChild(this._welcomeLabel);
             // add the startButton to the scene
             this.addChild(this._startButton);
+            this.addChild(this._background);
             this._startButton.on("click", this._startButtonClick);
         }
     }
