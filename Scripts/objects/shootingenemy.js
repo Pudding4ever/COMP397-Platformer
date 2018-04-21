@@ -74,6 +74,10 @@ var objects;
                 }
             }
             if (this.health <= 0) {
+                if(this.active == true)
+                {
+                 createjs.Sound.play("enemydead");
+                }
                 //console.log ("enemy deactivated!");
                 this.active = false;
                 this.isColliding = false;
