@@ -28,6 +28,9 @@ var objects;
         }
         Move() {
         }
+        stopHero() {
+            this.Physics.stopJumping();
+        }
     }
     objects.GameObject = GameObject;
 })(objects || (objects = {}));

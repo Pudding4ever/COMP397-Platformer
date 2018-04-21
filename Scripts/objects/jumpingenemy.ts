@@ -1,5 +1,5 @@
 module objects {
-    export class ShootingEnemy extends objects.GameObject {
+    export class JumpingEnemy extends objects.GameObject {
 
 private _physics :core.GamePhysics;
 public active: boolean = true;
@@ -9,14 +9,14 @@ public health: number = 7;
 public invframes: boolean = false;
 public invtimer: number = 0;
 public firetimer: number = 0;
-public fireRate: number = 90;
+public fireRate: number = 50;
 
 public myScene: objects.Scene;
 
 public bullet: objects.eBullet;
     
         constructor(assetManager: createjs.LoadQueue) {
-            super(assetManager, "shootingenemy");
+            super(assetManager, "jumpingenemy");
             this.Start();
         }
 
@@ -30,8 +30,7 @@ public bullet: objects.eBullet;
             this.x = 530;
             this.y = 460 - this.halfHeight;
             console.log (this.active);
-            this.health = 3;
-            //this.Physics.blankjump(this, 270 + 0.005);
+            this.health = 1;
         }
 
         public DirectionChecker()
@@ -122,16 +121,14 @@ public AIRoutine()
             if (this.firetimer >= this.fireRate)
             {
                 this.firetimer = 0;
-                this.ShootBang();
+                this.JumpAttack();
                 break;
             }
-            else
-            {
-                if (this.firetimer >= 25) //stand still for a second after firing
-                {
-                this.MoveEnemy();
-                }
-            }
+        }
+
+        case 1:
+        {
+            //rush toward player firing shots
             break;
         }
 
@@ -140,26 +137,21 @@ public AIRoutine()
     }
 }
 
-public MoveEnemy()
+public JumpAttack()
 {
-//this.Physics.stopJumping();
-//console.log (this.currentplatform);
-//console.log (this.currentplatform.blockAbove);
-//console.log (this.currentplatform.blockLeft);
-//console.log (this.currentplatform.blockRight);
-if(this.scaleX < 0 && this.currentplatform.blockRight == true)
-{
-    //console.log("move right");
-    this.x = this.x + 1
-}
-else if (this.scaleX > 0 && this.currentplatform.blockLeft == true)
-{
-    //console.log("move left");
-    this.x = this.x - 1
-}
+    if(this.scaleX < 0)
+    {
+    this._physics.enemyjump(this, 270 + 0.005);
+    }
+    else {this._physics.enemyjump(this, 270 - 0.005 - 90);}
 }
 
-public ShootBang()
+
+}
+
+}
+
+/* public ShootBang()
 {
     console.log("shootbang");
     for (var b in this.myScene.enemybulletobjectpool)
@@ -179,7 +171,4 @@ public ShootBang()
         }
 }
 
-        }
-    }
-
-}
+        } */

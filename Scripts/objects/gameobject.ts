@@ -14,6 +14,10 @@ module objects {
     public halfHeight: number;
     public isColliding: boolean;
     public isCollidingBullet: boolean;
+    public Physics :core.GamePhysics;
+    public currentplatform: objects.Platform;
+
+    
 
     // constructors
     constructor(assetManager: createjs.LoadQueue, imageString:string) {
@@ -52,5 +56,9 @@ module objects {
     public Move():void {
 
     }
+
+    public stopHero():void {
+      this.Physics.stopJumping();
+  }
   }
 }

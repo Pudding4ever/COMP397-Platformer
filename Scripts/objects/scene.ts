@@ -2,14 +2,12 @@ module objects {
   export class Scene extends createjs.Container {
     // Instance Variables
 
-
-
-    
     // Public Properties
     public assetManager;
     public bulletobjectpool: objects.Bullet[];
     public enemybulletobjectpool: objects.eBullet[];
     public collisionmanager: managers.Collision;
+    public player: GameObject;
 
     public height: number;
     public width: number;

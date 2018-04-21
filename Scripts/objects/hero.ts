@@ -12,6 +12,7 @@ module objects {
 
         public myScene: objects.Scene;
         public ROF: number;
+        public baseROF = 30;
         public timer: number = 0;
         public weapontype: number = 0;
         public switchdelay: number = 15;
@@ -21,12 +22,16 @@ module objects {
         public invframes: boolean = false;
         public invtimer: number = 0;
 
+        public shield: boolean = false;
+        public rapidfire: boolean = false;
+
         constructor(assetManager: createjs.LoadQueue, weightN: number) {
             super(assetManager, "player");
             this._physics = new core.GamePhysics();
             this._weightN = weightN;
             this._previousX = this.x;
             this._previousY = this.y;
+            this.baseROF = 30;
             this.ROF = 30;
             this.Start();
         }
@@ -76,22 +81,30 @@ module objects {
         public Move():void {
             if(objects.Game.keyboardManager.moveLeft) {
                 this.x -= 5;
+                if(this.scaleX > 0)
+                {
+                    this.scaleX = -1;
+                }
             }
 
             if(objects.Game.keyboardManager.moveRight) {
                 //if (!this.isOnMiddle()) {
                     this.x += 5;
+                    if(this.scaleX < 0)
+                    {
+                        this.scaleX = 1;
+                    }
                // }
             }
 
             if(objects.Game.keyboardManager.moveForward)
             {
-                this.y += 5;
+               // this.y += 5;
             }
 
             if(objects.Game.keyboardManager.moveBackward)
             {
-                this.y -= 5;
+                //this.y -= 5;
             }
 
             if (objects.Game.keyboardManager.jumpForward) {
@@ -121,21 +134,31 @@ module objects {
 
         public setWeaponROF()
         {
+
+            if (this.rapidfire == true)
+            {
+                this.baseROF = 15;
+            }
+            else
+            {
+                this.baseROF = 30;
+            }
+
             switch(this.weapontype)
             {
-                case this.weapontype = 0:
+                case this.weapontype = 0: //pistol
                 {
-                    this.ROF = 30;
+                    this.ROF = this.baseROF;
                     break;
                 }
-                case this.weapontype = 1:
+                case this.weapontype = 1: //shotgun
                 {
-                    this.ROF = 60;
+                    this.ROF = this.baseROF * 2;
                     break;
                 }
                 case this.weapontype = 2:
                 {
-                    this.ROF = 12;
+                    this.ROF = this.baseROF / 3; 
                     break;
                 }
             }
@@ -149,9 +172,11 @@ module objects {
             {
             this.timer = 0;
 
+
+
                 switch(this.weapontype)
                 {
-                    case this.weapontype = 0:
+                    case this.weapontype = 0: //pistol
                     {
                         for (b in this.myScene.bulletobjectpool)
                         {
@@ -161,6 +186,7 @@ module objects {
                             {
                                // console.log ("activating bullet!");
                                 this.myScene.bulletobjectpool[b].bullettype = 0;
+                                this.myScene.bulletobjectpool[b].bulletDirection = this.scaleX;
                                 this.myScene.bulletobjectpool[b].x = this.x;
                                 this.myScene.bulletobjectpool[b].y = this.y;
                                 this.myScene.bulletobjectpool[b].active = true;
@@ -171,7 +197,7 @@ module objects {
                          break;
                     }
 
-                    case this.weapontype = 2:
+                    case this.weapontype = 2: //machine gun
                     {
                         for (b in this.myScene.bulletobjectpool)
                         {
@@ -181,6 +207,7 @@ module objects {
                             {
                                // console.log ("activating bullet!");
                                 this.myScene.bulletobjectpool[b].bullettype = 0;
+                                this.myScene.bulletobjectpool[b].bulletDirection = this.scaleX;
                                 this.myScene.bulletobjectpool[b].x = this.x;
                                 this.myScene.bulletobjectpool[b].y = this.y;
                                 this.myScene.bulletobjectpool[b].active = true;
@@ -191,9 +218,8 @@ module objects {
                         break;
                     }
 
-                    case this.weapontype = 1:
+                    case this.weapontype = 1: //shotgun
                     {
-
                         for (let i: number = 0; i < 5; i++)
                         {
                         for (b in this.myScene.bulletobjectpool)
@@ -204,6 +230,7 @@ module objects {
                             {
                                // console.log ("activating bullet!");
                                this.myScene.bulletobjectpool[b].bullettype = i;
+                               this.myScene.bulletobjectpool[b].bulletDirection = this.scaleX;
                                 this.myScene.bulletobjectpool[b].x = this.x;
                                 this.myScene.bulletobjectpool[b].y = this.y;
                                 this.myScene.bulletobjectpool[b].active = true;

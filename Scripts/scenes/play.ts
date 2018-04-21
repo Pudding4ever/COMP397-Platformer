@@ -4,7 +4,7 @@ module scenes {
     //TODO: Game object private variables
       private _sonic: objects.Hero;
       private _platform: objects.Platform;
-      private _badguy: objects.ShootingEnemy;
+      //private _badguy: objects.ShootingEnemy;
 
       private _healthLabel: objects.Label;
       private _weaponLabel: objects.Label;
@@ -23,22 +23,22 @@ module scenes {
 
 this.plan = `
 ....................................................................................................................................................................................................................................................................................
-...............................................................................................................###....................................................................................###............................LVLFIN............................#############
-...............................................................................................................###....................................................................................###............................LVLFIN............................#############
+................................................................................................................###...................................................................................###............................LVLFIN............................#############
+................................................................................................................###...................................................................................###............................LVLFIN............................#############
 ############....................................................................................................######................................................................................###.....................###......###.....#######...............###############
 ############....................................................................................................######................................................................................###.....................###......###.....#######...............###############
 ############..........................................................................#####........###..........#######...............................................................................###....................##.##....##.##....##..###...###.......#################
-############..........................................................................#####........###..........#######....w.........e................................................................###....................##.##....##.##....##..###...###.......#################
+############....................e.....................................................#####........###..........#######....w.........e................................................................###....................##.##....##.##....##..###...###.......#################
 ############...................####...............................................#####............######.......##################################....................................................###...................##...##..##...##.......##...........####################
 ############...................####...............................................#####............######.......##################################....................................................###...................##...##..##...##.......##...........####################
 #..............................####...........................................#####................########.....................................####.....................................#######......###....................##.##....##.##.......##.........#######################
-#..............................####...........................................#####................########.....................................####.......................e.............#######......###....................##.##....##.##.......##.........#######################
+#.......................j......####...........................................#####................########.....................................####.......................e.............#######......###....................##.##....##.##.......##.........#######################
 #.....................####.....####................................................................#########.......................................####.................######......#######...........###.....................###......###.......##.......##########################
 #.....................####.....####.....................w..........................................#########.......................................####.................######......#######...........###.....................###......###.......##.......##########################
 #.....................####.....####...................######........#######........................##########.......................................................#####..............................................................................#############################
-#...........@.........####.....####...................######........#######..............e.........##########................e......................................#####................................................E.............................#############################
-######################################.......################################################################################################################......................................#################################################################################
-######################################.......################################################################################################################......................................#################################################################################`;
+#...........@.........####.....####............j.....######........#######..............e.........##########................e......................................#####................................................E.............................##############################
+####################################################################################################################################################################################################################################################################################
+####################################################################################################################################################################################################################################################################################`;
 
       console.log(this.plan);
       this._healthLabel = new objects.Label("Health: x", "12px", "Consolas", "#000000", 20, 20, true);
@@ -92,25 +92,24 @@ this.plan = `
             //place a platform
             console.log(chr);
             let newplat = new objects.Platform(this.assetManager, this.x*scale, this.y*scale);
-            this.levelPlatforms.push(newplat);
-            this.addChild(newplat);
-            if (this.prevrow != null)
-            {
-
                 //check adjacency to other platforms
-                if (this.prevrow[this.x] == this.row[this.x])
+                if (this.prevrow != null && this.prevrow[this.x] == this.row[this.x])
                 {
-                    newplat.blockAbove == true;
+                    newplat.blockAbove = true;
+                    console.log("blockabove");
                 }
                 if (this.x > 0 && this.row[this.x] == this.row[this.x-1])
                 {
-                    newplat.blockLeft == true;
+                    newplat.blockLeft = true;
+                    console.log("blockleft");
                 }
                 if (this.x < this.row.length && this.row[this.x] == this.row[this.x+1])
                 {
-                    newplat.blockRight == true;
+                    newplat.blockRight = true;
+                    console.log("blockright");
                 }
-            }
+                this.levelPlatforms.push(newplat);
+                this.addChild(newplat);
           //console.log("Platform placed!");
           break;
             }
@@ -132,13 +131,25 @@ this.plan = `
                 newenemy.myScene = this;
                 this.addChild(newenemy);
                 this.stageActors.push(newenemy);
-                console.log("enemy placed!");
+                console.log("shooting enemy placed!");
                 break;
             }
 
-            case chr = 'E':
+            case chr = 'j':
             {
-                //place major enemy
+                let newenemy = new objects.JumpingEnemy(this.assetManager)
+                newenemy.x = this.x*scale;
+                newenemy.y = this.y*scale;
+                newenemy.myScene = this;
+                this.addChild(newenemy);
+                this.stageActors.push(newenemy);
+                console.log("jumping enemy placed!");
+                break;
+            }
+
+            case chr = 'f':
+            {
+                //place flying enemy
                 /*
                 let newenemy = new objects.FlyingEnemy(this.assetManager)
                 newenemy.x = this.x*scale;
@@ -163,6 +174,7 @@ this.plan = `
             default:
             {
               //empty space
+              //If our editor doesn't understand the character it's looking at (not listed above) then it just doesn't put anything there.
               break;
             }
 
@@ -218,7 +230,7 @@ this.plan = `
     public UpdateCamera()
     {
         this.stage.regX = this._sonic.x - 50;
-        this.stage.regY = this._sonic.y - 410;
+        this.stage.regY = this._sonic.y - 350;
     }
 
 
@@ -234,6 +246,7 @@ this.plan = `
         this.checkEnemyBullets();
         //this._badguy.Update();
         this.CheckPlatformCollisions();
+        this.CheckEnemyPlatformCollisions();
         this.UpdateLabels();
         this.UpdateCamera();
         this.UpdateActors();
@@ -297,16 +310,18 @@ public checkEnemyBullets()
       
       this.addChild(this._platform);
       //this.addChild(this._badguy);
-      this._sonic = new objects.Hero(this.assetManager, 1 * 10);
+      this._sonic = new objects.Hero(this.assetManager, 1 * 18);
+      this.player = this._sonic;
       this.addChild(this._sonic);
       this._sonic.myScene = this;
+
       this._sonic.x = this._rx;
       this._sonic.y = this._ry;
       this.collisionmanager = new managers.Collision();
       //this._platform = new objects.Platform(this.assetManager);
       //this._badguy = new objects.Enemy(this.assetManager);
       this.bulletobjectpool = new Array<objects.Bullet>();
-      for (var i = 0; i < 50; i++)
+      for (var i = 0; i < 150; i++)
       {
           var b: objects.Bullet;
           b = new objects.Bullet(this.assetManager);
@@ -316,12 +331,12 @@ public checkEnemyBullets()
       }
 
       this.enemybulletobjectpool = new Array<objects.eBullet>();
-      for (var i = 0; i < 50; i++)
+      for (var i = 0; i < 150; i++)
       {
-          var b: objects.eBullet;
-          b = new objects.eBullet(this.assetManager);
-          this.enemybulletobjectpool.push(b);
-          this.addChild(b);
+          var eb: objects.eBullet;
+            eb = new objects.eBullet(this.assetManager);
+          this.enemybulletobjectpool.push(eb);
+          this.addChild(eb);
           console.log ("created ebullet");
       }
 
@@ -331,12 +346,11 @@ public checkEnemyBullets()
     {
     //Checks all platforms in levelPlatforms array for collisions with hero.
     //Probably a slow way to do this but I had to find a way to support multiple platforms in the world at once.
-
         for (var i = 0; i < this.levelPlatforms.length; i++)
         {
             if (this.isOn(this.levelPlatforms[i])) {
-                console.log("isOn:" + this.isOn(this.levelPlatforms[i]));
-                console.log("isFalling:" + this._sonic.isFalling());
+                //console.log("isOn:" + this.isOn(this.levelPlatforms[i]));
+                //console.log("isFalling:" + this._sonic.isFalling());
                 this._sonic.stopHero();
                 this.placeOn(this.levelPlatforms[i], this._sonic);
                 return;
@@ -359,6 +373,46 @@ public checkEnemyBullets()
 
     private placeOn(platform: objects.Platform, hero: objects.Hero) {
         hero.y = platform.y - platform.height/2 - hero.height/2;
+    }
+
+
+//duplicate code for checking enemy collisions cause we're DOING IT THE LAZY WAY
+//checkenemyplatformcollisions and enemyison are reversed compared to their player versions cause 
+
+    public CheckEnemyPlatformCollisions()
+    {
+        for (var a = 0; a < this.stageActors.length; a++)
+        {
+           // console.log("checking enemy " + this.stageActors[a]);
+        for (var i = 0; i < this.levelPlatforms.length; i++)
+        {
+            //console.log("checking enemy " + this.stageActors[a] + "on " + this.levelPlatforms[i]);
+            if (this.enemyisOn(this.levelPlatforms[i], this.stageActors[a])) {
+                this.stageActors[a].stopHero();
+                this.enemyplaceOn(this.levelPlatforms[i], this.stageActors[a]);
+                this.stageActors[a].currentplatform = this.levelPlatforms[i];
+                //console.log(this.stageActors[a]);
+                //console.log(this.stageActors[a].currentplatform);
+                break;
+            }
+        }
+    }
+}
+
+
+    private enemyisOn(platform: objects.Platform, enemy: objects.GameObject):boolean
+    {
+        let x = enemy.x;
+        let y = enemy.y;
+        let isIn: boolean =  x + enemy.width/2 >= platform.x - platform.width/2 &&
+            x - enemy.width/2 <= platform.x + platform.width/2 &&
+            y + enemy.height/2 >= platform.y - platform.height/2 &&
+            y - enemy.height/2 <= platform.y + platform.height/2;
+        return isIn; //&& this._sonic.isFalling();
+    }
+
+    private enemyplaceOn(platform: objects.Platform, gameObject: objects.GameObject) {
+        gameObject.y = platform.y - platform.height/2 - gameObject.height/2;
     }
 
   }

@@ -4,6 +4,7 @@ var objects;
         constructor(assetManager, weightN) {
             super(assetManager, "player");
             this._forceN = 1;
+            this.baseROF = 30;
             this.timer = 0;
             this.weapontype = 0;
             this.switchdelay = 15;
@@ -11,10 +12,13 @@ var objects;
             this.lives = 3;
             this.invframes = false;
             this.invtimer = 0;
+            this.shield = false;
+            this.rapidfire = false;
             this._physics = new core.GamePhysics();
             this._weightN = weightN;
             this._previousX = this.x;
             this._previousY = this.y;
+            this.baseROF = 30;
             this.ROF = 30;
             this.Start();
         }
@@ -55,17 +59,23 @@ var objects;
         Move() {
             if (objects.Game.keyboardManager.moveLeft) {
                 this.x -= 5;
+                if (this.scaleX > 0) {
+                    this.scaleX = -1;
+                }
             }
             if (objects.Game.keyboardManager.moveRight) {
                 //if (!this.isOnMiddle()) {
                 this.x += 5;
+                if (this.scaleX < 0) {
+                    this.scaleX = 1;
+                }
                 // }
             }
             if (objects.Game.keyboardManager.moveForward) {
-                this.y += 5;
+                // this.y += 5;
             }
             if (objects.Game.keyboardManager.moveBackward) {
-                this.y -= 5;
+                //this.y -= 5;
             }
             if (objects.Game.keyboardManager.jumpForward) {
                 this._physics.jump(this, 270 + 0.005);
@@ -86,20 +96,26 @@ var objects;
             }
         }
         setWeaponROF() {
+            if (this.rapidfire == true) {
+                this.baseROF = 15;
+            }
+            else {
+                this.baseROF = 30;
+            }
             switch (this.weapontype) {
-                case this.weapontype = 0:
+                case this.weapontype = 0://pistol
                     {
-                        this.ROF = 30;
+                        this.ROF = this.baseROF;
                         break;
                     }
-                case this.weapontype = 1:
+                case this.weapontype = 1://shotgun
                     {
-                        this.ROF = 60;
+                        this.ROF = this.baseROF * 2;
                         break;
                     }
                 case this.weapontype = 2:
                     {
-                        this.ROF = 12;
+                        this.ROF = this.baseROF / 3;
                         break;
                     }
             }
@@ -111,7 +127,7 @@ var objects;
             if (this.timer >= this.ROF) {
                 this.timer = 0;
                 switch (this.weapontype) {
-                    case this.weapontype = 0:
+                    case this.weapontype = 0://pistol
                         {
                             for (b in this.myScene.bulletobjectpool) {
                                 // console.log ("checking bullet object pool ", + b);
@@ -119,6 +135,7 @@ var objects;
                                 if (this.myScene.bulletobjectpool[b].active == false) {
                                     // console.log ("activating bullet!");
                                     this.myScene.bulletobjectpool[b].bullettype = 0;
+                                    this.myScene.bulletobjectpool[b].bulletDirection = this.scaleX;
                                     this.myScene.bulletobjectpool[b].x = this.x;
                                     this.myScene.bulletobjectpool[b].y = this.y;
                                     this.myScene.bulletobjectpool[b].active = true;
@@ -128,7 +145,7 @@ var objects;
                             }
                             break;
                         }
-                    case this.weapontype = 2:
+                    case this.weapontype = 2://machine gun
                         {
                             for (b in this.myScene.bulletobjectpool) {
                                 // console.log ("checking bullet object pool ", + b);
@@ -136,6 +153,7 @@ var objects;
                                 if (this.myScene.bulletobjectpool[b].active == false) {
                                     // console.log ("activating bullet!");
                                     this.myScene.bulletobjectpool[b].bullettype = 0;
+                                    this.myScene.bulletobjectpool[b].bulletDirection = this.scaleX;
                                     this.myScene.bulletobjectpool[b].x = this.x;
                                     this.myScene.bulletobjectpool[b].y = this.y;
                                     this.myScene.bulletobjectpool[b].active = true;
@@ -145,7 +163,7 @@ var objects;
                             }
                             break;
                         }
-                    case this.weapontype = 1:
+                    case this.weapontype = 1://shotgun
                         {
                             for (let i = 0; i < 5; i++) {
                                 for (b in this.myScene.bulletobjectpool) {
@@ -154,6 +172,7 @@ var objects;
                                     if (this.myScene.bulletobjectpool[b].active == false) {
                                         // console.log ("activating bullet!");
                                         this.myScene.bulletobjectpool[b].bullettype = i;
+                                        this.myScene.bulletobjectpool[b].bulletDirection = this.scaleX;
                                         this.myScene.bulletobjectpool[b].x = this.x;
                                         this.myScene.bulletobjectpool[b].y = this.y;
                                         this.myScene.bulletobjectpool[b].active = true;

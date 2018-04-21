@@ -1,8 +1,8 @@
 var objects;
 (function (objects) {
-    class ShootingEnemy extends objects.GameObject {
+    class JumpingEnemy extends objects.GameObject {
         constructor(assetManager) {
-            super(assetManager, "shootingenemy");
+            super(assetManager, "jumpingenemy");
             this.active = true;
             this.timer = 0;
             this.etype = 0;
@@ -10,7 +10,7 @@ var objects;
             this.invframes = false;
             this.invtimer = 0;
             this.firetimer = 0;
-            this.fireRate = 90;
+            this.fireRate = 50;
             this.Start();
         }
         Start() {
@@ -23,8 +23,7 @@ var objects;
             this.x = 530;
             this.y = 460 - this.halfHeight;
             console.log(this.active);
-            this.health = 3;
-            //this.Physics.blankjump(this, 270 + 0.005);
+            this.health = 1;
         }
         DirectionChecker() {
             //face and shoot in direction of the player
@@ -90,53 +89,49 @@ var objects;
                         //stand still and fire shots
                         if (this.firetimer >= this.fireRate) {
                             this.firetimer = 0;
-                            this.ShootBang();
+                            this.JumpAttack();
                             break;
                         }
-                        else {
-                            if (this.firetimer >= 25) {
-                                this.MoveEnemy();
-                            }
-                        }
+                    }
+                case 1:
+                    {
+                        //rush toward player firing shots
                         break;
                     }
                 default:
                     break;
             }
         }
-        MoveEnemy() {
-            //this.Physics.stopJumping();
-            //console.log (this.currentplatform);
-            //console.log (this.currentplatform.blockAbove);
-            //console.log (this.currentplatform.blockLeft);
-            //console.log (this.currentplatform.blockRight);
-            if (this.scaleX < 0 && this.currentplatform.blockRight == true) {
-                //console.log("move right");
-                this.x = this.x + 1;
+        JumpAttack() {
+            if (this.scaleX < 0) {
+                this._physics.enemyjump(this, 270 + 0.005);
             }
-            else if (this.scaleX > 0 && this.currentplatform.blockLeft == true) {
-                //console.log("move left");
-                this.x = this.x - 1;
-            }
-        }
-        ShootBang() {
-            console.log("shootbang");
-            for (var b in this.myScene.enemybulletobjectpool) {
-                // console.log ("checking bullet object pool ", + b);
-                //console.log (this.myScene.bulletobjectpool[b].active);
-                if (this.myScene.enemybulletobjectpool[b].active == false) {
-                    console.log("activating ebullet!");
-                    this.myScene.enemybulletobjectpool[b].bullettype = 0;
-                    this.myScene.enemybulletobjectpool[b].bulletDirection = this.scaleX;
-                    this.myScene.enemybulletobjectpool[b].x = this.x;
-                    this.myScene.enemybulletobjectpool[b].y = this.y;
-                    this.myScene.enemybulletobjectpool[b].active = true;
-                    //console.log (this.myScene.bulletobjectpool[b].active);
-                    break;
-                }
+            else {
+                this._physics.enemyjump(this, 270 - 0.005 - 90);
             }
         }
     }
-    objects.ShootingEnemy = ShootingEnemy;
+    objects.JumpingEnemy = JumpingEnemy;
 })(objects || (objects = {}));
-//# sourceMappingURL=shootingenemy.js.map
+/* public ShootBang()
+{
+    console.log("shootbang");
+    for (var b in this.myScene.enemybulletobjectpool)
+    {
+       // console.log ("checking bullet object pool ", + b);
+        //console.log (this.myScene.bulletobjectpool[b].active);
+        if (this.myScene.enemybulletobjectpool[b].active == false)
+        {
+           console.log ("activating ebullet!");
+            this.myScene.enemybulletobjectpool[b].bullettype = 0;
+            this.myScene.enemybulletobjectpool[b].bulletDirection = this.scaleX;
+            this.myScene.enemybulletobjectpool[b].x = this.x;
+            this.myScene.enemybulletobjectpool[b].y = this.y;
+            this.myScene.enemybulletobjectpool[b].active = true;
+        //console.log (this.myScene.bulletobjectpool[b].active);
+        break;
+        }
+}
+
+        } */
+//# sourceMappingURL=jumpingenemy.js.map

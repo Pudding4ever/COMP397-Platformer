@@ -16,6 +16,23 @@ module managers {
       }
     }
 
+    public checkJumpingEnemy(object1: objects.GameObject, object2: objects.GameObject)
+    {
+      let P1: math.Vec2 = new math.Vec2(object1.x, object1.y);
+      let P2: math.Vec2 = new math.Vec2(object2.x, object2.y);
+
+      if (math.Vec2.Distance(P1, P2) < (object1.halfHeight + object2.halfHeight)) {
+        if (!object2.isColliding) 
+        {
+          if (object2.name == "player")
+          {
+            object2.isColliding = true;
+          }
+        }
+
+      }
+    }
+
       public CheckBullet(object1: objects.GameObject, object2: objects.GameObject) {
         // create two vec2 objects
         let P1: math.Vec2 = new math.Vec2(object1.x, object1.y);
@@ -60,6 +77,7 @@ module managers {
               }
               case "shootingenemy":
               {
+                console.log("shootingenemy hit!");
                 object1.isColliding = true;
                 object2.isColliding = true;
                 break;
