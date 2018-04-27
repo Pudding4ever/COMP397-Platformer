@@ -57,6 +57,7 @@ this.plan = `
       this.width = this.rows[0].length;
       this.stageActors = [];
       this.stagePowerups =[];
+      this.regpoints=[];
       this.levelPlatforms = new Array<objects.Platform>();
 
       const scale = 32; //size of basic platform block (must be square)

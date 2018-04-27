@@ -35,6 +35,7 @@ var scenes;
             this.width = this.rows[0].length;
             this.stageActors = [];
             this.stagePowerups = [];
+            this.regpoints = [];
             this.levelPlatforms = new Array();
             const scale = 32; //size of basic platform block (must be square)
             /* const levelChars = {
