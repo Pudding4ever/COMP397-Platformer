@@ -1,6 +1,6 @@
 var scenes;
 (function (scenes) {
-    class OverScene extends objects.Scene {
+    class WinScene extends objects.Scene {
         // Public Properties
         // Constructor
         constructor(assetManager) {
@@ -19,7 +19,7 @@ var scenes;
             this._background.x = 1000;
             this._background.y = -10;
             this.addChild(this._background);
-            this._overLabel = new objects.Label("GAME OVER", "40px", "IMPACT", "#FF0000", 410, 240, true);
+            this._overLabel = new objects.Label("YOU'RE WINNER", "40px", "IMPACT", "#FF0000", 410, 240, true);
             this._backButton = new objects.Button(this.assetManager, "backButton", 320, 340);
             this.Main();
         }
@@ -35,6 +35,6 @@ var scenes;
             this._backButton.on("click", this._backButtonClick);
         }
     }
-    scenes.OverScene = OverScene;
+    scenes.WinScene = WinScene;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=over.js.map
+//# sourceMappingURL=win.js.map

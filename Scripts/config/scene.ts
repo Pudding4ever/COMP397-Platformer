@@ -5,6 +5,7 @@ module config {
     PLAY2,
     PLAY3,
     PLAY4,
+    WIN,
     OVER
   }
 }

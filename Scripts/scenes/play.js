@@ -595,7 +595,7 @@ var scenes;
                 b = new objects.Bullet(this.assetManager);
                 this.bulletobjectpool.push(b);
                 this.addChild(b);
-                //console.log("created bullet");
+                //console.log ("created bullet");
             }
             this.enemybulletobjectpool = new Array();
             for (var i = 0; i < 150; i++) {
@@ -603,7 +603,7 @@ var scenes;
                 eb = new objects.eBullet(this.assetManager);
                 this.enemybulletobjectpool.push(eb);
                 this.addChild(eb);
-                //console.log("created ebullet");
+                //console.log ("created ebullet");
             }
         }
         CheckPlatformCollisions() {

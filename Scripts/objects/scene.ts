@@ -14,6 +14,7 @@ module objects {
     public stageActors: Array<objects.GameObject>;
     public stagePowerups: Array<objects.GameObject>;
     public levelPlatforms: Array<objects.Platform>;
+    public regpoints: Array<objects.Platform>;
     public plan: string;
     public rows: Array<Array<String>>;
     public row: Array<String>;

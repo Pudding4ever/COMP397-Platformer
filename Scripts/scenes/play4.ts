@@ -17,6 +17,9 @@ module scenes {
 
       private EXIT: objects.GameObject;
 
+      private BOSSDEAD: boolean = false;
+     
+
     // Public Properties
 
     // Constructor
@@ -35,7 +38,7 @@ this.plan = `
 #######.......................................................#######
 ###...............................................................###
 ###...............................................................###
-###.B........................................ ....................###
+###.^...........................................................^.###
 #####################################################################
 #####################################################################`;
 
@@ -83,6 +86,14 @@ this.plan = `
             case chr = '.':
             {
                 //empty space
+            break;
+            }
+
+            case chr = '^':
+            {
+                //invisible position registration point for boss
+                let newplat = new objects.Platform(this.assetManager, this.x*scale, this.y*scale, "platform#");
+                this.regpoints.push(newplat);
             break;
             }
 
@@ -622,11 +633,11 @@ this.plan = `
         this.UpdateCamera();
         this.UpdateActors();
 
-/*         if (this.EXIT.isColliding == true)
+         if (this.BOSSDEAD == true)
         {
             createjs.Sound.stop();
-            objects.Game.currentScene = config.Scene.PLAY4;
-        } */
+            objects.Game.currentScene = config.Scene.WIN;
+        } 
 
         }
 

@@ -50,7 +50,7 @@ var objects;
                         {
                             this.alpha = 1;
                             this.x = this.x - 5 * this.bulletDirection;
-                            this.y = this.y + 0.5;
+                            this.y = this.y + 1;
                             this.timer++;
                             break;
                         }
@@ -58,7 +58,7 @@ var objects;
                         {
                             this.alpha = 1;
                             this.x = this.x - 5 * this.bulletDirection;
-                            this.y = this.y + 1;
+                            this.y = this.y - 1;
                             this.timer++;
                             break;
                         }
@@ -84,6 +84,30 @@ var objects;
                             this.scaleX = 0.5;
                             this.scaleY = 4;
                             this.x = this.x;
+                            this.y = this.y + 3;
+                            this.timer++;
+                            break;
+                        }
+                    case this.bullettype = 6:
+                        {
+                            this.alpha = 1;
+                            this.x = this.x;
+                            this.y = this.y + 3;
+                            this.timer++;
+                            break;
+                        }
+                    case this.bullettype = 7:
+                        {
+                            this.alpha = 1;
+                            this.x = this.x + 1;
+                            this.y = this.y + 3;
+                            this.timer++;
+                            break;
+                        }
+                    case this.bullettype = 8:
+                        {
+                            this.alpha = 1;
+                            this.x = this.x - 1;
                             this.y = this.y + 3;
                             this.timer++;
                             break;

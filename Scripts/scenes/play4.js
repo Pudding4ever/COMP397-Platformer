@@ -5,6 +5,7 @@ var scenes;
         // Constructor
         constructor(assetManager) {
             super(assetManager);
+            this.BOSSDEAD = false;
             this.plan = `
 ###...............................................................###
 ###...............................................................###
@@ -16,7 +17,7 @@ var scenes;
 #######.......................................................#######
 ###...............................................................###
 ###...............................................................###
-###.B........................................ ....................###
+###.^...........................................................^.###
 #####################################################################
 #####################################################################`;
             //console.log(this.plan);
@@ -56,6 +57,13 @@ var scenes;
                         case chr = '.':
                             {
                                 //empty space
+                                break;
+                            }
+                        case chr = '^':
+                            {
+                                //invisible position registration point for boss
+                                let newplat = new objects.Platform(this.assetManager, this.x * scale, this.y * scale, "platform#");
+                                this.regpoints.push(newplat);
                                 break;
                             }
                         case chr = '#':
@@ -517,11 +525,10 @@ var scenes;
             this.UpdateLabels();
             this.UpdateCamera();
             this.UpdateActors();
-            /*         if (this.EXIT.isColliding == true)
-                    {
-                        createjs.Sound.stop();
-                        objects.Game.currentScene = config.Scene.PLAY4;
-                    } */
+            if (this.BOSSDEAD == true) {
+                createjs.Sound.stop();
+                objects.Game.currentScene = config.Scene.WIN;
+            }
         }
         UpdateActors() {
             for (var a in this.stageActors) {

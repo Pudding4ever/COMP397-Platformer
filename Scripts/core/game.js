@@ -19,6 +19,7 @@ var core;
             { id: "startButton", src: "./Assets/images/startButton.png" },
             { id: "nextButton", src: "./Assets/images/nextButton.png" },
             { id: "backButton", src: "./Assets/images/backButton.png" },
+            { id: "skipButton", src: "./Assets/images/skipButton.png" },
             { id: "player", src: "./Assets/images/sonic.png" },
             { id: "bullet", src: "./Assets/images/bullet.png" },
             { id: "ebullet", src: "./Assets/images/ebullet.png" },
@@ -36,6 +37,7 @@ var core;
             { id: "jumpingenemy", src: "./Assets/images/e1.png" },
             { id: "shootingenemy", src: "./Assets/images/e2.png" },
             { id: "flyingenemy", src: "./Assets/images/e3.png" },
+            { id: "boss", src: "./Assets/images/boss.png" },
             { id: "backgroundlv1", src: "./Assets/images/bg1.png" },
             { id: "backgroundlv2", src: "./Assets/images/bg2.png" },
             { id: "backgroundlv3", src: "./Assets/images/bg3.png" },
@@ -117,6 +119,9 @@ var core;
                     currentScene = new scenes.Play3Scene(assetManager);
                     break;
                 case config.Scene.PLAY4:
+                    currentScene = new scenes.Play4Scene(assetManager);
+                    break;
+                case config.Scene.WIN:
                     currentScene = new scenes.Play4Scene(assetManager);
                     break;
                 case config.Scene.OVER:

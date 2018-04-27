@@ -16,9 +16,9 @@ var scenes;
 ......(############)........}............{........(############)...[-]...[-]...(######################################################....(#########)..............{**********************#####################################)......(#############################################
 ####################################################################################################################################################################################################################################################################################`;
             //console.log(this.plan);
-            this._healthLabel = new objects.Label("Health: x", "18px", "Consolas", "#FF0000", 10, 10, true);
-            this._weaponLabel = new objects.Label("Pistol", "18px", "Consolas", "#FF0000", 10, 30, true);
-            this._grenadeLabel = new objects.Label("Grenades", "18px", "Consolas", "#FF0000", 10, 50, true);
+            this._healthLabel = new objects.Label("Health: x", "18px", "Consolas", "#FFFFFF", 10, 10, true);
+            this._weaponLabel = new objects.Label("Pistol", "18px", "Consolas", "#FFFFFF", 10, 30, true);
+            this._grenadeLabel = new objects.Label("Grenades", "18px", "Consolas", "#FFFFFF", 10, 50, true);
             this._background = new objects.GameObject(this.assetManager, "backgroundlv2");
             this._background.x = 1000;
             this._background.y = -10;

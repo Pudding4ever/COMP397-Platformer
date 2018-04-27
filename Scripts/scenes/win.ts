@@ -1,5 +1,5 @@
 module scenes {
-  export class OverScene extends objects.Scene {
+  export class WinScene extends objects.Scene {
     // Private Instance Variables
     private _overLabel: objects.Label;
     private _backButton: objects.Button;
@@ -29,7 +29,7 @@ module scenes {
       this._background.x = 1000;
       this._background.y = -10;
       this.addChild(this._background);
-      this._overLabel = new objects.Label("GAME OVER", "40px", "IMPACT", "#FF0000", 410, 240, true);
+      this._overLabel = new objects.Label("YOU'RE WINNER", "40px", "IMPACT", "#FF0000", 410, 240, true);
       this._backButton = new objects.Button(this.assetManager, "backButton", 320, 340);
       this.Main();
     }
