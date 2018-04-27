@@ -43,7 +43,7 @@ this.plan = `
       this._weaponLabel = new objects.Label("Pistol", "18px", "Consolas", "#FF0000", 10, 30, true);
       this._grenadeLabel = new objects.Label("Grenades", "18px", "Consolas", "#FF0000", 10, 50, true);
       this._background = new objects.GameObject(this.assetManager, "backgroundlv3");
-      this._background.x = 1000;
+      this._background.x = 0;
       this._background.y = -10;
       this.addChild(this._background);
       this.rows = new Array<Array<String>>();
