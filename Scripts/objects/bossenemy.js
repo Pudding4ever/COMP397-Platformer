@@ -176,7 +176,7 @@ var objects;
                         if (this.y != this.myScene.regpoints[0].y) {
                             this.y = this.y + 1;
                         }
-                        if (this.x >= this.myScene.regpoints[0].x) {
+                        if (this.x <= this.myScene.regpoints[0].x) {
                             this.etype = 0;
                         }
                         break;

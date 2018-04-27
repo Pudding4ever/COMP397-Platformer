@@ -231,7 +231,7 @@ public bullet: objects.eBullet;
                     {
                         this.y = this.y + 1;
                     }
-                    if(this.x >= this.myScene.regpoints[0].x)
+                    if(this.x <= this.myScene.regpoints[0].x)
                     {
                         this.etype = 0;
                     }
