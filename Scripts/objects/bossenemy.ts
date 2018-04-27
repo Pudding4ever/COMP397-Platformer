@@ -211,7 +211,7 @@ public bullet: objects.eBullet;
                     }
                     if(this.y != this.myScene.regpoints[0].y)
                     {
-                        this.y = this.y - 1;
+                        this.y = this.y + 1;
                     }
                     if(this.x <= this.myScene.regpoints[0].x)
                     {
@@ -228,7 +228,7 @@ public bullet: objects.eBullet;
                     }
                     if(this.y != this.myScene.regpoints[1].y)
                     {
-                        this.y = this.y - 1;
+                        this.y = this.y + 1;
                     }
                     if(this.x >= this.myScene.regpoints[1].x)
                     {
