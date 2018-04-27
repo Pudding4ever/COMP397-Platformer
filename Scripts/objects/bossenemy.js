@@ -10,7 +10,7 @@ var objects;
             this.invframes = false;
             this.invtimer = 0;
             this.firetimer = 0;
-            this.fireRate = 50;
+            this.fireRate = 100;
             this.Start();
         }
         Start() {
@@ -156,13 +156,13 @@ var objects;
                 case 1:
                     {
                         //move left to right
-                        if (this.x > this.myScene.regpoints[0].x) {
+                        if (this.x > this.myScene.regpoints[1].x) {
                             this.x = this.x + 2;
                         }
-                        if (this.y != this.myScene.regpoints[0].y) {
+                        if (this.y != this.myScene.regpoints[1].y) {
                             this.y = this.y + 1;
                         }
-                        if (this.x <= this.myScene.regpoints[0].x) {
+                        if (this.x <= this.myScene.regpoints[1].x) {
                             this.etype = 2;
                         }
                         break;
@@ -170,13 +170,13 @@ var objects;
                 case 2:
                     {
                         //move right to left
-                        if (this.x < this.myScene.regpoints[1].x) {
+                        if (this.x < this.myScene.regpoints[0].x) {
                             this.x = this.x + 2;
                         }
-                        if (this.y != this.myScene.regpoints[1].y) {
+                        if (this.y != this.myScene.regpoints[0].y) {
                             this.y = this.y + 1;
                         }
-                        if (this.x >= this.myScene.regpoints[1].x) {
+                        if (this.x <= this.myScene.regpoints[0].x) {
                             this.etype = 0;
                         }
                         break;
