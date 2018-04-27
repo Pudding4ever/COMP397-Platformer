@@ -29,7 +29,7 @@ module scenes {
       this._background.x = 1000;
       this._background.y = -10;
       this.addChild(this._background);
-      this._overLabel = new objects.Label("BAD END", "40px", "Consolas", "#FF0000", 320, 240, true);
+      this._overLabel = new objects.Label("GAME OVER", "40px", "Consolas", "#FF0000", 320, 240, true);
       this._backButton = new objects.Button(this.assetManager, "backButton", 320, 340);
       this.Main();
     }
