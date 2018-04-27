@@ -30,7 +30,7 @@ module scenes {
       this._background.y = -10;
       this.addChild(this._background);
       this._overLabel = new objects.Label("YOU'RE WINNER", "40px", "IMPACT", "#FF0000", 410, 240, true);
-      this._backButton = new objects.Button(this.assetManager, "backButton", 320, 340);
+      this._backButton = new objects.Button(this.assetManager, "backButton", 410, 340);
       this.Main();
     }
 

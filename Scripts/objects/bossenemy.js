@@ -191,7 +191,7 @@ var objects;
             for (var i = 0; i <= 3; i++) {
                 //spawn a jumper
                 let newenemy = new objects.JumpingEnemy(this.myScene.assetManager);
-                newenemy.x = this.x + 1;
+                newenemy.x = this.x + (i * 3);
                 newenemy.y = this.y + 10;
                 newenemy.myScene = this.myScene;
                 this.myScene.addChild(newenemy);
