@@ -21,6 +21,7 @@ module objects {
     public prevrow: Array<String>;
     public x: number;
     public y: number;
+    public BOSSDEAD: boolean = false;
 
     // Constructor
     constructor(assetManager: createjs.LoadQueue) {

@@ -4,6 +4,7 @@ var objects;
         // Constructor
         constructor(assetManager) {
             super();
+            this.BOSSDEAD = false;
             this.assetManager = assetManager;
         }
         // Private Methods

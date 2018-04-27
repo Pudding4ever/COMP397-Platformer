@@ -16,8 +16,6 @@ module scenes {
       private _ry: number;
 
       private EXIT: objects.GameObject;
-
-      private BOSSDEAD: boolean = false;
      
 
     // Public Properties

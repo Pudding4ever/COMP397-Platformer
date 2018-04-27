@@ -113,6 +113,7 @@ public bullet: objects.eBullet;
                this.alpha = 0;
                this.x = -100000;
                this.y = -100000;
+               this.myScene.BOSSDEAD == true;
             }
         }
 
@@ -182,12 +183,12 @@ public bullet: objects.eBullet;
                 //hover over player
                 if (this.y > this.myScene.player.y - 120)
                 {
-                 this.y = this.y - 0.2;
+                 this.y = this.y - 1;
                 }
         
                 if (this.y < this.myScene.player.y - 120)
                 {
-                this.y = this.y + 0.2;
+                this.y = this.y + 1;
                 }
 
                 if(this.scaleX < 0 && this.myScene.player.x != this.x)

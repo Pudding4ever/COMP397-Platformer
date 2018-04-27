@@ -5,7 +5,6 @@ var scenes;
         // Constructor
         constructor(assetManager) {
             super(assetManager);
-            this.BOSSDEAD = false;
             this.plan = `
 ###...............................................................###
 ###...............................................................###
