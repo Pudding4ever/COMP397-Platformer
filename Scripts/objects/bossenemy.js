@@ -23,7 +23,7 @@ var objects;
             this.x = 530;
             this.y = 460 - this.halfHeight;
             //console.log (this.active);
-            this.health = 5;
+            this.health = 50;
         }
         DirectionChecker() {
             //face and shoot in direction of the player
@@ -82,7 +82,7 @@ var objects;
                 this.alpha = 0;
                 this.x = -100000;
                 this.y = -100000;
-                this.myScene.BOSSDEAD == true;
+                this.myScene.BOSSDEAD = true;
             }
         }
         AIRoutine() {

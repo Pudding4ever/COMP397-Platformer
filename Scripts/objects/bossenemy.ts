@@ -32,7 +32,7 @@ public bullet: objects.eBullet;
             this.x = 530;
             this.y = 460 - this.halfHeight;
             //console.log (this.active);
-            this.health = 5;
+            this.health = 50;
         }
 
         public DirectionChecker()
@@ -113,7 +113,7 @@ public bullet: objects.eBullet;
                this.alpha = 0;
                this.x = -100000;
                this.y = -100000;
-               this.myScene.BOSSDEAD == true;
+               this.myScene.BOSSDEAD = true;
             }
         }
 
