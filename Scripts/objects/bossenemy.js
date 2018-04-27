@@ -171,7 +171,7 @@ var objects;
                     {
                         //move right to left
                         if (this.x > this.myScene.regpoints[0].x) {
-                            this.x = this.x + 2;
+                            this.x = this.x - 2;
                         }
                         if (this.y != this.myScene.regpoints[0].y) {
                             this.y = this.y + 1;
