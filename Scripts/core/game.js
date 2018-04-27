@@ -54,9 +54,9 @@ var core;
             { id: "gameover", src: "./Assets/audio/gameover.wav" },
             { id: "enemyshot", src: "./Assets/audio/enemyshot.wav" },
             { id: "enemydead", src: "./Assets/audio/jumping monster noise.wav" },
-            { id: "music1", src: "./Assets/audio/music1.wav" },
-            { id: "music2", src: "./Assets/audio/music2.wav" },
-            { id: "musicboss", src: "./Assets/audio/musicboss.wav" },
+            { id: "music1", src: "./Assets/audio/music1.ogg" },
+            { id: "music2", src: "./Assets/audio/music2.ogg" },
+            { id: "musicboss", src: "./Assets/audio/musicboss.ogg" },
             { id: "platform#", src: "./Assets/images/tiles/1.png" },
             { id: "platform(", src: "./Assets/images/tiles/2.png" },
             { id: "platform)", src: "./Assets/images/tiles/3.png" },
@@ -84,7 +84,7 @@ var core;
             createjs.Ticker.on("tick", Update);
             var context = canvas.msGetInputContext;
             objects.Game.stage = stage;
-            objects.Game.currentScene = config.Scene.PLAY3;
+            objects.Game.currentScene = config.Scene.START;
             currentState = config.Scene.START;
             keyboardManager = new managers.Keyboard();
             objects.Game.keyboardManager = keyboardManager;
