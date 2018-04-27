@@ -104,6 +104,10 @@ module managers {
           {
             object2.isColliding = true;
           }
+          if (object2.name == "player" && object1.name == "boss")
+          {
+            object2.isColliding = true;
+          }
         }
 
       }
@@ -159,6 +163,12 @@ module managers {
                 break;
               }
               case "flyingenemy":
+              {
+                object1.isColliding = true;
+                object2.isColliding = true;
+                break;
+              }
+              case "boss":
               {
                 object1.isColliding = true;
                 object2.isColliding = true;
