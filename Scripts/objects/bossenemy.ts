@@ -181,12 +181,12 @@ public bullet: objects.eBullet;
                 case 0:
                 {
                 //hover over player
-                if (this.y > this.myScene.player.y - 120)
+                if (this.y > this.myScene.player.y - 240)
                 {
                  this.y = this.y - 1;
                 }
         
-                if (this.y < this.myScene.player.y - 120)
+                if (this.y < this.myScene.player.y - 240)
                 {
                 this.y = this.y + 1;
                 }
@@ -206,7 +206,7 @@ public bullet: objects.eBullet;
                 case 1:
                 {
                     //move left to right
-                    if(this.x > this.myScene.regpoints[1].x)
+                    if(this.x < this.myScene.regpoints[1].x)
                     {
                         this.x = this.x + 2;
                     }
@@ -214,7 +214,7 @@ public bullet: objects.eBullet;
                     {
                         this.y = this.y + 1;
                     }
-                    if(this.x <= this.myScene.regpoints[1].x)
+                    if(this.x >= this.myScene.regpoints[1].x)
                     {
                         this.etype = 2;
                     }
@@ -223,7 +223,7 @@ public bullet: objects.eBullet;
                 case 2:
                 {
                     //move right to left
-                    if(this.x < this.myScene.regpoints[0].x)
+                    if(this.x > this.myScene.regpoints[0].x)
                     {
                         this.x = this.x + 2;
                     }
@@ -231,7 +231,7 @@ public bullet: objects.eBullet;
                     {
                         this.y = this.y + 1;
                     }
-                    if(this.x <= this.myScene.regpoints[0].x)
+                    if(this.x >= this.myScene.regpoints[0].x)
                     {
                         this.etype = 0;
                     }

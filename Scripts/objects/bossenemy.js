@@ -137,10 +137,10 @@ var objects;
                 case 0:
                     {
                         //hover over player
-                        if (this.y > this.myScene.player.y - 120) {
+                        if (this.y > this.myScene.player.y - 240) {
                             this.y = this.y - 1;
                         }
-                        if (this.y < this.myScene.player.y - 120) {
+                        if (this.y < this.myScene.player.y - 240) {
                             this.y = this.y + 1;
                         }
                         if (this.scaleX < 0 && this.myScene.player.x != this.x) {
@@ -156,13 +156,13 @@ var objects;
                 case 1:
                     {
                         //move left to right
-                        if (this.x > this.myScene.regpoints[1].x) {
+                        if (this.x < this.myScene.regpoints[1].x) {
                             this.x = this.x + 2;
                         }
                         if (this.y != this.myScene.regpoints[1].y) {
                             this.y = this.y + 1;
                         }
-                        if (this.x <= this.myScene.regpoints[1].x) {
+                        if (this.x >= this.myScene.regpoints[1].x) {
                             this.etype = 2;
                         }
                         break;
@@ -170,13 +170,13 @@ var objects;
                 case 2:
                     {
                         //move right to left
-                        if (this.x < this.myScene.regpoints[0].x) {
+                        if (this.x > this.myScene.regpoints[0].x) {
                             this.x = this.x + 2;
                         }
                         if (this.y != this.myScene.regpoints[0].y) {
                             this.y = this.y + 1;
                         }
-                        if (this.x <= this.myScene.regpoints[0].x) {
+                        if (this.x >= this.myScene.regpoints[0].x) {
                             this.etype = 0;
                         }
                         break;
