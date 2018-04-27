@@ -14,7 +14,7 @@ var objects;
             }
         }
         Reset() {
-            console.log("powerup reset");
+            //console.log("powerup reset");
             this.alpha = 0;
             this.x = -10000;
             this.y = -10000;

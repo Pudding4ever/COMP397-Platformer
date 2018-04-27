@@ -15,7 +15,7 @@ var objects;
             this.active == true;
             this.x = 530;
             this.y = 460 - this.halfHeight;
-            console.log(this.active);
+            //console.log(this.active);
         }
         Update() {
             if (this.active == true) {
@@ -23,7 +23,7 @@ var objects;
                 //run any AI here
             }
             if (this.isColliding == true) {
-                console.log("enemy deactivated!");
+                //console.log("enemy deactivated!");
                 this.active = false;
                 this.isColliding = false;
                 this.alpha = 0;

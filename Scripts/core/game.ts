@@ -75,7 +75,7 @@ module core {
 
         // preloads assets
         function Init(): void {
-            console.log("Initialization Started...");
+            //console.log("Initialization Started...");
             assetManager = new createjs.LoadQueue(); // creates the assetManager object
             assetManager.installPlugin(createjs.Sound); // asset manager can also load sounds
             assetManager.loadManifest(assetManifest);
@@ -83,7 +83,7 @@ module core {
         }
 
         function Start(): void {
-            console.log("Starting Application...")
+            //console.log("Starting Application...")
 
             stage = new createjs.Stage(canvas);
             stage.enableMouseOver(20); // turn this on for buttons

@@ -131,7 +131,7 @@ var managers;
                                 }
                             case "shootingenemy":
                                 {
-                                    console.log("shootingenemy hit!");
+                                    //console.log("shootingenemy hit!");
                                     object1.isColliding = true;
                                     object2.isColliding = true;
                                     break;

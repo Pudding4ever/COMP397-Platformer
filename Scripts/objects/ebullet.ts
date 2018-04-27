@@ -17,7 +17,7 @@ public bulletDirection: number = 1;
             deltaMeasurer.start();
             this.active = false;
             this.alpha = 0;
-            //console.log (this.active);
+            ////console.log (this.active);
         }
 
 
@@ -118,11 +118,11 @@ public bulletDirection: number = 1;
                 }
                 if (this.timer > 150)
                 {
-                    //console.log ("bullet deactivated!");
+                    ////console.log ("bullet deactivated!");
                     this.ResetBullet();
 
                 }
-                //console.log ("bullet active and travelling");
+                ////console.log ("bullet active and travelling");
 
             }
         }

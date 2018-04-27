@@ -24,7 +24,7 @@ module scenes {
 
     // Initialize Game Variables and objects
     public Start(): void {
-      console.log ("GAME OVER YEAH");
+      //console.log ("GAME OVER YEAH");
       this._background = new objects.GameObject(this.assetManager, "backgroundlv3");
       this._background.x = 1000;
       this._background.y = -10;

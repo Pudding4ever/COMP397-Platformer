@@ -15,7 +15,7 @@ var objects;
             deltaMeasurer.start();
             this.active = false;
             this.alpha = 0;
-            //console.log (this.active);
+            ////console.log (this.active);
         }
         ResetBullet() {
             this.active = false;
@@ -85,10 +85,10 @@ var objects;
                         }
                 }
                 if (this.timer > 240) {
-                    //console.log ("bullet deactivated!");
+                    ////console.log ("bullet deactivated!");
                     this.ResetBullet();
                 }
-                //console.log ("bullet active and travelling");
+                ////console.log ("bullet active and travelling");
             }
         }
     }

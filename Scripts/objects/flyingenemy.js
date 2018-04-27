@@ -22,7 +22,7 @@ var objects;
             this.active == true;
             this.x = 530;
             this.y = 460 - this.halfHeight;
-            console.log(this.active);
+            //console.log (this.active);
             this.health = 5;
         }
         DirectionChecker() {
@@ -76,7 +76,7 @@ var objects;
                 if (this.active == true) {
                     createjs.Sound.play("enemydead");
                 }
-                //console.log ("enemy deactivated!");
+                ////console.log ("enemy deactivated!");
                 this.active = false;
                 this.isColliding = false;
                 this.alpha = 0;
@@ -114,28 +114,28 @@ var objects;
                 this.y = this.y + 0.2;
             }
             if (this.scaleX < 0 && this.myScene.player.x != this.x) {
-                //console.log("move right");
+                ////console.log("move right");
                 this.x = this.x + 1.5;
             }
             else if (this.scaleX > 0 && this.myScene.player.x != this.x) {
-                //console.log("move left");
+                ////console.log("move left");
                 this.x = this.x - 1.5;
             }
         }
         ShootBang() {
-            console.log("shootbang");
+            //console.log("shootbang");
             createjs.Sound.play("flyingenemyshot");
             for (var b in this.myScene.enemybulletobjectpool) {
-                // console.log ("checking bullet object pool ", + b);
-                //console.log (this.myScene.bulletobjectpool[b].active);
+                // //console.log ("checking bullet object pool ", + b);
+                ////console.log (this.myScene.bulletobjectpool[b].active);
                 if (this.myScene.enemybulletobjectpool[b].active == false) {
-                    console.log("activating ebullet!");
+                    //console.log ("activating ebullet!");
                     this.myScene.enemybulletobjectpool[b].bullettype = 5;
                     this.myScene.enemybulletobjectpool[b].bulletDirection = this.scaleX;
                     this.myScene.enemybulletobjectpool[b].x = this.x;
                     this.myScene.enemybulletobjectpool[b].y = this.y;
                     this.myScene.enemybulletobjectpool[b].active = true;
-                    //console.log (this.myScene.bulletobjectpool[b].active);
+                    ////console.log (this.myScene.bulletobjectpool[b].active);
                     break;
                 }
             }

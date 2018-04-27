@@ -66,7 +66,7 @@ var objects;
             this.timer++;
             this.switchtimer++;
             this.rapidtimer++;
-            //console.log (this.x, this.y);
+            ////console.log (this.x, this.y);
             this.invtimer++;
             if (this.isColliding == true) {
                 if (this.invtimer <= 40) {
@@ -152,8 +152,8 @@ var objects;
             }
         }
         fireBullet() {
-            // console.log ("fire key pressed!");
-            // console.log (this.myScene.bulletobjectpool);
+            // //console.log ("fire key pressed!");
+            // //console.log (this.myScene.bulletobjectpool);
             var b;
             if (this.timer >= this.ROF) {
                 this.timer = 0;
@@ -162,16 +162,16 @@ var objects;
                         {
                             createjs.Sound.play("pistol");
                             for (b in this.myScene.bulletobjectpool) {
-                                // console.log ("checking bullet object pool ", + b);
-                                //console.log (this.myScene.bulletobjectpool[b].active);
+                                // //console.log ("checking bullet object pool ", + b);
+                                ////console.log (this.myScene.bulletobjectpool[b].active);
                                 if (this.myScene.bulletobjectpool[b].active == false) {
-                                    // console.log ("activating bullet!");
+                                    // //console.log ("activating bullet!");
                                     this.myScene.bulletobjectpool[b].bullettype = 0;
                                     this.myScene.bulletobjectpool[b].bulletDirection = this.scaleX;
                                     this.myScene.bulletobjectpool[b].x = this.x;
                                     this.myScene.bulletobjectpool[b].y = this.y;
                                     this.myScene.bulletobjectpool[b].active = true;
-                                    //console.log (this.myScene.bulletobjectpool[b].active);
+                                    ////console.log (this.myScene.bulletobjectpool[b].active);
                                     break;
                                 }
                             }
@@ -182,16 +182,16 @@ var objects;
                             if (this.ammo2 > 0) {
                                 createjs.Sound.play("rifle");
                                 for (b in this.myScene.bulletobjectpool) {
-                                    // console.log ("checking bullet object pool ", + b);
-                                    //console.log (this.myScene.bulletobjectpool[b].active);
+                                    // //console.log ("checking bullet object pool ", + b);
+                                    ////console.log (this.myScene.bulletobjectpool[b].active);
                                     if (this.myScene.bulletobjectpool[b].active == false) {
-                                        // console.log ("activating bullet!");
+                                        // //console.log ("activating bullet!");
                                         this.myScene.bulletobjectpool[b].bullettype = 0;
                                         this.myScene.bulletobjectpool[b].bulletDirection = this.scaleX;
                                         this.myScene.bulletobjectpool[b].x = this.x;
                                         this.myScene.bulletobjectpool[b].y = this.y;
                                         this.myScene.bulletobjectpool[b].active = true;
-                                        //console.log (this.myScene.bulletobjectpool[b].active);
+                                        ////console.log (this.myScene.bulletobjectpool[b].active);
                                         break;
                                     }
                                 }
@@ -209,16 +209,16 @@ var objects;
                                 createjs.Sound.play("shotgun");
                                 for (let i = 0; i < 5; i++) {
                                     for (b in this.myScene.bulletobjectpool) {
-                                        // console.log ("checking bullet object pool ", + b);
-                                        //console.log (this.myScene.bulletobjectpool[b].active);
+                                        // //console.log ("checking bullet object pool ", + b);
+                                        ////console.log (this.myScene.bulletobjectpool[b].active);
                                         if (this.myScene.bulletobjectpool[b].active == false) {
-                                            // console.log ("activating bullet!");
+                                            // //console.log ("activating bullet!");
                                             this.myScene.bulletobjectpool[b].bullettype = i;
                                             this.myScene.bulletobjectpool[b].bulletDirection = this.scaleX;
                                             this.myScene.bulletobjectpool[b].x = this.x;
                                             this.myScene.bulletobjectpool[b].y = this.y;
                                             this.myScene.bulletobjectpool[b].active = true;
-                                            //console.log (this.myScene.bulletobjectpool[b].active);
+                                            ////console.log (this.myScene.bulletobjectpool[b].active);
                                             break;
                                         }
                                     }
