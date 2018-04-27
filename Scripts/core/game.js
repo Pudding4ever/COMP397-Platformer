@@ -40,7 +40,7 @@ var core;
             { id: "boss", src: "./Assets/images/boss.png" },
             { id: "backgroundlv1", src: "./Assets/images/bg1.png" },
             { id: "backgroundlv2", src: "./Assets/images/bg2.png" },
-            { id: "backgroundlv3", src: "./Assets/images/bg3.png" },
+            { id: "backgroundlv3", src: "./Assets/images/bg3.jpg" },
             { id: "levelexit", src: "./Assets/images/levelexit.png" },
             { id: "pistol", src: "./Assets/audio/pistol.wav" },
             { id: "rifle", src: "./Assets/audio/rifle.wav" },
@@ -122,7 +122,7 @@ var core;
                     currentScene = new scenes.Play4Scene(assetManager);
                     break;
                 case config.Scene.WIN:
-                    currentScene = new scenes.Play4Scene(assetManager);
+                    currentScene = new scenes.WinScene(assetManager);
                     break;
                 case config.Scene.OVER:
                     currentScene = new scenes.OverScene(assetManager);
