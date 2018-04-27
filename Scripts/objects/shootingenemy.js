@@ -10,7 +10,7 @@ var objects;
             this.invframes = false;
             this.invtimer = 0;
             this.firetimer = 0;
-            this.fireRate = 90;
+            this.fireRate = 120;
             this.Start();
         }
         Start() {
@@ -74,9 +74,8 @@ var objects;
                 }
             }
             if (this.health <= 0) {
-                if(this.active == true)
-                {
-                 createjs.Sound.play("enemydead");
+                if (this.active == true) {
+                    createjs.Sound.play("enemydead");
                 }
                 //console.log ("enemy deactivated!");
                 this.active = false;
@@ -124,8 +123,8 @@ var objects;
             }
         }
         ShootBang() {
-            console.log("shootbang");
             createjs.Sound.play("enemyshot");
+            console.log("shootbang");
             for (var b in this.myScene.enemybulletobjectpool) {
                 // console.log ("checking bullet object pool ", + b);
                 //console.log (this.myScene.bulletobjectpool[b].active);

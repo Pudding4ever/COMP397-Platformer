@@ -73,9 +73,8 @@ var objects;
                 }
             }
             if (this.health <= 0) {
-                if (this.active == true)
-                {
-                  createjs.Sound.play("enemydead");
+                if (this.active == true) {
+                    createjs.Sound.play("enemydead");
                 }
                 //console.log ("enemy deactivated!");
                 this.active = false;
@@ -107,7 +106,6 @@ var objects;
             }
         }
         JumpAttack() {
-             createjs.Sound.play("jumpingguysound");
             if (this.scaleX < 0) {
                 this._physics.enemyjump(this, 270 + 0.005);
             }

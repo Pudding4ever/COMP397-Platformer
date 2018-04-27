@@ -52,6 +52,7 @@ var objects;
             }
             if (this.lives <= 0) {
                 //eventually play some kind of death animation here
+                createjs.Sound.stop();
                 createjs.Sound.play("dead");
                 createjs.Sound.play("gameover");
                 objects.Game.currentScene = config.Scene.OVER;

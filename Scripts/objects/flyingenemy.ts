@@ -101,6 +101,10 @@ public bullet: objects.eBullet;
             if (this.health <= 0)
 
             {
+                if (this.active == true)
+                {
+                  createjs.Sound.play("enemydead");
+                }
                //console.log ("enemy deactivated!");
                this.active = false;
                this.isColliding = false;
@@ -167,6 +171,7 @@ public bullet: objects.eBullet;
  public ShootBang()
 {
     console.log("shootbang");
+    createjs.Sound.play("flyingenemyshot");
     for (var b in this.myScene.enemybulletobjectpool)
     {
        // console.log ("checking bullet object pool ", + b);

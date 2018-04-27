@@ -78,6 +78,9 @@ module objects {
             if (this.lives <= 0)
             {
                 //eventually play some kind of death animation here
+                createjs.Sound.stop();
+                createjs.Sound.play("dead");
+                createjs.Sound.play("gameover");
                 objects.Game.currentScene = config.Scene.OVER;
             }
 
@@ -108,6 +111,7 @@ module objects {
                        this.alpha = 1;
                    }
                    //do get hit, lose life, flash the player (TODO add flash effect);
+                   createjs.Sound.play("ouch");
                    this.lives --;
                    this.isColliding = false;
                    this.invtimer = 0;
@@ -216,6 +220,7 @@ module objects {
                 {
                     case this.weapontype = 0: //pistol
                     {
+                        createjs.Sound.play("pistol");
                         for (b in this.myScene.bulletobjectpool)
                         {
                            // console.log ("checking bullet object pool ", + b);
@@ -239,6 +244,7 @@ module objects {
                     {
                         if (this.ammo2 > 0)
                         {
+                            createjs.Sound.play("rifle");
                         for (b in this.myScene.bulletobjectpool)
                         {
                            // console.log ("checking bullet object pool ", + b);
@@ -266,6 +272,7 @@ module objects {
                     {
                         if (this.ammo1 > 0)
                         {
+                            createjs.Sound.play("shotgun");
                         for (let i: number = 0; i < 5; i++)
                         {
                         for (b in this.myScene.bulletobjectpool)

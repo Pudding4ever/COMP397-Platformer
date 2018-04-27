@@ -1,8 +1,8 @@
 var objects;
 (function (objects) {
     class Platform extends objects.GameObject {
-        constructor(assetManager, x, y) {
-            super(assetManager, "platform");
+        constructor(assetManager, x, y, graphic) {
+            super(assetManager, graphic);
             this.x = x;
             this.y = y;
         }

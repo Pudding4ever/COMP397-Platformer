@@ -6,23 +6,22 @@ var scenes;
         constructor(assetManager) {
             super(assetManager);
             this.plan = `
-....................................................................................................................................................................................................................................................................................
-................................................................................................................###...................................................................................###..............................................................#############
-................................................................................................................###.j.................................................................................###......................j........X..............................#############
-############.....................................................f..............................................######................................................................................###.....................###......###.....#######...............###############
-############....................................................................................................######................................................................................###.....................###......###.....#######...j...........###############
-############..........................................................................#####........###..........#######...............................................................................###....................##.##....##.##....##..###...###.......#################
-############....................e.....................................................#####........###..........#######.S..2.........e................................................................###....................##.##....##.##....##..###...###.......#################
-############...................####...............................................#####............######.......##################################....................................................###........f..........##...##..##...##.......##...........####################
-############...................####...............................................#####............######.......##################################.........................................B..........###...................##...##..##...##.......##...........####################
-#..............................####...........................................#####................########.....................................####.....................................#######......###....................##.##....##.##.......##.........#######################
-#..............................####...........................................#####................########.....................................####.j.....................e.............#######......###....................##.##....##.##.......##.........#######################
-#.....................####.....####................................................................#########.......................................####.................######......#######...........###.....................###......###.......##........#########################
-#.....................####.....####.....................w..............j...........................##########.......................................####................######......#######...................................###......###.......##........#########################
-#.....................####.....####...................######........#######........................##########.......................................................#####..............................................................................#############################
-#.@....B.....G.....+..####.....####............j......######........#######.............e.....1....##########...................e...................................#####..............................R................e.........j..........e.........#############################
-####################################################################################################################################################################################################################################################################################
-####################################################################################################################################################################################################################################################################################`;
+##################################).............................................................................{***}.................................................................................{*}............................................................###############
+##################################).............................................................................{***}.................................................................................{*}...............................X............................###############
+###########)....................................................................................................(####)................................................................................{*}.....................(#)......(#).....(#####)...............###############
+###########)............................................................................j.......................(####)................................................................................{*}.....................(#)......(#).....(#####)...............###############
+###########)..........................................................................[---]...........................................................................................................{*}....................{*.*}....{*.*}....{}..{*}...[--]........###############
+###########)..........................................................................[---]..........R........................................................f.......................................{*}.....f..............{*.*}....{*.*}....{}..{*}...[--]......#################
+#................................................................................[---].............(####).................................-------]....................................................{*}...................{*...*}..{*...*}.......{}...........####################
+#................................e...............................................[---].............(####).................................-------].......................................+............{*}...................{*...*}..{*...*}.......{}...........####################
+#..............................(##)........................................[---]...................{*****}......[-------------------------.........[--]..............................[-----]..........{*}....................{*.*}....{*.*}.......{}.........#######################
+#..............................(##)...............................f........[---]...................{*****}......[-------------------------.........[--]....................e....... [-----]...........{*}....................{*.*}....{*.*}.......{}.........#######################
+#.....................(##).....{**}................................................................{******}........................................[--].................[---]......[------]...........(#).....................{*}......{*}.......{}.......##########################
+#.....................(##).....{**}.....................+..........................................{******}........................................[--].................[---].....[------]............(#).....................{*}......{*}.......{}.......##########################
+#.....................{**}.....{**}...................(####)........(#####)........................{*******}.......................................................[---]...............................................................................#############################
+#.@...B...............{**}.....{**}..............S....(####)........(#####)..............e.........{*******}.................e.....................................[---].......................................j........e.............................##############################
+######################****#####****###################******########*******########################*********########################################################################################################################################################################
+######################****#####****###################******########*******########################*********########################################################################################################################################################################`;
             console.log(this.plan);
             this._healthLabel = new objects.Label("Health: x", "18px", "Consolas", "#FF0000", 10, 10, true);
             this._weaponLabel = new objects.Label("Pistol", "18px", "Consolas", "#FF0000", 10, 30, true);
@@ -31,9 +30,6 @@ var scenes;
             this._background.x = 1000;
             this._background.y = -10;
             this.addChild(this._background);
-            this.addChild(this._healthLabel);
-            this.addChild(this._weaponLabel);
-            //this.addChild(this._grenadeLabel);
             this.rows = new Array();
             this.rows = this.plan.trim().split("\n").map(l => [...l]); //Splits up the "plan" string into an array of single rows, broken at each new line.
             console.log(this.rows);
@@ -42,7 +38,7 @@ var scenes;
             this.stageActors = [];
             this.stagePowerups = [];
             this.levelPlatforms = new Array();
-            const scale = 25; //size of basic platform block (must be square)
+            const scale = 32; //size of basic platform block (must be square)
             /* const levelChars = {
                ".": "empty", "#": objects.Platform,
                "@": objects.Hero, "e": objects.Enemy//, "E": objects.BigEnemy, "W": objects.Weapon, "P": objects.Powerup
@@ -69,7 +65,237 @@ var scenes;
                             {
                                 //place a platform
                                 //console.log(chr);
-                                let newplat = new objects.Platform(this.assetManager, this.x * scale, this.y * scale);
+                                let newplat = new objects.Platform(this.assetManager, this.x * scale, this.y * scale, "platform#");
+                                //check adjacency to other platforms
+                                if (this.prevrow != null && this.prevrow[this.x] == this.row[this.x]) {
+                                    newplat.blockAbove = true;
+                                    //console.log("blockabove");
+                                }
+                                if (this.x > 0 && this.row[this.x] == this.row[this.x - 1]) {
+                                    newplat.blockLeft = true;
+                                    //console.log("blockleft");
+                                }
+                                if (this.x < this.row.length && this.row[this.x] == this.row[this.x + 1]) {
+                                    newplat.blockRight = true;
+                                    //console.log("blockright");
+                                }
+                                this.levelPlatforms.push(newplat);
+                                this.addChild(newplat);
+                                //console.log("Platform placed!");
+                                break;
+                            }
+                        case chr = '(':
+                            {
+                                //place a platform
+                                //console.log(chr);
+                                let newplat = new objects.Platform(this.assetManager, this.x * scale, this.y * scale, "platform(");
+                                //check adjacency to other platforms
+                                if (this.prevrow != null && this.prevrow[this.x] == this.row[this.x]) {
+                                    newplat.blockAbove = true;
+                                    //console.log("blockabove");
+                                }
+                                if (this.x > 0 && this.row[this.x] == this.row[this.x - 1]) {
+                                    newplat.blockLeft = true;
+                                    //console.log("blockleft");
+                                }
+                                if (this.x < this.row.length && this.row[this.x] == this.row[this.x + 1]) {
+                                    newplat.blockRight = true;
+                                    //console.log("blockright");
+                                }
+                                this.levelPlatforms.push(newplat);
+                                this.addChild(newplat);
+                                //console.log("Platform placed!");
+                                break;
+                            }
+                        case chr = ')':
+                            {
+                                //place a platform
+                                //console.log(chr);
+                                let newplat = new objects.Platform(this.assetManager, this.x * scale, this.y * scale, "platform)");
+                                //check adjacency to other platforms
+                                if (this.prevrow != null && this.prevrow[this.x] == this.row[this.x]) {
+                                    newplat.blockAbove = true;
+                                    //console.log("blockabove");
+                                }
+                                if (this.x > 0 && this.row[this.x] == this.row[this.x - 1]) {
+                                    newplat.blockLeft = true;
+                                    //console.log("blockleft");
+                                }
+                                if (this.x < this.row.length && this.row[this.x] == this.row[this.x + 1]) {
+                                    newplat.blockRight = true;
+                                    //console.log("blockright");
+                                }
+                                this.levelPlatforms.push(newplat);
+                                this.addChild(newplat);
+                                //console.log("Platform placed!");
+                                break;
+                            }
+                        case chr = '-':
+                            {
+                                //place a platform
+                                //console.log(chr);
+                                let newplat = new objects.Platform(this.assetManager, this.x * scale, this.y * scale, "platform-");
+                                //check adjacency to other platforms
+                                if (this.prevrow != null && this.prevrow[this.x] == this.row[this.x]) {
+                                    newplat.blockAbove = true;
+                                    //console.log("blockabove");
+                                }
+                                if (this.x > 0 && this.row[this.x] == this.row[this.x - 1]) {
+                                    newplat.blockLeft = true;
+                                    //console.log("blockleft");
+                                }
+                                if (this.x < this.row.length && this.row[this.x] == this.row[this.x + 1]) {
+                                    newplat.blockRight = true;
+                                    //console.log("blockright");
+                                }
+                                this.levelPlatforms.push(newplat);
+                                this.addChild(newplat);
+                                //console.log("Platform placed!");
+                                break;
+                            }
+                        case chr = '[':
+                            {
+                                //place a platform
+                                //console.log(chr);
+                                let newplat = new objects.Platform(this.assetManager, this.x * scale, this.y * scale, "platform[");
+                                //check adjacency to other platforms
+                                if (this.prevrow != null && this.prevrow[this.x] == this.row[this.x]) {
+                                    newplat.blockAbove = true;
+                                    //console.log("blockabove");
+                                }
+                                if (this.x > 0 && this.row[this.x] == this.row[this.x - 1]) {
+                                    newplat.blockLeft = true;
+                                    //console.log("blockleft");
+                                }
+                                if (this.x < this.row.length && this.row[this.x] == this.row[this.x + 1]) {
+                                    newplat.blockRight = true;
+                                    //console.log("blockright");
+                                }
+                                this.levelPlatforms.push(newplat);
+                                this.addChild(newplat);
+                                //console.log("Platform placed!");
+                                break;
+                            }
+                        case chr = ']':
+                            {
+                                //place a platform
+                                //console.log(chr);
+                                let newplat = new objects.Platform(this.assetManager, this.x * scale, this.y * scale, "platform]");
+                                //check adjacency to other platforms
+                                if (this.prevrow != null && this.prevrow[this.x] == this.row[this.x]) {
+                                    newplat.blockAbove = true;
+                                    //console.log("blockabove");
+                                }
+                                if (this.x > 0 && this.row[this.x] == this.row[this.x - 1]) {
+                                    newplat.blockLeft = true;
+                                    //console.log("blockleft");
+                                }
+                                if (this.x < this.row.length && this.row[this.x] == this.row[this.x + 1]) {
+                                    newplat.blockRight = true;
+                                    //console.log("blockright");
+                                }
+                                this.levelPlatforms.push(newplat);
+                                this.addChild(newplat);
+                                //console.log("Platform placed!");
+                                break;
+                            }
+                        case chr = '_':
+                            {
+                                //place a platform
+                                //console.log(chr);
+                                let newplat = new objects.Platform(this.assetManager, this.x * scale, this.y * scale, "platform_");
+                                //check adjacency to other platforms
+                                if (this.prevrow != null && this.prevrow[this.x] == this.row[this.x]) {
+                                    newplat.blockAbove = true;
+                                    //console.log("blockabove");
+                                }
+                                if (this.x > 0 && this.row[this.x] == this.row[this.x - 1]) {
+                                    newplat.blockLeft = true;
+                                    //console.log("blockleft");
+                                }
+                                if (this.x < this.row.length && this.row[this.x] == this.row[this.x + 1]) {
+                                    newplat.blockRight = true;
+                                    //console.log("blockright");
+                                }
+                                this.levelPlatforms.push(newplat);
+                                this.addChild(newplat);
+                                //console.log("Platform placed!");
+                                break;
+                            }
+                        case chr = '{':
+                            {
+                                //place a platform
+                                //console.log(chr);
+                                let newplat = new objects.Platform(this.assetManager, this.x * scale, this.y * scale, "platform{");
+                                //check adjacency to other platforms
+                                if (this.prevrow != null && this.prevrow[this.x] == this.row[this.x]) {
+                                    newplat.blockAbove = true;
+                                    //console.log("blockabove");
+                                }
+                                if (this.x > 0 && this.row[this.x] == this.row[this.x - 1]) {
+                                    newplat.blockLeft = true;
+                                    //console.log("blockleft");
+                                }
+                                if (this.x < this.row.length && this.row[this.x] == this.row[this.x + 1]) {
+                                    newplat.blockRight = true;
+                                    //console.log("blockright");
+                                }
+                                this.levelPlatforms.push(newplat);
+                                this.addChild(newplat);
+                                //console.log("Platform placed!");
+                                break;
+                            }
+                        case chr = '}':
+                            {
+                                //place a platform
+                                //console.log(chr);
+                                let newplat = new objects.Platform(this.assetManager, this.x * scale, this.y * scale, "platform}");
+                                //check adjacency to other platforms
+                                if (this.prevrow != null && this.prevrow[this.x] == this.row[this.x]) {
+                                    newplat.blockAbove = true;
+                                    //console.log("blockabove");
+                                }
+                                if (this.x > 0 && this.row[this.x] == this.row[this.x - 1]) {
+                                    newplat.blockLeft = true;
+                                    //console.log("blockleft");
+                                }
+                                if (this.x < this.row.length && this.row[this.x] == this.row[this.x + 1]) {
+                                    newplat.blockRight = true;
+                                    //console.log("blockright");
+                                }
+                                this.levelPlatforms.push(newplat);
+                                this.addChild(newplat);
+                                //console.log("Platform placed!");
+                                break;
+                            }
+                        case chr = '=':
+                            {
+                                //place a platform
+                                //console.log(chr);
+                                let newplat = new objects.Platform(this.assetManager, this.x * scale, this.y * scale, "platform=");
+                                //check adjacency to other platforms
+                                if (this.prevrow != null && this.prevrow[this.x] == this.row[this.x]) {
+                                    newplat.blockAbove = true;
+                                    //console.log("blockabove");
+                                }
+                                if (this.x > 0 && this.row[this.x] == this.row[this.x - 1]) {
+                                    newplat.blockLeft = true;
+                                    //console.log("blockleft");
+                                }
+                                if (this.x < this.row.length && this.row[this.x] == this.row[this.x + 1]) {
+                                    newplat.blockRight = true;
+                                    //console.log("blockright");
+                                }
+                                this.levelPlatforms.push(newplat);
+                                this.addChild(newplat);
+                                //console.log("Platform placed!");
+                                break;
+                            }
+                        case chr = '*':
+                            {
+                                //place a platform
+                                //console.log(chr);
+                                let newplat = new objects.Platform(this.assetManager, this.x * scale, this.y * scale, "platform#");
                                 //check adjacency to other platforms
                                 if (this.prevrow != null && this.prevrow[this.x] == this.row[this.x]) {
                                     newplat.blockAbove = true;
@@ -234,7 +460,7 @@ var scenes;
                 }
                 this.y++;
             }
-            console.log(this.levelPlatforms);
+            //console.log(this.levelPlatforms);
             this.Start();
         }
         // Private Mathods
@@ -276,6 +502,10 @@ var scenes;
         }
         // TODO: Initialize Game Variables and objects
         Start() {
+            createjs.Sound.play("music1");
+            this.addChild(this._healthLabel);
+            this.addChild(this._weaponLabel);
+            this.addChild(this._grenadeLabel);
             this.Main();
         }
         //TODO: Call update of game objects
@@ -291,6 +521,7 @@ var scenes;
             this.UpdateCamera();
             this.UpdateActors();
             if (this.EXIT.isColliding == true) {
+                createjs.Sound.stop();
                 objects.Game.currentScene = config.Scene.PLAY2;
             }
         }

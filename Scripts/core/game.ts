@@ -23,7 +23,6 @@ module core {
             {id: "nextButton", src: "./Assets/images/nextButton.png"},
             {id: "backButton", src: "./Assets/images/backButton.png"},
             {id: "player", src: "./Assets/images/sonic.png"},
-            {id: "platform", src: "./Assets/images/platform.png"},
             {id: "bullet", src: "./Assets/images/bullet.png"},
             {id: "ebullet", src: "./Assets/images/ebullet.png"},
             {id: "badguy", src: "./Assets/images/badguy.png"},
@@ -44,6 +43,33 @@ module core {
             {id: "backgroundlv2", src: "./Assets/images/bg2.png"},
             {id: "backgroundlv3", src: "./Assets/images/bg3.png"},
             {id: "levelexit", src: "./Assets/images/levelexit.png"},
+            { id: "pistol", src: "./Assets/audio/pistol.wav" },
+            { id: "rifle", src: "./Assets/audio/rifle.wav" },
+            { id: "rifle2", src: "./Assets/audio/rifle2.wav" },
+            { id: "ouch", src: "./Assets/audio/ouch.wav" },
+            { id: "ouch2", src: "./Assets/audio/ouch2.wav" },
+            { id: "dead", src: "./Assets/audio/dead.wav" },
+            { id: "jumpingguysound", src: "./Assets/audio/jumping monster noise.wav" },
+            { id: "powerup", src: "./Assets/audio/powerup.wav" },
+            { id: "shotgun", src: "./Assets/audio/shotgun.wav" },
+            { id: "heal", src: "./Assets/audio/heal.wav" },
+            { id: "flyingenemyshot", src: "./Assets/audio/flyingenemyshot.wav" },
+            { id: "gameover", src: "./Assets/audio/gameover.wav" },
+            { id: "enemyshot", src: "./Assets/audio/enemyshot.wav" },
+            { id: "enemydead", src: "./Assets/audio/jumping monster noise.wav" },
+            { id: "music1", src: "./Assets/audio/music1.wav" },
+            { id: "music2", src: "./Assets/audio/music2.wav" },
+            { id: "musicboss", src: "./Assets/audio/musicboss.wav" },
+            {id: "platform#", src: "./Assets/images/tiles/1.png"},
+            {id: "platform(", src: "./Assets/images/tiles/2.png"},
+            {id: "platform)", src: "./Assets/images/tiles/3.png"},
+            {id: "platform-", src: "./Assets/images/tiles/4.png"},
+            {id: "platform[", src: "./Assets/images/tiles/5.png"},
+            {id: "platform]", src: "./Assets/images/tiles/6.png"},
+            {id: "platform_", src: "./Assets/images/tiles/7.png"},
+            {id: "platform{", src: "./Assets/images/tiles/8.png"},
+            {id: "platform}", src: "./Assets/images/tiles/9.png"},
+            {id: "platform=", src: "./Assets/images/tiles/10.png"},
 
         ];
 
@@ -65,7 +91,7 @@ module core {
             createjs.Ticker.on("tick", Update);
             var context = canvas.msGetInputContext
             objects.Game.stage = stage;
-            objects.Game.currentScene = config.Scene.START;
+            objects.Game.currentScene = config.Scene.PLAY3;
             currentState = config.Scene.START;
 
             keyboardManager = new managers.Keyboard();
@@ -101,6 +127,9 @@ module core {
                     break;
                     case config.Scene.PLAY3:
                     currentScene = new scenes.Play3Scene(assetManager);
+                    break;
+                    case config.Scene.PLAY4:
+                    currentScene = new scenes.Play4Scene(assetManager);
                     break;
                 case config.Scene.OVER:
                     currentScene = new scenes.OverScene(assetManager);

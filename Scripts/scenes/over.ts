@@ -3,6 +3,7 @@ module scenes {
     // Private Instance Variables
     private _overLabel: objects.Label;
     private _backButton: objects.Button;
+    private _background: objects.GameObject;
 
     // Public Properties
 
@@ -24,7 +25,11 @@ module scenes {
     // Initialize Game Variables and objects
     public Start(): void {
       console.log ("GAME OVER YEAH");
-      this._overLabel = new objects.Label("Game Over", "40px", "Consolas", "#FF0000", 320, 240, true);
+      this._background = new objects.GameObject(this.assetManager, "backgroundlv3");
+      this._background.x = 1000;
+      this._background.y = -10;
+      this.addChild(this._background);
+      this._overLabel = new objects.Label("BAD END", "40px", "Consolas", "#FF0000", 320, 240, true);
       this._backButton = new objects.Button(this.assetManager, "backButton", 320, 340);
       this.Main();
     }

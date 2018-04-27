@@ -45,7 +45,7 @@ var managers;
                             }
                         case "p_shield":
                             {
-                             createjs.Sound.play("powerup");   
+                                createjs.Sound.play("powerup");
                                 object2.isColliding = true;
                                 object1.shield = true;
                                 object1.shieldflicker = true;

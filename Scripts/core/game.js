@@ -20,7 +20,6 @@ var core;
             { id: "nextButton", src: "./Assets/images/nextButton.png" },
             { id: "backButton", src: "./Assets/images/backButton.png" },
             { id: "player", src: "./Assets/images/sonic.png" },
-            { id: "platform", src: "./Assets/images/platform.png" },
             { id: "bullet", src: "./Assets/images/bullet.png" },
             { id: "ebullet", src: "./Assets/images/ebullet.png" },
             { id: "badguy", src: "./Assets/images/badguy.png" },
@@ -54,7 +53,20 @@ var core;
             { id: "flyingenemyshot", src: "./Assets/audio/flyingenemyshot.wav" },
             { id: "gameover", src: "./Assets/audio/gameover.wav" },
             { id: "enemyshot", src: "./Assets/audio/enemyshot.wav" },
-            { id: "enemydead", src: "./Assets/audio/pistol.wav" },
+            { id: "enemydead", src: "./Assets/audio/jumping monster noise.wav" },
+            { id: "music1", src: "./Assets/audio/music1.wav" },
+            { id: "music2", src: "./Assets/audio/music2.wav" },
+            { id: "musicboss", src: "./Assets/audio/musicboss.wav" },
+            { id: "platform#", src: "./Assets/images/tiles/1.png" },
+            { id: "platform(", src: "./Assets/images/tiles/2.png" },
+            { id: "platform)", src: "./Assets/images/tiles/3.png" },
+            { id: "platform-", src: "./Assets/images/tiles/4.png" },
+            { id: "platform[", src: "./Assets/images/tiles/5.png" },
+            { id: "platform]", src: "./Assets/images/tiles/6.png" },
+            { id: "platform_", src: "./Assets/images/tiles/7.png" },
+            { id: "platform{", src: "./Assets/images/tiles/8.png" },
+            { id: "platform}", src: "./Assets/images/tiles/9.png" },
+            { id: "platform=", src: "./Assets/images/tiles/10.png" },
         ];
         // preloads assets
         function Init() {
@@ -72,7 +84,7 @@ var core;
             createjs.Ticker.on("tick", Update);
             var context = canvas.msGetInputContext;
             objects.Game.stage = stage;
-            objects.Game.currentScene = config.Scene.START;
+            objects.Game.currentScene = config.Scene.PLAY3;
             currentState = config.Scene.START;
             keyboardManager = new managers.Keyboard();
             objects.Game.keyboardManager = keyboardManager;
@@ -103,6 +115,9 @@ var core;
                     break;
                 case config.Scene.PLAY3:
                     currentScene = new scenes.Play3Scene(assetManager);
+                    break;
+                case config.Scene.PLAY4:
+                    currentScene = new scenes.Play4Scene(assetManager);
                     break;
                 case config.Scene.OVER:
                     currentScene = new scenes.OverScene(assetManager);

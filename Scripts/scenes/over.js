@@ -15,16 +15,18 @@ var scenes;
         // Initialize Game Variables and objects
         Start() {
             console.log("GAME OVER YEAH");
-            this._overLabel = new objects.Label("GAME OVER YEAH", "40px", "IMPACT", "#FF0000", 320, 240, true);
-            this._backButton = new objects.Button(this.assetManager, "backButton", 320, 340);
             this._background = new objects.GameObject(this.assetManager, "backgroundlv3");
+            this._background.x = 1000;
+            this._background.y = -10;
+            this.addChild(this._background);
+            this._overLabel = new objects.Label("BAD END", "40px", "Consolas", "#FF0000", 320, 240, true);
+            this._backButton = new objects.Button(this.assetManager, "backButton", 320, 340);
             this.Main();
         }
         Update() {
         }
         // This is where the fun happens
         Main() {
-             this.addChild(this._background);
             // add the welcome label to the scene
             this.addChild(this._overLabel);
             // add the backButton to the scene

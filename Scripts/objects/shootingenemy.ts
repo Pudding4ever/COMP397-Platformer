@@ -9,7 +9,7 @@ public health: number = 7;
 public invframes: boolean = false;
 public invtimer: number = 0;
 public firetimer: number = 0;
-public fireRate: number = 90;
+public fireRate: number = 120;
 
 public myScene: objects.Scene;
 
@@ -100,8 +100,11 @@ public bullet: objects.eBullet;
 
             }
             if (this.health <= 0)
-
             {
+                if (this.active == true)
+                {
+                  createjs.Sound.play("enemydead");
+                }
             //console.log ("enemy deactivated!");
                this.active = false;
                this.isColliding = false;
@@ -161,6 +164,7 @@ else if (this.scaleX > 0 && this.currentplatform.blockLeft == true)
 
 public ShootBang()
 {
+    createjs.Sound.play("enemyshot");
     console.log("shootbang");
     for (var b in this.myScene.enemybulletobjectpool)
     {

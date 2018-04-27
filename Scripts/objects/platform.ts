@@ -5,8 +5,8 @@ module objects {
         public blockLeft: boolean;
         public blockRight: boolean;
 
-        constructor(assetManager: createjs.LoadQueue, x:number, y:number) {
-            super(assetManager, "platform");
+        constructor(assetManager: createjs.LoadQueue, x:number, y:number, graphic:string) {
+            super(assetManager, graphic);
             this.x = x;
             this.y = y;
         }
